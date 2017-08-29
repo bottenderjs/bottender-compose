@@ -1,0 +1,44 @@
+{
+  "name": "messaging-apis",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yoctol/messaging-apis.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-config-yoctol-base": "^0.13.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
+    "prettier": "^1.5.3"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "yarn run lint -- --fix",
+    "lint:staged": "lint-staged",
+    "precommit": "lint-staged",
+    "testonly": "jest",
+    "testonly:watch": "jest --watch",
+    "test": "yarn run lint --silent && yarn run testonly --silent"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "random-item": "^1.0.0"
+  }
+}
