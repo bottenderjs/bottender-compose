@@ -1,9 +1,11 @@
 {
-  "name": "messaging-apis",
+  "name": "bottender-hoa",
+  "version": "0.0.1-0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Yoctol/messaging-apis.git"
+    "url": "https://github.com/Yoctol/bottender-hoa.git"
   },
+  "main": "src/index",
   "license": "MIT",
   "engines": {
     "node": ">=6"
@@ -33,9 +35,7 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "transformIgnorePatterns": [
-      "/node_modules/"
-    ],
+    "transformIgnorePatterns": ["/node_modules/"],
     "testEnvironment": "node"
   },
   "dependencies": {
