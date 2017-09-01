@@ -1,6 +1,6 @@
 {
   "name": "bottender-hoa",
-  "version": "0.0.1-0",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Yoctol/bottender-hoa.git"
@@ -35,7 +35,9 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "transformIgnorePatterns": ["/node_modules/"],
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
     "testEnvironment": "node"
   },
   "dependencies": {
