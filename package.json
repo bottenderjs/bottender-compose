@@ -28,16 +28,14 @@
     "precommit": "lint-staged",
     "testonly": "jest",
     "testonly:watch": "jest --watch",
-    "test": "yarn run lint --silent && yarn run testonly --silent"
+    "test": "yarn run lint && yarn run testonly"
   },
   "lint-staged": {
     "*.js": "eslint --fix"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "transformIgnorePatterns": [
-      "/node_modules/"
-    ],
+    "transformIgnorePatterns": ["/node_modules/"],
     "testEnvironment": "node"
   },
   "dependencies": {
