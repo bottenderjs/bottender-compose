@@ -1,5 +1,5 @@
 module.exports = function sendText(text) {
-  return context => {
-    context.sendText(text);
+  return async context => {
+    await context.sendText(text);
   };
 };
