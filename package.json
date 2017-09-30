@@ -28,7 +28,7 @@
     "precommit": "lint-staged",
     "testonly": "jest",
     "testonly:watch": "jest --watch",
-    "test": "yarn run lint --silent && yarn run testonly --silent"
+    "test": "yarn run lint && yarn run testonly --silent"
   },
   "lint-staged": {
     "*.js": "eslint --fix"
