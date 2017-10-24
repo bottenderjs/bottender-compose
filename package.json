@@ -1,9 +1,9 @@
 {
-  "name": "bottender-hoa",
+  "name": "bottender-compose",
   "version": "0.0.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Yoctol/bottender-hoa.git"
+    "url": "https://github.com/Yoctol/bottender-compose.git"
   },
   "main": "src/index",
   "license": "MIT",
