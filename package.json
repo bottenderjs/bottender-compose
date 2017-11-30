@@ -1,5 +1,6 @@
 {
   "name": "bottender-compose",
+  "description": "An utility library for bottender and higher-order handlers",
   "version": "0.0.3",
   "repository": {
     "type": "git",
@@ -10,6 +11,11 @@
   "engines": {
     "node": ">=7.6"
   },
+  "keywords": [
+    "bot",
+    "bottender",
+    "compose"
+  ],
   "devDependencies": {
     "delay": "^2.0.0",
     "eslint": "^4.3.0",

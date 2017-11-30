@@ -6,8 +6,6 @@ it('should export state apis', () => {
 });
 
 it('should export Messenger apis', () => {
-  expect(B.sendText).toBeDefined();
-  expect(B.sendRawBody).toBeDefined();
   expect(B.sendMessage).toBeDefined();
   expect(B.sendText).toBeDefined();
   expect(B.sendAttachment).toBeDefined();
@@ -47,6 +45,7 @@ it('should export LINE apis', () => {
   expect(B.sendConfirmTemplate).toBeDefined();
   expect(B.sendCarouselTemplate).toBeDefined();
   expect(B.sendImageCarouselTemplate).toBeDefined();
+  expect(B.reply).toBeDefined();
   expect(B.replyText).toBeDefined();
   expect(B.replyImage).toBeDefined();
   expect(B.replyVideo).toBeDefined();
@@ -58,6 +57,7 @@ it('should export LINE apis', () => {
   expect(B.replyConfirmTemplate).toBeDefined();
   expect(B.replyCarouselTemplate).toBeDefined();
   expect(B.replyImageCarouselTemplate).toBeDefined();
+  expect(B.push).toBeDefined();
   expect(B.pushText).toBeDefined();
   expect(B.pushImage).toBeDefined();
   expect(B.pushVideo).toBeDefined();
