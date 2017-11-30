@@ -1,7 +1,7 @@
 {
   "name": "bottender-compose",
   "description": "An utility library for bottender and higher-order handlers",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Yoctol/bottender-compose.git"
@@ -42,7 +42,9 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "transformIgnorePatterns": ["/node_modules/"],
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
     "testEnvironment": "node",
     "timers": "fake",
     "resetModules": true,
