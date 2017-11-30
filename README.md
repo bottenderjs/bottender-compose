@@ -18,7 +18,7 @@ npm install bottender-compose
 Create a function that executes methods in series.
 
 ```js
-const { series } = require('bottender-compose');
+const { series, sendText } = require('bottender-compose');
 
 bot.onEvent(series([
   sendText('a');
@@ -32,7 +32,7 @@ bot.onEvent(series([
 Create a function that executes methods in parallel.
 
 ```js
-const { parallel } = require('bottender-compose');
+const { parallel, sendText } = require('bottender-compose');
 
 bot.onEvent(parallel([
   sendText('a');
@@ -46,7 +46,7 @@ bot.onEvent(parallel([
 Create a function that executes one of method randomly.
 
 ```js
-const { parallel } = require('bottender-compose');
+const { parallel, sendText } = require('bottender-compose');
 
 bot.onEvent(random([
   sendText('a');
