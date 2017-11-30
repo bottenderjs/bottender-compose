@@ -1,6 +1,6 @@
 const B = require('../');
 
-it('should export State apis', () => {
+it('should export state apis', () => {
   expect(B.setState).toBeDefined();
   expect(B.resetState).toBeDefined();
 });

@@ -9,7 +9,7 @@
   "main": "src/index",
   "license": "MIT",
   "engines": {
-    "node": ">=6"
+    "node": ">=7.6"
   },
   "keywords": [
     "bot",
@@ -17,6 +17,7 @@
     "compose"
   ],
   "devDependencies": {
+    "delay": "^2.0.0",
     "eslint": "^4.3.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-config-yoctol-base": "^0.13.0",
@@ -41,10 +42,11 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "transformIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "testEnvironment": "node"
+    "transformIgnorePatterns": ["/node_modules/"],
+    "testEnvironment": "node",
+    "timers": "fake",
+    "resetModules": true,
+    "resetMocks": true
   },
   "dependencies": {
     "random-item": "^1.0.0"
