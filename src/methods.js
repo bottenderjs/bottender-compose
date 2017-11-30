@@ -1,5 +1,6 @@
+exports.state = ['setState', 'resetState'];
+
 exports.messenger = [
-  'sendRawBody',
   'sendMessage',
   'sendText',
   'sendAttachment',
@@ -39,6 +40,7 @@ exports.line = [
   'sendConfirmTemplate',
   'sendCarouselTemplate',
   'sendImageCarouselTemplate',
+  'reply',
   'replyText',
   'replyImage',
   'replyVideo',
@@ -51,6 +53,7 @@ exports.line = [
   'replyCarouselTemplate',
   'replyImageCarouselTemplate',
   'sendImageCarouselTemplate',
+  'push',
   'pushText',
   'pushImage',
   'pushVideo',
