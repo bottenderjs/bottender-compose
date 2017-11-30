@@ -1,5 +1,5 @@
 const series = require('../series');
-const sendText = require('../sendText');
+const { sendText } = require('../');
 
 it('should create action that will run in series', async () => {
   let resolveHaha;

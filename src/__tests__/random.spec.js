@@ -3,7 +3,7 @@ jest.mock('random-item');
 const randomItem = require('random-item');
 
 const random = require('../random');
-const sendText = require('../sendText');
+const { sendText } = require('../');
 
 it('should create action that will call sendText', () => {
   const haha = sendText('haha');

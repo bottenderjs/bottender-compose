@@ -1,7 +1,7 @@
 const delay = require('delay');
 
 const parallel = require('../parallel');
-const sendText = require('../sendText');
+const { sendText } = require('../');
 
 it('should create action that will run in parallel', () => {
   const haha = async context => {
