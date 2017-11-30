@@ -1,4 +1,4 @@
-const sendText = require('../sendText');
+const { sendText } = require('../');
 
 it('should create action that will call sendText', async () => {
   const action = sendText('haha');
