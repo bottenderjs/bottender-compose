@@ -1,5 +1,10 @@
 const B = require('../');
 
+it('should export state apis', () => {
+  expect(B.setState).toBeDefined();
+  expect(B.resetState).toBeDefined();
+});
+
 it('should export Messenger apis', () => {
   expect(B.sendText).toBeDefined();
   expect(B.sendRawBody).toBeDefined();

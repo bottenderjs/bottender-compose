@@ -1,3 +1,5 @@
+exports.state = ['setState', 'resetState'];
+
 exports.messenger = [
   'sendRawBody',
   'sendMessage',
