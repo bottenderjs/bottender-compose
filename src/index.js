@@ -1,6 +1,7 @@
-const { messenger, line, slack, telegram } = require('./methods');
+const { state, messenger, line, slack, telegram } = require('./methods');
 
-const allMethods = messenger
+const allMethods = state
+  .concat(messenger)
   .concat(line)
   .concat(slack)
   .concat(telegram);
