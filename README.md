@@ -21,9 +21,9 @@ Create a function that executes methods in series.
 const { series, sendText } = require('bottender-compose');
 
 bot.onEvent(series([
-  sendText('a');
-  sendText('b');
-  sendText('c');
+  sendText('a'),
+  sendText('b'),
+  sendText('c'),
 ]))
 ```
 
@@ -35,9 +35,9 @@ Create a function that executes methods in parallel.
 const { parallel, sendText } = require('bottender-compose');
 
 bot.onEvent(parallel([
-  sendText('a');
-  sendText('b');
-  sendText('c');
+  sendText('a'),
+  sendText('b'),
+  sendText('c'),
 ]))
 ```
 
@@ -49,10 +49,27 @@ Create a function that executes one of method randomly.
 const { parallel, sendText } = require('bottender-compose');
 
 bot.onEvent(random([
-  sendText('a');
-  sendText('b');
-  sendText('c');
+  sendText('a'),
+  sendText('b'),
+  sendText('c'),
 ]))
+```
+
+### `tree`
+
+Create a function that executes function according to return value from first parameter.
+
+```js
+const { tree, sendText } = require('bottender-compose');
+
+bot.onEvent(tree(
+  context => 'a',
+  {
+    a: sendText('a'),
+    b: sendText('b'),
+    c: sendText('c'),
+  {
+))
 ```
 
 ### Other Methods
