@@ -1,9 +1,9 @@
 # bottender-compose
 
-> An utility library for [Bottender](github.com/Yoctol/bottender) and higher-order handlers
-
 [![npm](https://img.shields.io/npm/v/bottender-compose.svg?style=flat-square)](https://www.npmjs.com/package/bottender-compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> An utility library for [Bottender](github.com/Yoctol/bottender) and higher-order handlers
 
 ## Installation
 
