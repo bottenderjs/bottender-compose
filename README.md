@@ -24,7 +24,7 @@ bot.onEvent(series([
   sendText('a'),
   sendText('b'),
   sendText('c'),
-]))
+]));
 ```
 
 ### `parallel`
@@ -38,7 +38,7 @@ bot.onEvent(parallel([
   sendText('a'),
   sendText('b'),
   sendText('c'),
-]))
+]));
 ```
 
 ### `random`
@@ -52,24 +52,44 @@ bot.onEvent(random([
   sendText('a'),
   sendText('b'),
   sendText('c'),
-]))
+]));
 ```
 
-### `tree`
+### `branch`
 
-Create a function that executes function according to return value from first parameter.
+Create a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.
 
 ```js
 const { tree, sendText } = require('bottender-compose');
 
-bot.onEvent(tree(
-  context => 'a',
-  {
-    a: sendText('a'),
-    b: sendText('b'),
-    c: sendText('c'),
-  {
-))
+bot.onEvent(branch(
+  context => true,
+  sendText('a'),
+  sendText('b'),
+));
+```
+
+Or you can executes function on `true` and do nothing when received `false`.
+
+```js
+branch(
+  context => true,
+  sendText('a'),
+)
+```
+
+### `condition`
+
+Create a function that which encapsulates `if/else`, `if/else`, ... logic.
+
+```js
+const { condition, sendText } = require('bottender-compose');
+
+bot.onEvent(condition(
+  [context => false, sendText('a')]
+  [context => false, sendText('b')]
+  [context => true, sendText('c')]
+));
 ```
 
 ### Other Methods
