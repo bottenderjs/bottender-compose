@@ -15,4 +15,5 @@ allMethods.forEach(method => {
 exports.random = require('./random');
 exports.series = require('./series');
 exports.parallel = require('./parallel');
-exports.tree = require('./tree');
+exports.condition = require('./condition');
+exports.branch = require('./branch');
