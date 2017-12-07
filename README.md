@@ -85,11 +85,11 @@ Create a function that which encapsulates `if/else`, `if/else`, ... logic.
 ```js
 const { condition, sendText } = require('bottender-compose');
 
-bot.onEvent(condition(
-  [context => false, sendText('a')]
-  [context => false, sendText('b')]
-  [context => true, sendText('c')]
-));
+bot.onEvent(condition([
+  [context => false, sendText('a')],
+  [context => false, sendText('b')],
+  [context => true, sendText('c')],
+]));
 ```
 
 ### Other Methods
