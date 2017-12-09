@@ -17,4 +17,5 @@ exports.series = require('./series');
 exports.parallel = require('./parallel');
 exports.condition = require('./condition');
 exports.branch = require('./branch');
+exports.platform = require('./platform');
 exports.tryCatch = require('./tryCatch');
