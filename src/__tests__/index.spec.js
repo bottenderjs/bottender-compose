@@ -1,8 +1,9 @@
 const B = require('../');
 
-it('should export state apis', () => {
+it('should export common apis', () => {
   expect(B.setState).toBeDefined();
   expect(B.resetState).toBeDefined();
+  expect(B.typing).toBeDefined();
 });
 
 it('should export Messenger apis', () => {
