@@ -190,6 +190,19 @@ bot.onEvent(condition([
 * `sendContact`
 * `sendChatAction`
 
+## Viber
+
+* `sendMessage`
+* `sendText`
+* `sendPicture`
+* `sendVideo`
+* `sendFile`
+* `sendContact`
+* `sendLocation`
+* `sendURL`
+* `sendSticker`
+* `sendCarouselContent`
+
 ## License
 
 MIT © [Yoctol](https://github.com/Yoctol/bottender-compose)

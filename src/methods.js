@@ -87,3 +87,16 @@ exports.telegram = [
   'sendContact',
   'sendChatAction',
 ];
+
+exports.viber = [
+  'sendMessage',
+  'sendText',
+  'sendPicture',
+  'sendVideo',
+  'sendFile',
+  'sendContact',
+  'sendLocation',
+  'sendURL',
+  'sendSticker',
+  'sendCarouselContent',
+];
