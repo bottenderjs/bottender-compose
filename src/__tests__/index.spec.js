@@ -97,4 +97,5 @@ it('should export Telegram apis', () => {
 
 it('should export other apis', () => {
   expect(B.random).toBeDefined();
+  expect(B.tryCatch).toBeDefined();
 });

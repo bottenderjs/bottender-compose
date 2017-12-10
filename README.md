@@ -80,7 +80,7 @@ branch(
 
 ### `condition`
 
-Create a function that which encapsulates `if/else`, `if/else`, ... logic.
+Create a function that encapsulates `if/else`, `if/else`, ... logic.
 
 ```js
 const { condition, sendText } = require('bottender-compose');
@@ -90,6 +90,19 @@ bot.onEvent(condition([
   [context => false, sendText('b')],
   [context => true, sendText('c')],
 ]));
+```
+
+### `tryCatch`
+
+Create a function that calls error handler on error.
+
+```js
+const { tryCatch, sendText } = require('bottender-compose');
+
+bot.onEvent(tryCatch(
+  doSomething(),
+  sendText('Error!')
+));
 ```
 
 ### Other Methods
