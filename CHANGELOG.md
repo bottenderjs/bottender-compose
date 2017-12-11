@@ -1,3 +1,9 @@
+0.3.0 / 2017-12-11
+==================
+- [new] Support `platform` and `tryCatch`.
+- [new] Export `typing`.
+- [new] Export Viber, FB methods.
+
 0.2.0 / 2017-12-07
 ==================
 - [new] Support `branch` and `condition`.
