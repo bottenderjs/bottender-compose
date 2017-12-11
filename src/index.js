@@ -1,11 +1,20 @@
-const { common, messenger, line, slack, telegram, viber } = require('./methods');
+const {
+  common,
+  messenger,
+  line,
+  slack,
+  telegram,
+  viber,
+  fb,
+} = require('./methods');
 
 const allMethods = common
   .concat(messenger)
   .concat(line)
   .concat(slack)
   .concat(telegram)
-  .concat(viber);
+  .concat(viber)
+  .concat(fb);
 
 allMethods.forEach(method => {
   if (!exports[method]) {

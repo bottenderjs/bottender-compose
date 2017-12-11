@@ -109,6 +109,11 @@ it('should export Viber apis', () => {
   expect(B.sendCarouselContent).toBeDefined();
 });
 
+it('should export FB apis', () => {
+  expect(B.sendComment).toBeDefined();
+  expect(B.sendPrivateReply).toBeDefined();
+});
+
 it('should export other apis', () => {
   expect(B.random).toBeDefined();
   expect(B.series).toBeDefined();

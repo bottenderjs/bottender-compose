@@ -244,6 +244,11 @@ bot.onEvent(tryCatch(
 * `sendSticker`
 * `sendCarouselContent`
 
+## FB
+
+* `sendComment`
+* `sendPrivateReply`
+
 ## License
 
 MIT © [Yoctol](https://github.com/Yoctol/bottender-compose)
