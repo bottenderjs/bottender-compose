@@ -1,4 +1,4 @@
-exports.state = ['setState', 'resetState'];
+exports.common = ['setState', 'resetState', 'typing'];
 
 exports.messenger = [
   'sendMessage',

@@ -107,10 +107,11 @@ bot.onEvent(tryCatch(
 
 ### Other Methods
 
-#### State
+#### Common
 
 * `setState`
 * `resetState`
+* `typing`
 
 #### Messenger
 
