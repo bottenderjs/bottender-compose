@@ -100,3 +100,5 @@ exports.viber = [
   'sendSticker',
   'sendCarouselContent',
 ];
+
+exports.fb = ['sendComment', 'sendPrivateReply'];
