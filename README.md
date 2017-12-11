@@ -60,7 +60,7 @@ bot.onEvent(random([
 Create a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.
 
 ```js
-const { tree, sendText } = require('bottender-compose');
+const { branch, sendText } = require('bottender-compose');
 
 bot.onEvent(branch(
   context => true,
@@ -90,6 +90,33 @@ bot.onEvent(condition([
   [context => false, sendText('b')],
   [context => true, sendText('c')],
 ]));
+```
+
+### `platform`
+
+Create a function that will process function depending upon the platform context.
+
+```js
+const {
+  platform,
+  sendGenericTemplate,
+  sendImagemap,
+} = require('bottender-compose');
+
+bot.onEvent(platform({
+  messenger: sendGenericTemplate(...),
+  line: sendImagemap(...),
+}));
+```
+
+Or you can use `others` key to match other platforms:
+
+```js
+platform({
+  messenger: sendGenericTemplate(...),
+  line: sendImagemap(...),
+  others: sendText('Unsupported.'),
+});
 ```
 
 ### `tryCatch`
