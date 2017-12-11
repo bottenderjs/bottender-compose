@@ -1,10 +1,11 @@
-const { state, messenger, line, slack, telegram } = require('./methods');
+const { state, messenger, line, slack, telegram, viber } = require('./methods');
 
 const allMethods = state
   .concat(messenger)
   .concat(line)
   .concat(slack)
-  .concat(telegram);
+  .concat(telegram)
+  .concat(viber);
 
 allMethods.forEach(method => {
   if (!exports[method]) {
