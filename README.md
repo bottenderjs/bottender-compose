@@ -168,7 +168,7 @@ bot.onEvent(tryCatch(
 * `dissociateLabel`
 * `getAssociatedLabels`
 
-## LINE
+#### LINE
 
 * `sendText`
 * `sendImage`
@@ -210,12 +210,12 @@ bot.onEvent(tryCatch(
 * `linkRichMenu`
 * `unlinkRichMenu`
 
-## Slack
+#### Slack
 
 * `sendText`
 * `postMessage`
 
-## Telegram
+#### Telegram
 
 * `sendText`
 * `sendMessage`
@@ -231,7 +231,7 @@ bot.onEvent(tryCatch(
 * `sendContact`
 * `sendChatAction`
 
-## Viber
+#### Viber
 
 * `sendMessage`
 * `sendText`
@@ -244,7 +244,7 @@ bot.onEvent(tryCatch(
 * `sendSticker`
 * `sendCarouselContent`
 
-## FB
+#### FB
 
 * `sendComment`
 * `sendPrivateReply`
