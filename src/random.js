@@ -1,1 +1,5 @@
-module.exports = require('random-item');
+const randomItem = require('random-item');
+
+module.exports = actions => async context => {
+  await randomItem(actions)(context);
+};
