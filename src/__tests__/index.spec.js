@@ -119,8 +119,8 @@ it('should export other apis', () => {
   expect(B.condition).toBeDefined();
   expect(B.parallel).toBeDefined();
   expect(B.platform).toBeDefined();
-  expect(B.percentage).toBeDefined();
   expect(B.random).toBeDefined();
   expect(B.series).toBeDefined();
   expect(B.tryCatch).toBeDefined();
+  expect(B.weight).toBeDefined();
 });

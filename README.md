@@ -112,15 +112,15 @@ const { tryCatch, sendText } = require('bottender-compose');
 bot.onEvent(tryCatch(doSomething(), sendText('Error!')));
 ```
 
-### `percentage`
+### `weight`
 
-Create a function that executes one of method by its percentage.
+Create a function that randomly executes one of method by its weight.
 
 ```js
-const { percentage, sendText } = require('bottender-compose');
+const { weight, sendText } = require('bottender-compose');
 
 bot.onEvent(
-  percentage([
+  weight([
     [0.2, sendText('20%')],
     [0.4, sendText('40%')],
     [0.4, sendText('40%')],
