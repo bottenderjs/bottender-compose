@@ -20,11 +20,7 @@ Create a function that executes methods in series.
 ```js
 const { series, sendText } = require('bottender-compose');
 
-bot.onEvent(series([
-  sendText('a'),
-  sendText('b'),
-  sendText('c'),
-]));
+bot.onEvent(series([sendText('a'), sendText('b'), sendText('c')]));
 ```
 
 ### `parallel`
@@ -34,11 +30,7 @@ Create a function that executes methods in parallel.
 ```js
 const { parallel, sendText } = require('bottender-compose');
 
-bot.onEvent(parallel([
-  sendText('a'),
-  sendText('b'),
-  sendText('c'),
-]));
+bot.onEvent(parallel([sendText('a'), sendText('b'), sendText('c')]));
 ```
 
 ### `random`
@@ -48,11 +40,7 @@ Create a function that executes one of method randomly.
 ```js
 const { random, sendText } = require('bottender-compose');
 
-bot.onEvent(random([
-  sendText('a'),
-  sendText('b'),
-  sendText('c'),
-]));
+bot.onEvent(random([sendText('a'), sendText('b'), sendText('c')]));
 ```
 
 ### `branch`
@@ -62,20 +50,13 @@ Create a function that will process either the `onTrue` or the `onFalse` functio
 ```js
 const { branch, sendText } = require('bottender-compose');
 
-bot.onEvent(branch(
-  context => true,
-  sendText('a'),
-  sendText('b'),
-));
+bot.onEvent(branch(context => true, sendText('a'), sendText('b')));
 ```
 
 Or you can executes function on `true` and do nothing when received `false`.
 
 ```js
-branch(
-  context => true,
-  sendText('a'),
-)
+branch(context => true, sendText('a'));
 ```
 
 ### `condition`
@@ -85,11 +66,13 @@ Create a function that encapsulates `if/else`, `if/else`, ... logic.
 ```js
 const { condition, sendText } = require('bottender-compose');
 
-bot.onEvent(condition([
-  [context => false, sendText('a')],
-  [context => false, sendText('b')],
-  [context => true, sendText('c')],
-]));
+bot.onEvent(
+  condition([
+    [context => false, sendText('a')],
+    [context => false, sendText('b')],
+    [context => true, sendText('c')],
+  ])
+);
 ```
 
 ### `platform`
@@ -126,10 +109,23 @@ Create a function that calls error handler on error.
 ```js
 const { tryCatch, sendText } = require('bottender-compose');
 
-bot.onEvent(tryCatch(
-  doSomething(),
-  sendText('Error!')
-));
+bot.onEvent(tryCatch(doSomething(), sendText('Error!')));
+```
+
+### `percentage`
+
+Create a function that executes one of method by its percentage.
+
+```js
+const { percentage, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  percentage([
+    [0.2, sendText('20%')],
+    [0.4, sendText('40%')],
+    [0.4, sendText('40%')],
+  ])
+);
 ```
 
 ### Other Methods

@@ -1,21 +1,25 @@
 {
   "name": "bottender-compose",
   "description": "An utility library for bottender and higher-order handlers",
-  "version": "0.3.1",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Yoctol/bottender-compose.git"
   },
+  "version": "0.3.1",
   "main": "src/index",
-  "license": "MIT",
-  "engines": {
-    "node": ">=7.6"
+  "scripts": {
+    "precommit": "lint-staged",
+    "lint": "eslint src",
+    "lint:fix": "yarn run lint -- --fix",
+    "lint:staged": "lint-staged",
+    "test": "yarn run lint && yarn run testonly",
+    "testonly": "jest",
+    "testonly:watch": "jest --watch"
   },
-  "keywords": [
-    "bot",
-    "bottender",
-    "compose"
-  ],
+  "dependencies": {
+    "random-item": "^1.0.0"
+  },
   "devDependencies": {
     "delay": "^2.0.0",
     "eslint": "^4.13.1",
@@ -29,24 +33,13 @@
     "prettier": "^1.9.2",
     "prettier-package-json": "^1.4.0"
   },
-  "scripts": {
-    "lint": "eslint src",
-    "lint:fix": "yarn run lint -- --fix",
-    "lint:staged": "lint-staged",
-    "precommit": "lint-staged",
-    "testonly": "jest",
-    "testonly:watch": "jest --watch",
-    "test": "yarn run lint && yarn run testonly"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "package.json": [
-      "prettier-package-json --write",
-      "git add"
-    ]
+  "keywords": [
+    "bot",
+    "bottender",
+    "compose"
+  ],
+  "engines": {
+    "node": ">=7.6"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -58,7 +51,14 @@
     "resetModules": true,
     "resetMocks": true
   },
-  "dependencies": {
-    "random-item": "^1.0.0"
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "package.json": [
+      "prettier-package-json --write",
+      "git add"
+    ]
   }
 }
