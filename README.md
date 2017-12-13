@@ -46,7 +46,7 @@ bot.onEvent(parallel([
 Create a function that executes one of method randomly.
 
 ```js
-const { random } = require('bottender-compose');
+const { random, sendText } = require('bottender-compose');
 
 bot.onEvent(random([
   sendText('a'),
