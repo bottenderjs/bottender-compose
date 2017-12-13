@@ -20,7 +20,11 @@ Create a function that executes methods in series.
 ```js
 const { series, sendText } = require('bottender-compose');
 
-bot.onEvent(series([sendText('a'), sendText('b'), sendText('c')]));
+bot.onEvent(series([
+  sendText('1. First Item'),
+  sendText('2. Second Item'),
+  sendText('3. Third Item'),
+]));
 ```
 
 ### `parallel`
@@ -30,7 +34,11 @@ Create a function that executes methods in parallel.
 ```js
 const { parallel, sendText } = require('bottender-compose');
 
-bot.onEvent(parallel([sendText('a'), sendText('b'), sendText('c')]));
+bot.onEvent(parallel([
+  sendText('- You got one of Items'),
+  sendText('- You got one of Items'),
+  sendText('- You got one of Items'),
+]));
 ```
 
 ### `random`
@@ -40,7 +48,11 @@ Create a function that executes one of method randomly.
 ```js
 const { random, sendText } = require('bottender-compose');
 
-bot.onEvent(random([sendText('a'), sendText('b'), sendText('c')]));
+bot.onEvent(random([
+  sendText('You got a random item: A'),
+  sendText('You got a random item: B'),
+  sendText('You got a random item: C'),
+]));
 ```
 
 ### `branch`
@@ -50,13 +62,17 @@ Create a function that will process either the `onTrue` or the `onFalse` functio
 ```js
 const { branch, sendText } = require('bottender-compose');
 
-bot.onEvent(branch(context => true, sendText('a'), sendText('b')));
+bot.onEvent(branch(
+  context => true,
+  sendText('You are the lucky one.'),
+  sendText('Too bad.')
+));
 ```
 
 Or you can executes function on `true` and do nothing when received `false`.
 
 ```js
-branch(context => true, sendText('a'));
+branch(context => true, sendText('You are the lucky one.'));
 ```
 
 ### `condition`
@@ -109,7 +125,10 @@ Create a function that calls error handler on error.
 ```js
 const { tryCatch, sendText } = require('bottender-compose');
 
-bot.onEvent(tryCatch(doSomething(), sendText('Error!')));
+bot.onEvent(tryCatch(
+  doSomethingMayFail(),
+  sendText('Error Happened~~~~~~~~~~~!')
+));
 ```
 
 ### `weight`
