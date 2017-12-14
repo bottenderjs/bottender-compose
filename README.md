@@ -147,6 +147,22 @@ bot.onEvent(
 );
 ```
 
+### `doNothing`
+
+Create a no-op function.
+
+```js
+const { branch, sendText, doNothing } = require('bottender-compose');
+
+bot.onEvent(
+  branch(
+    context => false,
+    sendText('You are the lucky one.'),
+    doNothing() // do exactly nothing...
+  )
+);
+```
+
 ### Other Methods
 
 #### Common
