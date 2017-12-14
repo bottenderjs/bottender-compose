@@ -1,3 +1,7 @@
+0.4.0 / 2017-12-14
+==================
+- [new] Support `weight` and `doNothing`.
+
 0.3.1 / 2017-12-13
 ==================
 - [fix] Fix `random` runtime bug
