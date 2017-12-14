@@ -123,4 +123,5 @@ it('should export other apis', () => {
   expect(B.series).toBeDefined();
   expect(B.tryCatch).toBeDefined();
   expect(B.weight).toBeDefined();
+  expect(B.doNothing).toBeDefined();
 });
