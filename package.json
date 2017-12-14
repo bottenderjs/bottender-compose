@@ -18,6 +18,7 @@
     "testonly:watch": "jest --watch"
   },
   "dependencies": {
+    "noop2": "^2.0.0",
     "random-item": "^1.0.0"
   },
   "devDependencies": {
