@@ -275,7 +275,7 @@ bot.onEvent(
 * `sendSticker`
 * `sendCarouselContent`
 
-#### FB
+#### Facebook
 
 * `sendComment`
 * `sendPrivateReply`
