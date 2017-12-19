@@ -20,11 +20,13 @@ Create a function that executes methods in series.
 ```js
 const { series, sendText } = require('bottender-compose');
 
-bot.onEvent(series([
-  sendText('1. First Item'),
-  sendText('2. Second Item'),
-  sendText('3. Third Item'),
-]));
+bot.onEvent(
+  series([
+    sendText('1. First Item'),
+    sendText('2. Second Item'),
+    sendText('3. Third Item'),
+  ])
+);
 ```
 
 ### `parallel`
@@ -34,11 +36,13 @@ Create a function that executes methods in parallel.
 ```js
 const { parallel, sendText } = require('bottender-compose');
 
-bot.onEvent(parallel([
-  sendText('- You got one of Items'),
-  sendText('- You got one of Items'),
-  sendText('- You got one of Items'),
-]));
+bot.onEvent(
+  parallel([
+    sendText('- You got one of Items'),
+    sendText('- You got one of Items'),
+    sendText('- You got one of Items'),
+  ])
+);
 ```
 
 ### `random`
@@ -48,11 +52,13 @@ Create a function that executes one of method randomly.
 ```js
 const { random, sendText } = require('bottender-compose');
 
-bot.onEvent(random([
-  sendText('You got a random item: A'),
-  sendText('You got a random item: B'),
-  sendText('You got a random item: C'),
-]));
+bot.onEvent(
+  random([
+    sendText('You got a random item: A'),
+    sendText('You got a random item: B'),
+    sendText('You got a random item: C'),
+  ])
+);
 ```
 
 ### `branch`
@@ -62,11 +68,13 @@ Create a function that will process either the `onTrue` or the `onFalse` functio
 ```js
 const { branch, sendText } = require('bottender-compose');
 
-bot.onEvent(branch(
-  context => true,
-  sendText('You are the lucky one.'),
-  sendText('Too bad.')
-));
+bot.onEvent(
+  branch(
+    context => true,
+    sendText('You are the lucky one.'),
+    sendText('Too bad.')
+  )
+);
 ```
 
 Or you can executes function on `true` and do nothing when received `false`.
@@ -125,10 +133,9 @@ Create a function that calls error handler on error.
 ```js
 const { tryCatch, sendText } = require('bottender-compose');
 
-bot.onEvent(tryCatch(
-  doSomethingMayFail(),
-  sendText('Error Happened~~~~~~~~~~~!')
-));
+bot.onEvent(
+  tryCatch(doSomethingMayFail(), sendText('Error Happened~~~~~~~~~~~!'))
+);
 ```
 
 ### `weight`
@@ -161,6 +168,16 @@ bot.onEvent(
     doNothing() // do exactly nothing...
   )
 );
+```
+
+### `repeat`
+
+Create a function that executes the method repeatedly.
+
+```js
+const { repeat, sendText } = require('bottender-compose');
+
+bot.onEvent(repeat(3, sendText('This will be sent 3 times.')));
 ```
 
 ### Other Methods
