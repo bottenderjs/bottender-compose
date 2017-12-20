@@ -180,6 +180,24 @@ const { repeat, sendText } = require('bottender-compose');
 bot.onEvent(repeat(3, sendText('This will be sent 3 times.')));
 ```
 
+### `delay`
+
+Create a function that executes methods after a number of milliseconds.
+
+```js
+const { series, delay, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  B.series([
+    B.sendText('1. First Item'),
+    B.delay(1000);
+    B.sendText('2. Second Item'),
+    B.delay(1000);
+    B.sendText('3. Third Item'),
+  ])
+);
+```
+
 ### Other Methods
 
 #### Common

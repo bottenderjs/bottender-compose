@@ -32,3 +32,4 @@ exports.tryCatch = require('./tryCatch');
 exports.weight = require('./weight');
 exports.doNothing = require('./doNothing');
 exports.repeat = require('./repeat');
+exports.delay = require('./delay');

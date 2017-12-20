@@ -15,14 +15,15 @@
     "lint:staged": "lint-staged",
     "test": "yarn run lint && yarn run testonly",
     "testonly": "jest",
+    "testonly:cov": "jest --coverage --runInBand --forceExit",
     "testonly:watch": "jest --watch"
   },
   "dependencies": {
+    "delay": "^2.0.0",
     "noop2": "^2.0.0",
     "random-item": "^1.0.0"
   },
   "devDependencies": {
-    "delay": "^2.0.0",
     "eslint": "^4.13.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-yoctol-base": "^0.14.2",
