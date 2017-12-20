@@ -29,6 +29,9 @@ it('should export Messenger apis', () => {
   expect(B.markSeen).toBeDefined();
   expect(B.typingOn).toBeDefined();
   expect(B.typingOff).toBeDefined();
+  expect(B.passThreadControl).toBeDefined();
+  expect(B.passThreadControlToPageInbox).toBeDefined();
+  expect(B.takeThreadControl).toBeDefined();
   expect(B.associateLabel).toBeDefined();
   expect(B.dissociateLabel).toBeDefined();
   expect(B.getAssociatedLabels).toBeDefined();
@@ -90,10 +93,14 @@ it('should export Telegram apis', () => {
   expect(B.sendVideo).toBeDefined();
   expect(B.sendVoice).toBeDefined();
   expect(B.sendVideoNote).toBeDefined();
+  expect(B.sendMediaGroup).toBeDefined();
   expect(B.sendLocation).toBeDefined();
   expect(B.sendVenue).toBeDefined();
   expect(B.sendContact).toBeDefined();
   expect(B.sendChatAction).toBeDefined();
+  expect(B.sendInvoice).toBeDefined();
+  expect(B.sendGame).toBeDefined();
+  expect(B.setGameScore).toBeDefined();
 });
 
 it('should export Viber apis', () => {

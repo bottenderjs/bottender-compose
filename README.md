@@ -230,6 +230,9 @@ bot.onEvent(
 * `markSeen`
 * `typingOn`
 * `typingOff`
+* `passThreadControl`
+* `passThreadControlToPageInbox`
+* `takeThreadControl`
 * `associateLabel`
 * `dissociateLabel`
 * `getAssociatedLabels`
@@ -292,10 +295,14 @@ bot.onEvent(
 * `sendVideo`
 * `sendVoice`
 * `sendVideoNote`
+* `sendMediaGroup`
 * `sendLocation`
 * `sendVenue`
 * `sendContact`
 * `sendChatAction`
+* `sendInvoice`
+* `sendGame`
+* `setGameScore`
 
 #### Viber
 
