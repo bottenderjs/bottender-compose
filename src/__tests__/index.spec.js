@@ -1,5 +1,9 @@
 const B = require('../');
 
+it('should export default', () => {
+  expect(B).toBeDefined();
+});
+
 it('should export common apis', () => {
   expect(B.setState).toBeDefined();
   expect(B.resetState).toBeDefined();

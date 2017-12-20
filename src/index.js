@@ -7,6 +7,16 @@ const {
   viber,
   fb,
 } = require('./methods');
+const branch = require('./branch');
+const condition = require('./condition');
+const parallel = require('./parallel');
+const platform = require('./platform');
+const random = require('./random');
+const series = require('./series');
+const tryCatch = require('./tryCatch');
+const weight = require('./weight');
+const doNothing = require('./doNothing');
+const repeat = require('./repeat');
 
 const allMethods = common
   .concat(messenger)
@@ -16,19 +26,25 @@ const allMethods = common
   .concat(viber)
   .concat(fb);
 
-allMethods.forEach(method => {
-  if (!exports[method]) {
-    exports[method] = (...args) => context => context[method](...args);
-  }
-});
-
-exports.branch = require('./branch');
-exports.condition = require('./condition');
-exports.parallel = require('./parallel');
-exports.platform = require('./platform');
-exports.random = require('./random');
-exports.series = require('./series');
-exports.tryCatch = require('./tryCatch');
-exports.weight = require('./weight');
-exports.doNothing = require('./doNothing');
-exports.repeat = require('./repeat');
+// eslint-disable-next-line no-multi-assign
+exports = module.exports = {
+  branch,
+  condition,
+  parallel,
+  platform,
+  random,
+  series,
+  tryCatch,
+  weight,
+  doNothing,
+  repeat,
+  ...allMethods.reduce((prev, method) => {
+    if (!prev[method]) {
+      return {
+        ...prev,
+        [method]: (...args) => context => context[method](...args),
+      };
+    }
+    return prev;
+  }, {}),
+};
