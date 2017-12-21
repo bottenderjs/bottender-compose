@@ -63,7 +63,8 @@ bot.onEvent(
 
 ### `branch`
 
-Create a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.
+Create a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.  
+Furthermore, `branch` can be sued as curry function.
 
 ```js
 const { branch, sendText } = require('bottender-compose');
@@ -74,6 +75,14 @@ bot.onEvent(
     sendText('You are the lucky one.'),
     sendText('Too bad.')
   )
+);
+
+// curry function
+
+const trueConditionBranch = branch(context => true);
+
+bot.onEvent(
+  trueConditionBranch(sendText('You are the lucky one.'), sendText('Too bad.'))
 );
 ```
 
@@ -128,7 +137,8 @@ platform({
 
 ### `tryCatch`
 
-Create a function that calls error handler on error.
+Create a function that calls error handler on error.  
+Furthermore, `tryCatch` can be sued as curry function.
 
 ```js
 const { tryCatch, sendText } = require('bottender-compose');
@@ -136,6 +146,12 @@ const { tryCatch, sendText } = require('bottender-compose');
 bot.onEvent(
   tryCatch(doSomethingMayFail(), sendText('Error Happened~~~~~~~~~~~!'))
 );
+
+// curry function
+
+const mayFailTryCatch = tryCatch(doSomethingMayFail());
+
+bot.onEvent(mayFailTryCatch(sendText('Error Happened~~~~~~~~~~~!')));
 ```
 
 ### `weight`
@@ -172,12 +188,19 @@ bot.onEvent(
 
 ### `repeat`
 
-Create a function that executes the method repeatedly.
+Create a function that executes the method repeatedly.  
+Furthermore, `repeat` can be sued as curry function.
 
 ```js
 const { repeat, sendText } = require('bottender-compose');
 
 bot.onEvent(repeat(3, sendText('This will be sent 3 times.')));
+
+// curry function
+
+const repeatFiveTimes = repeat(5);
+
+bot.onEvent(repeatFiveTimes(sendText('This will be sent 5 times.')));
 ```
 
 ### `delay`

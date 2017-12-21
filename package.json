@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "delay": "^2.0.0",
+    "lodash": "^4.17.4",
     "noop2": "^2.0.0",
     "random-item": "^1.0.0"
   },
