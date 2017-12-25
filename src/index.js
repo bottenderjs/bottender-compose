@@ -33,3 +33,4 @@ exports.weight = require('./weight');
 exports.doNothing = require('./doNothing');
 exports.repeat = require('./repeat');
 exports.delay = require('./delay');
+exports.spy = require('./spy');
