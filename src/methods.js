@@ -26,6 +26,7 @@ exports.messenger = [
   'passThreadControl',
   'passThreadControlToPageInbox',
   'takeThreadControl',
+  'requestThreadControl',
   'associateLabel',
   'dissociateLabel',
   'getAssociatedLabels',
