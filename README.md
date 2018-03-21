@@ -236,7 +236,6 @@ bot.onEvent(
 * `requestThreadControl`
 * `associateLabel`
 * `dissociateLabel`
-* `getAssociatedLabels`
 
 #### LINE
 
@@ -275,7 +274,6 @@ bot.onEvent(
 * `pushConfirmTemplate`
 * `pushCarouselTemplate`
 * `pushImageCarouselTemplate`
-* `getLinkedRichMenu`
 * `linkRichMenu`
 * `unlinkRichMenu`
 

@@ -35,7 +35,6 @@ it('should export Messenger apis', () => {
   expect(B.requestThreadControl).toBeDefined();
   expect(B.associateLabel).toBeDefined();
   expect(B.dissociateLabel).toBeDefined();
-  expect(B.getAssociatedLabels).toBeDefined();
 });
 
 it('should export LINE apis', () => {
@@ -74,7 +73,6 @@ it('should export LINE apis', () => {
   expect(B.pushConfirmTemplate).toBeDefined();
   expect(B.pushCarouselTemplate).toBeDefined();
   expect(B.pushImageCarouselTemplate).toBeDefined();
-  expect(B.getLinkedRichMenu).toBeDefined();
   expect(B.linkRichMenu).toBeDefined();
   expect(B.unlinkRichMenu).toBeDefined();
 });
