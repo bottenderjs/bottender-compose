@@ -282,6 +282,7 @@ bot.onEvent(
 
 * `sendText`
 * `postMessage`
+* `postEphemeral`
 
 #### Telegram
 
