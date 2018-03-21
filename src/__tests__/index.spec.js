@@ -32,6 +32,7 @@ it('should export Messenger apis', () => {
   expect(B.passThreadControl).toBeDefined();
   expect(B.passThreadControlToPageInbox).toBeDefined();
   expect(B.takeThreadControl).toBeDefined();
+  expect(B.requestThreadControl).toBeDefined();
   expect(B.associateLabel).toBeDefined();
   expect(B.dissociateLabel).toBeDefined();
   expect(B.getAssociatedLabels).toBeDefined();

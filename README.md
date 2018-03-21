@@ -233,6 +233,7 @@ bot.onEvent(
 * `passThreadControl`
 * `passThreadControlToPageInbox`
 * `takeThreadControl`
+* `requestThreadControl`
 * `associateLabel`
 * `dissociateLabel`
 * `getAssociatedLabels`
