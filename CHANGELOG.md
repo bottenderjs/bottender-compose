@@ -1,3 +1,35 @@
+# 0.6.1 / 2018-03-21
+
+* [new] Support new methods:
+
+messenger:
+
+* `requestThreadControl`
+
+slack:
+
+* `postEphemeral`
+
+telegram:
+
+* `kickChatMember`
+* `unbanChatMember`
+* `restrictChatMember`
+* `promoteChatMember`
+* `exportChatInviteLink`
+* `setChatPhoto`
+* `deleteChatPhoto`
+* `setChatTitle`
+* `setChatDescription`
+* `setChatStickerSet`
+* `deleteChatStickerSet`
+* `pinChatMessage`
+* `unpinChatMessage`
+* `leaveChat`
+* `answerShippingQuery`
+* `answerPreCheckoutQuery`
+* `answerInlineQuery`
+
 # 0.6.0 / 2018-03-21
 
 * [new] Support passing function as argument to context methods:
