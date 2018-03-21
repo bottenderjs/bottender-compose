@@ -29,7 +29,6 @@ exports.messenger = [
   'requestThreadControl',
   'associateLabel',
   'dissociateLabel',
-  'getAssociatedLabels',
 ];
 
 exports.line = [
@@ -69,7 +68,6 @@ exports.line = [
   'pushConfirmTemplate',
   'pushCarouselTemplate',
   'pushImageCarouselTemplate',
-  'getLinkedRichMenu',
   'linkRichMenu',
   'unlinkRichMenu',
 ];
