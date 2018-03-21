@@ -74,7 +74,7 @@ exports.line = [
   'unlinkRichMenu',
 ];
 
-exports.slack = ['sendText', 'postMessage'];
+exports.slack = ['sendText', 'postMessage', 'postEphemeral'];
 
 exports.telegram = [
   'sendText',

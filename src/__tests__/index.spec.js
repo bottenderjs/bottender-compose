@@ -82,6 +82,7 @@ it('should export LINE apis', () => {
 it('should export Slack apis', () => {
   expect(B.sendText).toBeDefined();
   expect(B.postMessage).toBeDefined();
+  expect(B.postEphemeral).toBeDefined();
 });
 
 it('should export Telegram apis', () => {
