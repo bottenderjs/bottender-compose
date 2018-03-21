@@ -1,3 +1,25 @@
+# 0.6.0 / 2018-03-21
+
+* [new] Support passing function as argument to context methods:
+
+You can pass function as argument to handle time-specified or context-specified case, for example:
+
+```js
+// Lazy execution
+B.sendText(() => `Now: ${new Date()}`);
+
+// Use user information on context
+B.sendText(
+  context =>
+    `${context.session.user.first_name} ${
+      context.session.user.last_name
+    }, You are the lucky one.`
+);
+
+// Use event information
+B.sendText(context => `Received: ${context.event.text}`);
+```
+
 # 0.5.1 / 2017-12-20
 
 * [new] Support methods:
