@@ -301,7 +301,24 @@ bot.onEvent(
 * `sendVenue`
 * `sendContact`
 * `sendChatAction`
+* `kickChatMember`
+* `unbanChatMember`
+* `restrictChatMember`
+* `promoteChatMember`
+* `exportChatInviteLink`
+* `setChatPhoto`
+* `deleteChatPhoto`
+* `setChatTitle`
+* `setChatDescription`
+* `setChatStickerSet`
+* `deleteChatStickerSet`
+* `pinChatMessage`
+* `unpinChatMessage`
+* `leaveChat`
 * `sendInvoice`
+* `answerShippingQuery`
+* `answerPreCheckoutQuery`
+* `answerInlineQuery`
 * `sendGame`
 * `setGameScore`
 
