@@ -262,7 +262,6 @@ bot.onEvent(
 * `replyConfirmTemplate`
 * `replyCarouselTemplate`
 * `replyImageCarouselTemplate`
-* `replyImageCarouselTemplate`
 * `push`
 * `pushText`
 * `pushImage`
