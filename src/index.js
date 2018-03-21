@@ -18,7 +18,15 @@ const allMethods = common
 
 allMethods.forEach(method => {
   if (!exports[method]) {
-    exports[method] = (...args) => context => context[method](...args);
+    exports[method] = (...args) => context =>
+      context[method](
+        ...args.map(arg => {
+          if (typeof arg === 'function') {
+            return arg(context);
+          }
+          return arg;
+        })
+      );
   }
 });
 
