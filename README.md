@@ -198,7 +198,7 @@ bot.onEvent(
 );
 ```
 
-### Other Methods
+### Context Methods
 
 #### Common
 
@@ -321,6 +321,26 @@ bot.onEvent(
 
 * `sendComment`
 * `sendPrivateReply`
+
+## Passing Function as Argument to Context Method
+
+You can pass function as argument to handle time-specified or context-specified case, for example:
+
+```js
+// Lazy execution
+B.sendText(() => `Now: ${new Date()}`);
+
+// Use user information on context
+B.sendText(
+  context =>
+    `${context.session.user.first_name} ${
+      context.session.user.last_name
+    }, You are the lucky one.`
+);
+
+// Use event information
+B.sendText(context => `Received: ${context.event.text}`);
+```
 
 ## License
 
