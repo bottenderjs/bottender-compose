@@ -1,3 +1,28 @@
+# 0.6.2 / 2018-03-22
+
+* [new] Support new methods:
+
+telegram:
+
+* `editMessageText`
+* `editMessageCaption`
+* `editMessageReplyMarkup`
+* `deleteMessage`
+* `editMessageLiveLocation`
+* `stopMessageLiveLocation`
+* `forwardMessageFrom`
+* `forwardMessageTo`
+
+* [removed] remove useless
+
+messenger:
+
+* `getAssociatedLabels`
+
+line:
+
+* `getLinkedRichMenu`
+
 # 0.6.1 / 2018-03-21
 
 * [new] Support new methods:
