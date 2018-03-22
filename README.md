@@ -190,9 +190,9 @@ const { series, delay, sendText } = require('bottender-compose');
 bot.onEvent(
   series([
     sendText('1. First Item'),
-    delay(1000);
+    delay(1000),
     sendText('2. Second Item'),
-    delay(1000);
+    delay(1000),
     sendText('3. Third Item'),
   ])
 );
