@@ -98,6 +98,14 @@ it('should export Telegram apis', () => {
   expect(B.sendVenue).toBeDefined();
   expect(B.sendContact).toBeDefined();
   expect(B.sendChatAction).toBeDefined();
+  expect(B.editMessageText).toBeDefined();
+  expect(B.editMessageCaption).toBeDefined();
+  expect(B.editMessageReplyMarkup).toBeDefined();
+  expect(B.deleteMessage).toBeDefined();
+  expect(B.editMessageLiveLocation).toBeDefined();
+  expect(B.stopMessageLiveLocation).toBeDefined();
+  expect(B.forwardMessageFrom).toBeDefined();
+  expect(B.forwardMessageTo).toBeDefined();
   expect(B.kickChatMember).toBeDefined();
   expect(B.unbanChatMember).toBeDefined();
   expect(B.restrictChatMember).toBeDefined();

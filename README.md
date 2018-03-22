@@ -299,6 +299,14 @@ bot.onEvent(
 * `sendVenue`
 * `sendContact`
 * `sendChatAction`
+* `editMessageText`
+* `editMessageCaption`
+* `editMessageReplyMarkup`
+* `deleteMessage`
+* `editMessageLiveLocation`
+* `stopMessageLiveLocation`
+* `forwardMessageFrom`
+* `forwardMessageTo`
 * `kickChatMember`
 * `unbanChatMember`
 * `restrictChatMember`
