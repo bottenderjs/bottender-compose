@@ -188,12 +188,12 @@ Create a function that executes methods after a number of milliseconds.
 const { series, delay, sendText } = require('bottender-compose');
 
 bot.onEvent(
-  B.series([
-    B.sendText('1. First Item'),
-    B.delay(1000);
-    B.sendText('2. Second Item'),
-    B.delay(1000);
-    B.sendText('3. Third Item'),
+  series([
+    sendText('1. First Item'),
+    delay(1000);
+    sendText('2. Second Item'),
+    delay(1000);
+    sendText('3. Third Item'),
   ])
 );
 ```
