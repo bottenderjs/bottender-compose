@@ -19,8 +19,7 @@ it('should call second parameter function if first parameter return true, or cal
 
   br(context);
 
-  await Promise.resolve();
-  await Promise.resolve();
+  await flushPromises();
 
   expect(cond).toHaveBeenCalled();
   expect(context.sendText).toBeCalledWith(

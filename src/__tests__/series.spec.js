@@ -28,21 +28,19 @@ it('should create action that will run in series', async () => {
 
   action(context);
 
-  await Promise.resolve();
+  await flushPromises();
 
   expect(context.sendText.mock.calls).toContainEqual(['haha']);
 
   resolveHaha();
 
-  await Promise.resolve();
-  await Promise.resolve();
+  await flushPromises();
 
   expect(context.sendText.mock.calls).toContainEqual(['wow']);
 
   resolveWow();
 
-  await Promise.resolve();
-  await Promise.resolve();
+  await flushPromises();
 
   expect(context.sendText.mock.calls).toContainEqual(['cool']);
 });
