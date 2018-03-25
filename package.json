@@ -48,6 +48,9 @@
     "transformIgnorePatterns": [
       "/node_modules/"
     ],
+    "setupFiles": [
+      "./test/setupTest.js"
+    ],
     "testEnvironment": "node",
     "timers": "fake",
     "resetModules": true,

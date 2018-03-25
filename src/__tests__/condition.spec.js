@@ -18,8 +18,7 @@ it('should run second function in the element which first function return true',
 
   conds(context);
 
-  await Promise.resolve();
-  await Promise.resolve();
+  await flushPromises();
 
   expect(condA).toHaveBeenCalled();
   expect(context.sendText).not.toBeCalledWith(
