@@ -64,3 +64,24 @@ it('should call last action', () => {
 
   expect(context.sendText).toBeCalledWith('cool');
 });
+
+it('should pass extra args to underlying action', async () => {
+  const haha = jest.fn();
+  const wow = jest.fn();
+  const cool = jest.fn();
+  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+
+  Math.random.mockReturnValueOnce(0.4);
+
+  const action = weight(conds);
+
+  const context = {
+    sendText: jest.fn(),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(haha).toBeCalledWith(context, extraArg);
+});

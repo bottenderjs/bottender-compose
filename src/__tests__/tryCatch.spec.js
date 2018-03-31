@@ -29,3 +29,19 @@ it('should create action that will call error handler on error in curried tryCat
 
   expect(context.sendText).toBeCalledWith('Error');
 });
+
+it('should pass extra args to underlying action', async () => {
+  const haha = jest.fn();
+
+  const action = tryCatch(haha, sendText('Error'));
+
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(haha).toBeCalledWith(context, extraArg);
+});

@@ -2,11 +2,14 @@ const curry = require('lodash/curry');
 
 function noop() {}
 
-const branch = (predicate, onTrue, onFalse = noop) => async context => {
-  if (await predicate(context)) {
-    await onTrue(context);
+const branch = (predicate, onTrue, onFalse = noop) => async (
+  context,
+  ...otherArgs
+) => {
+  if (await predicate(context, ...otherArgs)) {
+    await onTrue(context, ...otherArgs);
   } else {
-    await onFalse(context);
+    await onFalse(context, ...otherArgs);
   }
 };
 

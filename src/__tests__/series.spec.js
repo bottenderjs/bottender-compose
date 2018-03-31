@@ -44,3 +44,21 @@ it('should create action that will run in series', async () => {
 
   expect(context.sendText.mock.calls).toContainEqual(['cool']);
 });
+
+it('should pass extra args to underlying action', async () => {
+  const haha = jest.fn();
+  const wow = jest.fn();
+
+  const action = series([haha, wow]);
+
+  const context = {
+    sendText: jest.fn(),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(haha).toBeCalledWith(context, extraArg);
+  expect(wow).toBeCalledWith(context, extraArg);
+});

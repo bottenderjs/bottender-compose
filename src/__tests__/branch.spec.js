@@ -111,3 +111,48 @@ it('should call second parameter function if first parameter return true, or cal
     'You are the butter to my bread, and the breath to my life - Julie & Julia'
   );
 });
+
+describe('should pass extra args to underlying action', () => {
+  it('on true', async () => {
+    const cond = jest.fn(() => true);
+
+    const trueAction = jest.fn();
+
+    const br = branch(cond, trueAction);
+
+    const context = {
+      sendText: jest.fn(),
+    };
+
+    const extraArg = {};
+
+    br(context, extraArg);
+
+    await flushPromises();
+
+    expect(cond).toHaveBeenCalled();
+    expect(trueAction).toBeCalledWith(context, extraArg);
+  });
+
+  it('on false', async () => {
+    const cond = jest.fn(() => false);
+
+    const trueAction = jest.fn();
+    const falseAction = jest.fn();
+
+    const br = branch(cond, trueAction, falseAction);
+
+    const context = {
+      sendText: jest.fn(),
+    };
+
+    const extraArg = {};
+
+    br(context, extraArg);
+
+    await flushPromises();
+
+    expect(cond).toHaveBeenCalled();
+    expect(falseAction).toBeCalledWith(context, extraArg);
+  });
+});

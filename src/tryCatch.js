@@ -1,8 +1,8 @@
 const curry = require('lodash/curry');
 
-const tryCatch = (statement, onError) => async context => {
+const tryCatch = (statement, onError) => async (context, ...otherArgs) => {
   try {
-    await statement(context);
+    await statement(context, ...otherArgs);
   } catch (err) {
     await onError(context, err);
   }

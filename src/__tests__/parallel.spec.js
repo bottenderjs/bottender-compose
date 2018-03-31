@@ -29,3 +29,21 @@ it('should create action that will run in parallel', () => {
   expect(context.sendText.mock.calls).toContainEqual(['wow']);
   expect(context.sendText.mock.calls).toContainEqual(['haha']);
 });
+
+it('should pass extra args to underlying action', async () => {
+  const haha = jest.fn();
+  const wow = jest.fn();
+
+  const action = parallel([haha, wow]);
+
+  const context = {
+    sendText: jest.fn(),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(haha).toBeCalledWith(context, extraArg);
+  expect(wow).toBeCalledWith(context, extraArg);
+});
