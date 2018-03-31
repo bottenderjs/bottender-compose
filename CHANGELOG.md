@@ -1,3 +1,32 @@
+# 0.7.0 / 2018-03-31
+
+* [new] Curry branch, repeat and tryCatch:
+
+```js
+// curry branch
+const trueConditionBranch = branch(context => true);
+
+bot.onEvent(
+  trueConditionBranch(sendText('You are the lucky one.'), sendText('Too bad.'))
+);
+
+// curry repeat
+const repeatFiveTimes = repeat(5);
+
+bot.onEvent(repeatFiveTimes(sendText('This will be sent 5 times.')));
+
+// curry tryCatch
+const mayFailTryCatch = tryCatch(doSomethingMayFail());
+
+bot.onEvent(mayFailTryCatch(sendText('Error Happened~~~~~~~~~~~!')));
+```
+
+* [new] support otherArgs:
+
+```js
+const action = (context, ...otherArgs) => {};
+```
+
 # 0.6.2 / 2018-03-22
 
 * [new] Support new methods:
