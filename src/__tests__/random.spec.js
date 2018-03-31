@@ -23,3 +23,24 @@ it('should create action that will call sendText', () => {
   expect(randomItem).toBeCalledWith(actions);
   expect(context.sendText).toBeCalledWith('cool');
 });
+
+it('should pass extra args to underlying action', () => {
+  const haha = jest.fn();
+  const wow = jest.fn();
+
+  const actions = [haha, wow];
+
+  randomItem.mockReturnValueOnce(haha);
+  const action = random(actions);
+
+  const context = {
+    sendText: jest.fn(),
+  };
+
+  const extraArg = {};
+
+  action(context, extraArg);
+
+  expect(randomItem).toBeCalledWith(actions);
+  expect(haha).toBeCalledWith(context, extraArg);
+});

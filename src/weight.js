@@ -1,4 +1,4 @@
-module.exports = conds => async context => {
+module.exports = conds => async (context, ...otherArgs) => {
   const totalWeight = conds.reduce((sum, cond) => cond[0] + sum, 0);
   const d = Math.random();
 
@@ -9,7 +9,7 @@ module.exports = conds => async context => {
     accum += weight / totalWeight;
     if (d < accum) {
       /* eslint-disable no-await-in-loop */
-      await action(context);
+      await action(context, ...otherArgs);
       /* eslint-enable no-await-in-loop */
       break;
     }

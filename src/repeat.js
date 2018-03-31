@@ -1,8 +1,8 @@
 const curry = require('lodash/curry');
 
-const repeat = (times, action) => async context => {
+const repeat = (times, action) => async (context, ...otherArgs) => {
   for (let i = 0; i < times; i += 1) {
-    await action(context); // eslint-disable-line no-await-in-loop
+    await action(context, ...otherArgs); // eslint-disable-line no-await-in-loop
   }
 };
 

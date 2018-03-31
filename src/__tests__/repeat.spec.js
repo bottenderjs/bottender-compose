@@ -28,3 +28,19 @@ it('should create action that will run in curried repeat', async () => {
 
   expect(context.sendText.mock.calls.length).toBe(5);
 });
+
+it('should pass extra args to underlying action', async () => {
+  const cool = jest.fn();
+
+  const action = repeat(5, cool);
+
+  const context = {
+    sendText: jest.fn(),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(cool).toBeCalledWith(context, extraArg);
+});
