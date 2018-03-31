@@ -15,3 +15,17 @@ it('should create action that will call error handler on error', async () => {
 
   expect(context.sendText).toBeCalledWith('Error');
 });
+
+it('should create action that will call error handler on error in curried tryCatch', async () => {
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+  const mayFailTryCatch = tryCatch(
+    jest.fn().mockReturnValue(Promise.reject(new Error()))
+  );
+  const action = mayFailTryCatch(sendText('Error'));
+
+  await action(context);
+
+  expect(context.sendText).toBeCalledWith('Error');
+});
