@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/Yoctol/bottender-compose.git"
   },
-  "version": "0.8.0",
+  "version": "0.8.1",
   "main": "src/index",
   "scripts": {
     "precommit": "lint-staged",
