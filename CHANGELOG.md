@@ -1,3 +1,68 @@
+# 0.8.0 / 2018-04-02
+
+* [new] Use Template in String:
+
+You can use `context`, `session`, `event`, `state` to access values in your template string:
+
+```js
+B.sendText('Hi, {{session.user.first_name}} {{session.user.last_name}}');
+B.sendText('Received: {{event.text}');
+B.sendText('State: {{state.xxx}');
+```
+
+* [new] Support `match`:
+
+Create a function that encapsulates value matching logic.
+
+```js
+const { match, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  match('a', [
+    ['a', sendText('You got a A')],
+    ['b', sendText('You got a B')],
+    ['c', sendText('You got a C')],
+  ])
+);
+```
+
+It accepts function with `context` argument:
+
+```js
+bot.onEvent(
+  match(context => context.state.answer, [
+    ['a', sendText('You got a A')],
+    ['b', sendText('You got a B')],
+    ['c', sendText('You got a C')],
+  ])
+);
+
+// curry function
+const matchAnswer = match(context => context.state.answer);
+
+bot.onEvent(
+  matchAnswer([
+    ['a', sendText('You got a A')],
+    ['b', sendText('You got a B')],
+    ['c', sendText('You got a C')],
+  ])
+);
+```
+
++To assign default action, use `_` as pattern:
+
+```js
+const { _, match, sendText } = require('bottender-compose');
+bot.onEvent(
+  condition('a', [
+    ['a', sendText('You got a A')],
+    ['b', sendText('You got a B')],
+    ['c', sendText('You got a C')],
+    [_, sendText('You got something')],
+  ])
+);
+```
+
 # 0.7.0 / 2018-03-31
 
 * [new] Curry branch, repeat and tryCatch:
