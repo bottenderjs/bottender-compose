@@ -42,7 +42,7 @@ exports.compileTemplate = tpl => context => {
     const value = get(context, properties.slice(1));
 
     warning(
-      typeof value !== 'string',
+      typeof value === 'string',
       `Properties accessors in template is invalid -- expected return a string but got: ${typeof value}`
     );
 

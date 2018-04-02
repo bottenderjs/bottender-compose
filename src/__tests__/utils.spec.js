@@ -118,11 +118,23 @@ describe('#compileTemplate', () => {
     ).toBe('Hi, James & yyy & Cool');
   });
 
-  it('should show warning when the result of properties accessors is not a string', () => {
-    expectTemplate('Hi, {{context.session.user}}').toBe('Hi, [object Object]');
-    expect(warning).toBeCalledWith(
-      true,
-      'Properties accessors in template is invalid -- expected return a string but got: object'
-    );
+  describe('#warning', () => {
+    it('should not show warning when the result of properties accessors is not a string', () => {
+      expectTemplate('Hi, {{context.session.user.first_name}}');
+      expect(warning).toBeCalledWith(
+        true,
+        'Properties accessors in template is invalid -- expected return a string but got: string'
+      );
+    });
+
+    it('should show warning when the result of properties accessors is not a string', () => {
+      expectTemplate('Hi, {{context.session.user}}').toBe(
+        'Hi, [object Object]'
+      );
+      expect(warning).toBeCalledWith(
+        false,
+        'Properties accessors in template is invalid -- expected return a string but got: object'
+      );
+    });
   });
 });
