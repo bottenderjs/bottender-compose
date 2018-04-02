@@ -389,6 +389,16 @@ B.sendText(
 B.sendText(context => `Received: ${context.event.text}`);
 ```
 
+## Use Template in String
+
+You can use `context`, `session`, `event`, `state` to access values in your template string:
+
+```js
+B.sendText('Hi, {{session.user.first_name}} {{session.user.last_name}}');
+B.sendText('Received: {{event.text}');
+B.sendText('State: {{state.xxx}');
+```
+
 ## License
 
 MIT © [Yoctol](https://github.com/Yoctol/bottender-compose)
