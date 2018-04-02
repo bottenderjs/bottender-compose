@@ -1,3 +1,7 @@
+# 0.8.1 / 2018-04-02
+
+* [fix] warning condition on compileTemplate method.
+
 # 0.8.0 / 2018-04-02
 
 * [new] Use Template in String:
