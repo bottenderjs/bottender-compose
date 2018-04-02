@@ -49,7 +49,7 @@ bot.onEvent(
 );
 ```
 
-+To assign default action, use `_` as pattern:
+To assign default action, use `_` as pattern:
 
 ```js
 const { _, match, sendText } = require('bottender-compose');
