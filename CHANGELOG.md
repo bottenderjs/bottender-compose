@@ -6,8 +6,8 @@ You can use `context`, `session`, `event`, `state` to access values in your temp
 
 ```js
 B.sendText('Hi, {{session.user.first_name}} {{session.user.last_name}}');
-B.sendText('Received: {{event.text}');
-B.sendText('State: {{state.xxx}');
+B.sendText('Received: {{event.text}}');
+B.sendText('State: {{state.xxx}}');
 ```
 
 * [new] Support `match`:
@@ -54,7 +54,7 @@ To assign default action, use `_` as pattern:
 ```js
 const { _, match, sendText } = require('bottender-compose');
 bot.onEvent(
-  condition('a', [
+  match('a', [
     ['a', sendText('You got a A')],
     ['b', sendText('You got a B')],
     ['c', sendText('You got a C')],
