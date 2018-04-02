@@ -30,8 +30,10 @@ allMethods.forEach(method => {
   }
 });
 
+exports._ = require('./_');
 exports.branch = require('./branch');
 exports.condition = require('./condition');
+exports.match = require('./match');
 exports.parallel = require('./parallel');
 exports.platform = require('./platform');
 exports.random = require('./random');

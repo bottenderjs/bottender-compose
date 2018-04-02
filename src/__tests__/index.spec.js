@@ -147,8 +147,10 @@ it('should export FB apis', () => {
 });
 
 it('should export other apis', () => {
+  expect(B._).toBeDefined();
   expect(B.branch).toBeDefined();
   expect(B.condition).toBeDefined();
+  expect(B.match).toBeDefined();
   expect(B.parallel).toBeDefined();
   expect(B.platform).toBeDefined();
   expect(B.random).toBeDefined();
