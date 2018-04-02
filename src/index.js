@@ -7,6 +7,7 @@ const {
   viber,
   fb,
 } = require('./methods');
+const { isValidTemplate, compileTemplate } = require('./utils');
 
 const allMethods = common
   .concat(messenger)
@@ -23,6 +24,9 @@ allMethods.forEach(method => {
         ...args.map(arg => {
           if (typeof arg === 'function') {
             return arg(context);
+          }
+          if (typeof arg === 'string' && isValidTemplate(arg)) {
+            return compileTemplate(arg)(context);
           }
           return arg;
         })
