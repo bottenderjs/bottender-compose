@@ -15,7 +15,7 @@ npm install bottender-compose
 
 ### `series`
 
-Create a function that executes methods in series.
+Creates a function that executes methods in series.
 
 ```js
 const { series, sendText } = require('bottender-compose');
@@ -31,7 +31,7 @@ bot.onEvent(
 
 ### `parallel`
 
-Create a function that executes methods in parallel.
+Creates a function that executes methods in parallel.
 
 ```js
 const { parallel, sendText } = require('bottender-compose');
@@ -47,7 +47,7 @@ bot.onEvent(
 
 ### `random`
 
-Create a function that executes one of method randomly.
+Creates a function that executes one of method randomly.
 
 ```js
 const { random, sendText } = require('bottender-compose');
@@ -63,7 +63,7 @@ bot.onEvent(
 
 ### `branch`
 
-Create a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.  
+Creates a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.  
 Furthermore, `branch` can be sued as curry function.
 
 ```js
@@ -78,7 +78,6 @@ bot.onEvent(
 );
 
 // curry function
-
 const trueConditionBranch = branch(context => true);
 
 bot.onEvent(
@@ -94,7 +93,7 @@ branch(context => true, sendText('You are the lucky one.'));
 
 ### `condition`
 
-Create a function that encapsulates `if/else`, `if/else`, ... logic.
+Creates a function that encapsulates `if/else`, `if/else`, ... logic.
 
 ```js
 const { condition, sendText } = require('bottender-compose');
@@ -110,7 +109,7 @@ bot.onEvent(
 
 ### `match`
 
-Create a function that encapsulates value matching logic.
+Creates a function that encapsulates value matching logic.
 
 ```js
 const { match, sendText } = require('bottender-compose');
@@ -136,7 +135,6 @@ bot.onEvent(
 );
 
 // curry function
-
 const matchAnswer = match(context => context.state.answer);
 
 bot.onEvent(
@@ -165,7 +163,7 @@ bot.onEvent(
 
 ### `platform`
 
-Create a function that will process function depending upon the platform context.
+Creates a function that will process function depending upon the platform context.
 
 ```js
 const {
@@ -192,7 +190,7 @@ platform({
 
 ### `tryCatch`
 
-Create a function that calls error handler on error.  
+Creates a function that calls error handler on error.  
 Furthermore, `tryCatch` can be sued as curry function.
 
 ```js
@@ -203,7 +201,6 @@ bot.onEvent(
 );
 
 // curry function
-
 const mayFailTryCatch = tryCatch(doSomethingMayFail());
 
 bot.onEvent(mayFailTryCatch(sendText('Error Happened~~~~~~~~~~~!')));
@@ -211,7 +208,7 @@ bot.onEvent(mayFailTryCatch(sendText('Error Happened~~~~~~~~~~~!')));
 
 ### `weight`
 
-Create a function that randomly executes one of method by its weight.
+Creates a function that randomly executes one of method by its weight.
 
 ```js
 const { weight, sendText } = require('bottender-compose');
@@ -227,7 +224,7 @@ bot.onEvent(
 
 ### `doNothing`
 
-Create a no-op function.
+Creates a no-op function.
 
 ```js
 const { branch, sendText, doNothing } = require('bottender-compose');
@@ -243,7 +240,7 @@ bot.onEvent(
 
 ### `repeat`
 
-Create a function that executes the method repeatedly.  
+Creates a function that executes the method repeatedly.  
 Furthermore, `repeat` can be sued as curry function.
 
 ```js
@@ -252,7 +249,6 @@ const { repeat, sendText } = require('bottender-compose');
 bot.onEvent(repeat(3, sendText('This will be sent 3 times.')));
 
 // curry function
-
 const repeatFiveTimes = repeat(5);
 
 bot.onEvent(repeatFiveTimes(sendText('This will be sent 5 times.')));
@@ -260,7 +256,7 @@ bot.onEvent(repeatFiveTimes(sendText('This will be sent 5 times.')));
 
 ### `delay`
 
-Create a function that executes methods after a number of milliseconds.
+Creates a function that executes methods after a number of milliseconds.
 
 ```js
 const { series, delay, sendText } = require('bottender-compose');
@@ -274,6 +270,19 @@ bot.onEvent(
     sendText('3. Third Item'),
   ])
 );
+```
+
+### `setDisplayName`
+
+Assigns to the `displayName` property on the action.
+
+```js
+const { setDisplayName, sendText } = require('bottender-compose');
+
+setDisplayName('sayHello', sendText('hello'));
+
+// curry function
+setDisplayName('sayHello')(sendText('hello'));
 ```
 
 ### Context Methods
