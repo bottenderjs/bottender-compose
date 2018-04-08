@@ -1,3 +1,18 @@
+# 0.8.2 / 2018-04-09
+
+* [new] Add `setDisplayName`:
+
+Assigns to the `displayName` property on the action.
+
+```js
+const { setDisplayName, sendText } = require('bottender-compose');
+
+setDisplayName('sayHello', sendText('hello'));
+
+// curry function
+setDisplayName('sayHello')(sendText('hello'));
+```
+
 # 0.8.1 / 2018-04-02
 
 * [fix] warning condition on compileTemplate method.
