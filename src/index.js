@@ -19,11 +19,11 @@ const allMethods = common
 
 allMethods.forEach(method => {
   if (!exports[method]) {
-    exports[method] = (...args) => context =>
+    exports[method] = (...args) => (context, ...otherArgs) =>
       context[method](
         ...args.map(arg => {
           if (typeof arg === 'function') {
-            return arg(context);
+            return arg(context, ...otherArgs);
           }
           if (typeof arg === 'string' && isValidTemplate(arg)) {
             return compileTemplate(arg)(context);

@@ -23,7 +23,23 @@ it('should call parameter as function', async () => {
   await action(context);
 
   expect(context.sendText).toBeCalledWith('haha');
-  expect(mockFn).toBeCalled();
+  expect(mockFn).toBeCalledWith(context);
+});
+
+it('should pass extra args to function', async () => {
+  const mockFn = jest.fn(() => 'haha');
+
+  const action = sendText(mockFn);
+
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(mockFn).toBeCalledWith(context, extraArg);
 });
 
 it('should parse template', async () => {
