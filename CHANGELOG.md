@@ -1,3 +1,8 @@
+# 0.8.3 / 2018-04-12
+
+* [fix] pass extra args to match value function (#58)
+* [fix] pass extra args to all of context fns (#59)
+
 # 0.8.2 / 2018-04-09
 
 * [new] Add `setDisplayName`:
