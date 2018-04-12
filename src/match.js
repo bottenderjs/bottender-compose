@@ -7,7 +7,8 @@ const match = (value, mapping) => {
   const otherMapping = mapping.filter(([pattern]) => pattern !== _);
 
   return async (context, ...otherArgs) => {
-    const val = typeof value === 'function' ? await value(context) : value;
+    const val =
+      typeof value === 'function' ? await value(context, ...otherArgs) : value;
 
     for (let i = 0; i < otherMapping.length; i++) {
       const [pattern, action] = otherMapping[i];

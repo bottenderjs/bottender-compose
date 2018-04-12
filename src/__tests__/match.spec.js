@@ -132,6 +132,26 @@ it('should pass extra args to underlying default action', async () => {
   expect(cool).toBeCalledWith(context, extraArg);
 });
 
+it('should pass extra args to value function', async () => {
+  const haha = jest.fn();
+  const wow = jest.fn();
+  const cool = jest.fn();
+
+  const value = jest.fn(() => 3);
+
+  const action = match(value, [[1, haha], [2, wow], [_, cool]]);
+
+  const context = {
+    sendText: jest.fn(),
+  };
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(value).toBeCalledWith(context, extraArg);
+});
+
 it('should create action that will run in curried match', async () => {
   const haha = sendText('haha');
   const wow = sendText('wow');
