@@ -1,3 +1,7 @@
+# 0.8.4 / 2018-04-26
+
+* [new] also overwrite name in `setDisplayName`
+
 # 0.8.3 / 2018-04-12
 
 * [fix] pass extra args to match value function (#58)
