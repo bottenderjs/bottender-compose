@@ -6,6 +6,7 @@ it('should create named action', async () => {
 
   const action = setDisplayName('sayCool', cool);
 
+  expect(action).toHaveProperty('name', 'sayCool');
   expect(action).toHaveProperty('displayName', 'sayCool');
 });
 
