@@ -1,15 +1,16 @@
 const curry = require('lodash/curry');
 
 const effect = (effectFn, action) => async (context, ...otherArgs) => {
-  const { derivedState, derivedParam } = (await effectFn()) || {};
+  const { derivedState, derivedParam } =
+    (await effectFn(context, ...otherArgs)) || {};
 
   if (derivedState) {
     context.setState(derivedState);
   }
 
   if (derivedParam) {
-    const [param, argsFromIndex2] = otherArgs;
-    if (param && typeof param === 'object') {
+    const [param, ...argsFromIndex2] = otherArgs;
+    if (!param || typeof param === 'object') {
       return action(
         context,
         {
