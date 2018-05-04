@@ -285,6 +285,35 @@ setDisplayName('sayHello', sendText('hello'));
 setDisplayName('sayHello')(sendText('hello'));
 ```
 
+### `effect`
+
+```js
+const { effect } = require('bottender-compose');
+
+bot.onEvent(
+  effect(
+    // function has side effects
+    async context => {
+      await doSomeSideEffects();
+      return {
+        derivedState: {
+          x: 1,
+        },
+        derivedParam: {
+          y: 2,
+        },
+      };
+    },
+
+    // action
+    async (context, param) => {
+      console.log(context.state.x); // 1
+      console.log(param.y); // 2
+    }
+  )
+);
+```
+
 ### Context Methods
 
 #### Common
