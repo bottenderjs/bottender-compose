@@ -48,3 +48,4 @@ exports.doNothing = require('./doNothing');
 exports.repeat = require('./repeat');
 exports.delay = require('./delay');
 exports.setDisplayName = require('./setDisplayName');
+exports.effect = require('./effect');

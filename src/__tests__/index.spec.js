@@ -161,4 +161,5 @@ it('should export other apis', () => {
   expect(B.repeat).toBeDefined();
   expect(B.delay).toBeDefined();
   expect(B.setDisplayName).toBeDefined();
+  expect(B.effect).toBeDefined();
 });
