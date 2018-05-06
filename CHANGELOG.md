@@ -1,3 +1,34 @@
+# 0.9.0 / 2018-05-06
+
+* [new] `effect`:
+
+```js
+const { effect } = require('bottender-compose');
+
+bot.onEvent(
+  effect(
+    // function has side effects
+    async context => {
+      await doSomeSideEffects();
+      return {
+        derivedState: {
+          x: 1,
+        },
+        derivedParam: {
+          y: 2,
+        },
+      };
+    },
+
+    // action
+    async (context, param) => {
+      console.log(context.state.x); // 1
+      console.log(param.y); // 2
+    }
+  )
+);
+```
+
 # 0.8.4 / 2018-04-26
 
 * [new] also overwrite name in `setDisplayName`
