@@ -314,6 +314,41 @@ bot.onEvent(
 );
 ```
 
+### Logger Methods
+
+```js
+B.series([
+  B.log('sending hello'),
+  B.info('sending hello'),
+  B.warn('sending hello'),
+  B.error('sending hello'),
+
+  B.sendText('hello'),
+]);
+```
+
+It supports template too.
+
+```js
+B.series([
+  B.log('user: {{ session.user.id }} x: {{ state.x }}'),
+  B.sendText('hello'),
+]);
+```
+
+You can use your owner adapter for the logger:
+
+```js
+const { log, info, warn, error } = B.createLogger({
+  log: debug('log'),
+  info: debug('info'),
+  warn: debug('warn'),
+  error: debug('error'),
+});
+
+B.series([log('sending hello'), B.sendText('hello')]);
+```
+
 ### Context Methods
 
 #### Common
