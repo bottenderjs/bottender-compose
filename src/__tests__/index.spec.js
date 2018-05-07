@@ -163,3 +163,11 @@ it('should export other apis', () => {
   expect(B.setDisplayName).toBeDefined();
   expect(B.effect).toBeDefined();
 });
+
+it('should export logger apis', () => {
+  expect(B.log).toBeDefined();
+  expect(B.info).toBeDefined();
+  expect(B.warn).toBeDefined();
+  expect(B.error).toBeDefined();
+  expect(B.createLogger).toBeDefined();
+});

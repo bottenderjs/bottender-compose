@@ -7,6 +7,7 @@ const {
   viber,
   fb,
 } = require('./methods');
+const { log, info, warn, error, createLogger } = require('./logger');
 const { isValidTemplate, compileTemplate } = require('./utils');
 
 const allMethods = common
@@ -49,3 +50,10 @@ exports.repeat = require('./repeat');
 exports.delay = require('./delay');
 exports.setDisplayName = require('./setDisplayName');
 exports.effect = require('./effect');
+
+/* Logger */
+exports.log = log;
+exports.info = info;
+exports.warn = warn;
+exports.error = error;
+exports.createLogger = createLogger;
