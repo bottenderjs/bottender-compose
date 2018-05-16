@@ -1,3 +1,7 @@
+# 0.10.0 / 2018-05-16
+
+* [new] build source with babel to have real support for node >= 7.6
+
 # 0.9.1 / 2018-05-07
 
 * Add new logger methods:
