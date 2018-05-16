@@ -7,8 +7,13 @@
     "url": "https://github.com/Yoctol/bottender-compose.git"
   },
   "version": "0.9.1",
-  "main": "src/index",
+  "main": "lib/index",
+  "files": [
+    "lib"
+  ],
   "scripts": {
+    "build": "npm run clean && babel src -d lib --ignore __tests__",
+    "clean": "rimraf lib",
     "precommit": "lint-staged",
     "lint": "eslint src",
     "lint:fix": "yarn run lint -- --fix",
@@ -26,6 +31,13 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.47",
+    "@babel/core": "^7.0.0-beta.47",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.47",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.47",
+    "@babel/preset-env": "^7.0.0-beta.47",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^22.4.3",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-yoctol-base": "^0.15.1",
@@ -35,7 +47,8 @@
     "jest": "^22.4.3",
     "lint-staged": "^7.0.2",
     "prettier": "^1.11.1",
-    "prettier-package-json": "^1.5.1"
+    "prettier-package-json": "^1.5.1",
+    "rimraf": "^2.6.2"
   },
   "keywords": [
     "bot",
@@ -48,7 +61,12 @@
   "jest": {
     "coverageDirectory": "./coverage/",
     "transformIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "lib"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "lib"
     ],
     "setupFiles": [
       "./test/setupTest.js"
