@@ -18,10 +18,12 @@
     "lint": "eslint src",
     "lint:fix": "yarn run lint -- --fix",
     "lint:staged": "lint-staged",
+    "prepublish": "npm run build",
     "test": "yarn run lint && yarn run testonly",
     "testonly": "jest",
     "testonly:cov": "jest --coverage --runInBand --forceExit",
-    "testonly:watch": "jest --watch"
+    "testonly:watch": "jest --watch",
+    "preversion": "npm test"
   },
   "dependencies": {
     "delay": "^2.0.0",
