@@ -191,7 +191,7 @@ platform({
 ### `tryCatch`
 
 Creates a function that calls error handler on error.  
-Furthermore, `tryCatch` can be sued as curry function.
+Furthermore, `tryCatch` can be used as curry function.
 
 ```js
 const { tryCatch, sendText } = require('bottender-compose');
