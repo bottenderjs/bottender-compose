@@ -1,0 +1,78 @@
+version: 2
+# Reference variables.
+references:
+  docker_default: &docker_node_8
+    working_directory: /tmp/app
+    docker:
+      - image: node:8
+    environment:
+      TZ: "/usr/share/zoneinfo/Asia/Taipei"
+
+jobs:
+  install:
+    <<: *docker_node_8
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-8-cache-{{checksum "yarn.lock"}}
+            - node-8-cache
+      - run:
+          name: install dependencies
+          command: |
+            yarn config set cache-folder .yarn-cache
+            yarn --frozen-lockfile
+      - save_cache:
+          key: node-8-cache-{{checksum "yarn.lock"}}
+          paths:
+            - .yarn-cache
+            - ./node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - lib
+  lint:
+    <<: *docker_node_8
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: run lint
+          command: npm run lint -- --color
+  test:
+    <<: *docker_node_8
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: run test
+          command: npm run testonly:cov -- --no-cache --colors
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: junit.xml
+
+workflows:
+  version: 2
+  all-in-one:
+    jobs:
+      - install:
+          filters:
+            tags:
+              only: /.*/
+      - lint:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
