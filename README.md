@@ -1,6 +1,7 @@
 # bottender-compose
 
 [![npm](https://img.shields.io/npm/v/bottender-compose.svg?style=flat-square)](https://www.npmjs.com/package/bottender-compose)
+[![CircleCI](https://circleci.com/gh/Yoctol/bottender-compose.svg?style=shield&circle-token=baa90bb904477834fedf0788e3ff6cbc9708ff43)](https://circleci.com/gh/Yoctol/bottender-compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > An utility library for [Bottender](https://github.com/Yoctol/bottender) and higher-order handlers
