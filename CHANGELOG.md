@@ -1,4 +1,4 @@
-# 0.10.2 / 2018-07-15
+# 0.10.2 / 2018-07-25
 
 * [new] Support user accessor: `{{user.xxx}}` in template.
 
