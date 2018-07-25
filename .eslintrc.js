@@ -1,19 +1,12 @@
 module.exports = {
-  extends: ['yoctol-base', 'prettier'],
+  extends: ['yoctol-base'],
   env: {
     node: true,
     jest: true,
     jasmine: true,
   },
-  plugins: ['import', 'prettier'],
+  plugins: ['import'],
   rules: {
     'import/no-extraneous-dependencies': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        trailingComma: 'es5',
-        singleQuote: true,
-      },
-    ],
   },
 };

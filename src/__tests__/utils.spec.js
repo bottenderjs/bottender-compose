@@ -77,7 +77,7 @@ describe('#compileTemplate', () => {
   it('should support only keywords with properties access', () => {
     expectTemplate('Hi, {{context.session.user.first_name}}').toBe('Hi, James');
     expectTemplate('Hi, {{session.user.first_name}}').toBe('Hi, James');
-    // expectTemplate('Hi, {{user.first_name}}').toBe('Hi, James');
+    expectTemplate('Hi, {{user.first_name}}').toBe('Hi, James');
     expectTemplate('Hi, {{context.event.text}}').toBe('Hi, Cool');
     expectTemplate('Hi, {{event.text}}').toBe('Hi, Cool');
     expectTemplate('Hi, {{context.state.xxx}}').toBe('Hi, yyy');
