@@ -1,3 +1,7 @@
+# 0.10.2 / 2018-07-15
+
+* [new] Support user accessor: `{{user.xxx}}` in template.
+
 # 0.10.1 / 2018-05-16
 
 * [fix] run babel compilation before publish.
