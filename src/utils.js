@@ -10,6 +10,14 @@ const TEMPLATE_WHITELIST_KEYS = [
   'state',
 ];
 
+const contextKeyPrefixResolveMap = {
+  context: '',
+  session: 'session.',
+  user: 'session.user.',
+  event: 'event.',
+  state: 'state.',
+};
+
 const VARIABLE = `(${TEMPLATE_WHITELIST_KEYS.join('|')})((\\.\\w+)+)`;
 
 exports.isValidTemplate = str => {
@@ -24,22 +32,18 @@ exports.compileTemplate = tpl => context => {
 
   const matchStrings = tpl.match(VALID_TEMPLATE);
 
-  for (let i = 0; i < matchStrings.length; i++) {
-    const matchString = matchStrings[i];
-
+  for (const matchString of matchStrings) {
     const [
       targetString,
       firstWhitelistKey,
       ...otherResults
     ] = VALID_TEMPLATE.exec(matchString);
 
-    let properties = otherResults[0];
+    const properties = `${
+      contextKeyPrefixResolveMap[firstWhitelistKey]
+    }${otherResults[0].slice(1)}`;
 
-    if (firstWhitelistKey !== 'context') {
-      properties = `.${firstWhitelistKey}${properties}`;
-    }
-
-    const value = get(context, properties.slice(1));
+    const value = get(context, properties);
 
     warning(
       typeof value === 'string',
