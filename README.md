@@ -520,12 +520,13 @@ B.sendText(context => `Received: ${context.event.text}`);
 
 ## Use Template in String
 
-You can use `context`, `session`, `event`, `state` to access values in your template string:
+You can use `context`, `session`, `event`, `state`, `user` to access values in your template string:
 
 ```js
 B.sendText('Hi, {{session.user.first_name}} {{session.user.last_name}}');
 B.sendText('Received: {{event.text}}');
 B.sendText('State: {{state.xxx}}');
+B.sendText('User: {{user.first_name}} {{user.last_name}}');
 ```
 
 ## License
