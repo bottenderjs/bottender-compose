@@ -43,7 +43,7 @@ exports.compileTemplate = tpl => context => {
       contextKeyPrefixResolveMap[firstWhitelistKey]
     }${otherResults[0].slice(1)}`;
 
-    const value = get(context, properties);
+    const value = get(context, properties, '');
 
     warning(
       typeof value === 'string',

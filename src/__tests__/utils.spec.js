@@ -18,7 +18,7 @@ describe('#isValidTemplate', () => {
       true
     );
     expect(isValidTemplate('Hi, {{session.user.first_name}}')).toBe(true);
-    // expect(isValidTemplate('Hi, {{user.first_name}}')).toBe(true);
+    expect(isValidTemplate('Hi, {{user.first_name}}')).toBe(true);
     expect(isValidTemplate('Hi, {{context.event.text}}')).toBe(true);
     expect(isValidTemplate('Hi, {{event.text}}')).toBe(true);
     expect(isValidTemplate('Hi, {{context.state.xxx}}')).toBe(true);
@@ -82,6 +82,10 @@ describe('#compileTemplate', () => {
     expectTemplate('Hi, {{event.text}}').toBe('Hi, Cool');
     expectTemplate('Hi, {{context.state.xxx}}').toBe('Hi, yyy');
     expectTemplate('Hi, {{state.xxx}}').toBe('Hi, yyy');
+  });
+
+  it('should fallback falsy value into empty string', () => {
+    expectTemplate('Hi, {{context.session.user.last_name}}').toBe('Hi, ');
   });
 
   it('should allow whitespaces', () => {
