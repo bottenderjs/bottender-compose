@@ -1,3 +1,7 @@
+# 0.10.3 / 2018-08-08
+
+* [fix] fallback to empty string when template getting falsy value
+
 # 0.10.2 / 2018-07-25
 
 * [new] Support user accessor: `{{user.xxx}}` in template.
