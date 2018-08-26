@@ -1,12 +1,12 @@
 const B = require('../');
 
-it('should export common apis', () => {
+it('should export common methods', () => {
   expect(B.setState).toBeDefined();
   expect(B.resetState).toBeDefined();
   expect(B.typing).toBeDefined();
 });
 
-it('should export Messenger apis', () => {
+it('should export Messenger methods', () => {
   expect(B.sendMessage).toBeDefined();
   expect(B.sendText).toBeDefined();
   expect(B.sendAttachment).toBeDefined();
@@ -37,7 +37,42 @@ it('should export Messenger apis', () => {
   expect(B.dissociateLabel).toBeDefined();
 });
 
-it('should export LINE apis', () => {
+it('should export Messenger predicates', () => {
+  expect(B.isMessage).toBeDefined();
+  expect(B.isText).toBeDefined();
+  expect(B.hasAttachment).toBeDefined();
+  expect(B.isImage).toBeDefined();
+  expect(B.isAudio).toBeDefined();
+  expect(B.isVideo).toBeDefined();
+  expect(B.isLocation).toBeDefined();
+  expect(B.isFile).toBeDefined();
+  expect(B.isFallback).toBeDefined();
+  expect(B.isSticker).toBeDefined();
+  expect(B.isLikeSticker).toBeDefined();
+  expect(B.isQuickReply).toBeDefined();
+  expect(B.isEcho).toBeDefined();
+  expect(B.isPostback).toBeDefined();
+  expect(B.isGamePlay).toBeDefined();
+  expect(B.isOptin).toBeDefined();
+  expect(B.isPayment).toBeDefined();
+  expect(B.isCheckoutUpdate).toBeDefined();
+  expect(B.isPreCheckout).toBeDefined();
+  expect(B.isRead).toBeDefined();
+  expect(B.isDelivery).toBeDefined();
+  expect(B.isPayload).toBeDefined();
+  expect(B.isPolicyEnforcement).toBeDefined();
+  expect(B.isAppRoles).toBeDefined();
+  expect(B.isStandby).toBeDefined();
+  expect(B.isPassThreadControl).toBeDefined();
+  expect(B.isTakeThreadControl).toBeDefined();
+  expect(B.isRequestThreadControl).toBeDefined();
+  expect(B.isRequestThreadControlFromPageInbox).toBeDefined();
+  expect(B.isFromCustomerChatPlugin).toBeDefined();
+  expect(B.isReferral).toBeDefined();
+  expect(B.isBrandedCamera).toBeDefined();
+});
+
+it('should export LINE methods', () => {
   expect(B.sendText).toBeDefined();
   expect(B.sendImage).toBeDefined();
   expect(B.sendVideo).toBeDefined();
@@ -77,13 +112,93 @@ it('should export LINE apis', () => {
   expect(B.unlinkRichMenu).toBeDefined();
 });
 
-it('should export Slack apis', () => {
+it('should export LINE predicates', () => {
+  expect(B.isMessage).toBeDefined();
+  expect(B.isText).toBeDefined();
+  expect(B.isImage).toBeDefined();
+  expect(B.isVideo).toBeDefined();
+  expect(B.isAudio).toBeDefined();
+  expect(B.isLocation).toBeDefined();
+  expect(B.isSticker).toBeDefined();
+  expect(B.isFollow).toBeDefined();
+  expect(B.isUnfollow).toBeDefined();
+  expect(B.isJoin).toBeDefined();
+  expect(B.isLeave).toBeDefined();
+  expect(B.isPostback).toBeDefined();
+  expect(B.isPayload).toBeDefined();
+  expect(B.isBeacon).toBeDefined();
+  expect(B.isAccountLink).toBeDefined();
+});
+
+it('should export Slack methods', () => {
   expect(B.sendText).toBeDefined();
   expect(B.postMessage).toBeDefined();
   expect(B.postEphemeral).toBeDefined();
 });
 
-it('should export Telegram apis', () => {
+it('should export Slack predicates', () => {
+  expect(B.isMessage).toBeDefined();
+  expect(B.isChannelsMessage).toBeDefined();
+  expect(B.isGroupsMessage).toBeDefined();
+  expect(B.isImMessage).toBeDefined();
+  expect(B.isMpimMessage).toBeDefined();
+  expect(B.isText).toBeDefined();
+  expect(B.isInteractiveMessage).toBeDefined();
+  expect(B.isAppUninstalled).toBeDefined();
+  expect(B.isChannelArchive).toBeDefined();
+  expect(B.isChannelCreated).toBeDefined();
+  expect(B.isChannelDeleted).toBeDefined();
+  expect(B.isChannelHistoryChanged).toBeDefined();
+  expect(B.isChannelRename).toBeDefined();
+  expect(B.isChannelUnarchive).toBeDefined();
+  expect(B.isDndUpdated).toBeDefined();
+  expect(B.isDndUpdated_user).toBeDefined();
+  expect(B.isEmailDomainChanged).toBeDefined();
+  expect(B.isEmojiChanged).toBeDefined();
+  expect(B.isFileChange).toBeDefined();
+  expect(B.isFileCommentAdded).toBeDefined();
+  expect(B.isFileCommentDeleted).toBeDefined();
+  expect(B.isFileCommentEdited).toBeDefined();
+  expect(B.isFileCreated).toBeDefined();
+  expect(B.isFileDeleted).toBeDefined();
+  expect(B.isFilePublic).toBeDefined();
+  expect(B.isFileShared).toBeDefined();
+  expect(B.isFileUnshared).toBeDefined();
+  expect(B.isGridMigrationFinished).toBeDefined();
+  expect(B.isGridMigrationStarted).toBeDefined();
+  expect(B.isGroupArchive).toBeDefined();
+  expect(B.isGroupClose).toBeDefined();
+  expect(B.isGroupHistoryChanged).toBeDefined();
+  expect(B.isGroupOpen).toBeDefined();
+  expect(B.isGroupRename).toBeDefined();
+  expect(B.isGroupUnarchive).toBeDefined();
+  expect(B.isImClose).toBeDefined();
+  expect(B.isImCreated).toBeDefined();
+  expect(B.isImHistoryChanged).toBeDefined();
+  expect(B.isImOpen).toBeDefined();
+  expect(B.isLinkShared).toBeDefined();
+  expect(B.isMemberJoinedChannel).toBeDefined();
+  expect(B.isMemberLeftChannel).toBeDefined();
+  expect(B.isPinAdded).toBeDefined();
+  expect(B.isPinRemoved).toBeDefined();
+  expect(B.isReactionAdded).toBeDefined();
+  expect(B.isReactionRemoved).toBeDefined();
+  expect(B.isStarAdded).toBeDefined();
+  expect(B.isStarRemoved).toBeDefined();
+  expect(B.isSubteamCreated).toBeDefined();
+  expect(B.isSubteamMembersChanged).toBeDefined();
+  expect(B.isSubteamSelfAdded).toBeDefined();
+  expect(B.isSubteamSelfRemoved).toBeDefined();
+  expect(B.isSubteamUpdated).toBeDefined();
+  expect(B.isTeamDomainChange).toBeDefined();
+  expect(B.isTeamJoin).toBeDefined();
+  expect(B.isTeamRename).toBeDefined();
+  expect(B.isTokensRevoked).toBeDefined();
+  expect(B.isUrlVerification).toBeDefined();
+  expect(B.isUserChange).toBeDefined();
+});
+
+it('should export Telegram methods', () => {
   expect(B.sendText).toBeDefined();
   expect(B.sendMessage).toBeDefined();
   expect(B.sendPhoto).toBeDefined();
@@ -128,7 +243,32 @@ it('should export Telegram apis', () => {
   expect(B.setGameScore).toBeDefined();
 });
 
-it('should export Viber apis', () => {
+it('should export Telegram predicates', () => {
+  expect(B.isMessage).toBeDefined();
+  expect(B.isText).toBeDefined();
+  expect(B.isAudio).toBeDefined();
+  expect(B.isDocument).toBeDefined();
+  expect(B.isGame).toBeDefined();
+  expect(B.isPhoto).toBeDefined();
+  expect(B.isSticker).toBeDefined();
+  expect(B.isVideo).toBeDefined();
+  expect(B.isVoice).toBeDefined();
+  expect(B.isVideoNote).toBeDefined();
+  expect(B.isContact).toBeDefined();
+  expect(B.isLocation).toBeDefined();
+  expect(B.isVenue).toBeDefined();
+  expect(B.isEditedMessage).toBeDefined();
+  expect(B.isChannelPost).toBeDefined();
+  expect(B.isEditedChannelPost).toBeDefined();
+  expect(B.isInlineQuery).toBeDefined();
+  expect(B.isChosenInlineResult).toBeDefined();
+  expect(B.isCallbackQuery).toBeDefined();
+  expect(B.isPayload).toBeDefined();
+  expect(B.isShippingQuery).toBeDefined();
+  expect(B.isPreCheckoutQuery).toBeDefined();
+});
+
+it('should export Viber methods', () => {
   expect(B.sendMessage).toBeDefined();
   expect(B.sendText).toBeDefined();
   expect(B.sendPicture).toBeDefined();
@@ -141,9 +281,47 @@ it('should export Viber apis', () => {
   expect(B.sendCarouselContent).toBeDefined();
 });
 
-it('should export FB apis', () => {
+it('should export Viber predicates', () => {
+  expect(B.isMessage).toBeDefined();
+  expect(B.isText).toBeDefined();
+  expect(B.isPicture).toBeDefined();
+  expect(B.isVideo).toBeDefined();
+  expect(B.isFile).toBeDefined();
+  expect(B.isSticker).toBeDefined();
+  expect(B.isContact).toBeDefined();
+  expect(B.isURL).toBeDefined();
+  expect(B.isLocation).toBeDefined();
+  expect(B.isSubscribed).toBeDefined();
+  expect(B.isUnsubscribed).toBeDefined();
+  expect(B.isConversationStarted).toBeDefined();
+  expect(B.isDelivered).toBeDefined();
+  expect(B.isSeen).toBeDefined();
+  expect(B.isFailed).toBeDefined();
+});
+
+it('should export Facebook methods', () => {
   expect(B.sendComment).toBeDefined();
   expect(B.sendPrivateReply).toBeDefined();
+});
+
+it('should export Facebook predicates', () => {
+  expect(B.isFeed).toBeDefined();
+  expect(B.isStatus).toBeDefined();
+  expect(B.isStatusAdd).toBeDefined();
+  expect(B.isStatusEdited).toBeDefined();
+  expect(B.isPost).toBeDefined();
+  expect(B.isPostRemove).toBeDefined();
+  expect(B.isComment).toBeDefined();
+  expect(B.isCommentAdd).toBeDefined();
+  expect(B.isCommentEdited).toBeDefined();
+  expect(B.isCommentRemove).toBeDefined();
+  expect(B.isLike).toBeDefined();
+  expect(B.isLikeAdd).toBeDefined();
+  expect(B.isLikeRemove).toBeDefined();
+  expect(B.isReaction).toBeDefined();
+  expect(B.isReactionAdd).toBeDefined();
+  expect(B.isReactionEdit).toBeDefined();
+  expect(B.isReactionRemove).toBeDefined();
 });
 
 it('should export other apis', () => {

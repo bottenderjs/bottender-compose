@@ -1,22 +1,15 @@
-const {
-  common,
-  messenger,
-  line,
-  slack,
-  telegram,
-  viber,
-  fb,
-} = require('./methods');
+const methods = require('./methods');
+const predicates = require('./predicates');
 const { log, info, warn, error, createLogger } = require('./logger');
 const { isValidTemplate, compileTemplate } = require('./utils');
 
-const allMethods = common
-  .concat(messenger)
-  .concat(line)
-  .concat(slack)
-  .concat(telegram)
-  .concat(viber)
-  .concat(fb);
+const allMethods = methods.common
+  .concat(methods.messenger)
+  .concat(methods.line)
+  .concat(methods.slack)
+  .concat(methods.telegram)
+  .concat(methods.viber)
+  .concat(methods.fb);
 
 allMethods.forEach(method => {
   if (!exports[method]) {
@@ -32,6 +25,19 @@ allMethods.forEach(method => {
           return arg;
         })
       );
+  }
+});
+
+const allPredicates = predicates.messenger
+  .concat(predicates.line)
+  .concat(predicates.slack)
+  .concat(predicates.telegram)
+  .concat(predicates.viber)
+  .concat(predicates.fb);
+
+allPredicates.forEach(predicate => {
+  if (!exports[predicate]) {
+    exports[predicate] = () => context => context.event[predicate];
   }
 });
 
