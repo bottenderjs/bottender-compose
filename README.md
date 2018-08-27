@@ -92,6 +92,8 @@ Or you can executes function on `true` and do nothing when received `false`.
 branch(context => true, sendText('You are the lucky one.'));
 ```
 
+`branch` works well with [predicates](#predicates).
+
 ### `condition`
 
 Creates a function that encapsulates `if/else`, `if/else`, ... logic.
@@ -107,6 +109,8 @@ bot.onEvent(
   ])
 );
 ```
+
+`condition` works well with [predicates](#predicates).
 
 ### `match`
 
@@ -500,7 +504,7 @@ B.series([log('sending hello'), B.sendText('hello')]);
 - `sendComment`
 - `sendPrivateReply`
 
-## Passing Function as Argument to Context Method
+### Passing Function as Argument to Context Method
 
 You can pass function as argument to handle time-specified or context-specified case, for example:
 
@@ -520,7 +524,7 @@ B.sendText(
 B.sendText(context => `Received: ${context.event.text}`);
 ```
 
-## Use Template in String
+### Use Template in String
 
 You can use `context`, `session`, `event`, `state`, `user` to access values in your template string:
 
@@ -530,6 +534,288 @@ B.sendText('Received: {{event.text}}');
 B.sendText('State: {{state.xxx}}');
 B.sendText('User: {{user.first_name}} {{user.last_name}}');
 ```
+
+<a name="predicates" />
+
+### Predicates
+
+### `isTextMatch`
+
+Creates a predicate function to return true when text matches.
+
+```js
+const { isTextMatch } = require('bottender-compose');
+
+isTextMatch('abc')(context); // boolean
+isTextMatch(/abc/)(context); // boolean
+```
+
+### `isPayloadMatch`
+
+Creates a predicate function to return true when payload matches.
+
+```js
+const { isPayloadMatch } = require('bottender-compose');
+
+isPayloadMatch('abc')(context); // boolean
+isPayloadMatch(/abc/)(context); // boolean
+```
+
+### `hasStateEqual`
+
+Creates a predicate function to return true when state matches.
+
+```js
+const { hasStateEqual } = require('bottender-compose');
+
+hasStateEqual('x', 1)(context); // boolean
+hasStateEqual('x.y.z', 1)(context); // boolean
+hasStateEqual('x', { y: { z: 1 } })(context); // boolean
+```
+
+### `not`
+
+Creates a predicate function with **not** condition.
+
+```js
+const { not, hasStateEqual } = require('bottender-compose');
+
+const predicate = not(hasStateEqual('x', 1));
+
+predicate(context); // boolean
+```
+
+### `and`
+
+Creates a predicate function with **and** condition.
+
+```js
+const { and, hasStateEqual } = require('bottender-compose');
+
+const predicate = and([
+  isTextMatch('abc'),
+  hasStateEqual('x', 1))
+]);
+
+predicate(context) // boolean
+```
+
+### `or`
+
+Creates a predicate function with **or** condition.
+
+```js
+const { or, hasStateEqual } = require('bottender-compose');
+
+const predicate = or([
+  isTextMatch('abc'),
+  hasStateEqual('x', 1))
+]);
+
+predicate(context) // boolean
+```
+
+### `alwaysTrue`
+
+Creates a predicate function that always return `true`.
+
+```js
+const { alwaysTrue } = require('bottender-compose');
+
+const predicate = alwaysTrue();
+
+predicate(context); // true
+```
+
+### `alwaysFalse`
+
+Creates a predicate function that always return `false`.
+
+```js
+const { alwaysFalse } = require('bottender-compose');
+
+const predicate = alwaysFalse();
+
+predicate(context); // false
+```
+
+#### Messenger
+
+- `isMessage`
+- `isText`
+- `hasAttachment`
+- `isImage`
+- `isAudio`
+- `isVideo`
+- `isLocation`
+- `isFile`
+- `isFallback`
+- `isSticker`
+- `isLikeSticker`
+- `isQuickReply`
+- `isEcho`
+- `isPostback`
+- `isGamePlay`
+- `isOptin`
+- `isPayment`
+- `isCheckoutUpdate`
+- `isPreCheckout`
+- `isRead`
+- `isDelivery`
+- `isPayload`
+- `isPolicyEnforcement`
+- `isAppRoles`
+- `isStandby`
+- `isPassThreadControl`
+- `isTakeThreadControl`
+- `isRequestThreadControl`
+- `isRequestThreadControlFromPageInbox`
+- `isFromCustomerChatPlugin`
+- `isReferral`
+- `isBrandedCamera`
+
+#### LINE
+
+- `isMessage`
+- `isText`
+- `isImage`
+- `isVideo`
+- `isAudio`
+- `isLocation`
+- `isSticker`
+- `isFollow`
+- `isUnfollow`
+- `isJoin`
+- `isLeave`
+- `isPostback`
+- `isPayload`
+- `isBeacon`
+- `isAccountLink`
+
+#### Slack
+
+- `isMessage`
+- `isChannelsMessage`
+- `isGroupsMessage`
+- `isImMessage`
+- `isMpimMessage`
+- `isText`
+- `isInteractiveMessage`
+- `isAppUninstalled`
+- `isChannelArchive`
+- `isChannelCreated`
+- `isChannelDeleted`
+- `isChannelHistoryChanged`
+- `isChannelRename`
+- `isChannelUnarchive`
+- `isDndUpdated`
+- `isDndUpdated_user`
+- `isEmailDomainChanged`
+- `isEmojiChanged`
+- `isFileChange`
+- `isFileCommentAdded`
+- `isFileCommentDeleted`
+- `isFileCommentEdited`
+- `isFileCreated`
+- `isFileDeleted`
+- `isFilePublic`
+- `isFileShared`
+- `isFileUnshared`
+- `isGridMigrationFinished`
+- `isGridMigrationStarted`
+- `isGroupArchive`
+- `isGroupClose`
+- `isGroupHistoryChanged`
+- `isGroupOpen`
+- `isGroupRename`
+- `isGroupUnarchive`
+- `isImClose`
+- `isImCreated`
+- `isImHistoryChanged`
+- `isImOpen`
+- `isLinkShared`
+- `isMemberJoinedChannel`
+- `isMemberLeftChannel`
+- `isPinAdded`
+- `isPinRemoved`
+- `isReactionAdded`
+- `isReactionRemoved`
+- `isStarAdded`
+- `isStarRemoved`
+- `isSubteamCreated`
+- `isSubteamMembersChanged`
+- `isSubteamSelfAdded`
+- `isSubteamSelfRemoved`
+- `isSubteamUpdated`
+- `isTeamDomainChange`
+- `isTeamJoin`
+- `isTeamRename`
+- `isTokensRevoked`
+- `isUrlVerification`
+- `isUserChange`
+
+#### Telegram
+
+- `isMessage`
+- `isText`
+- `isAudio`
+- `isDocument`
+- `isGame`
+- `isPhoto`
+- `isSticker`
+- `isVideo`
+- `isVoice`
+- `isVideoNote`
+- `isContact`
+- `isLocation`
+- `isVenue`
+- `isEditedMessage`
+- `isChannelPost`
+- `isEditedChannelPost`
+- `isInlineQuery`
+- `isChosenInlineResult`
+- `isCallbackQuery`
+- `isPayload`
+- `isShippingQuery`
+- `isPreCheckoutQuery`
+
+#### Viber
+
+- `isMessage`
+- `isText`
+- `isPicture`
+- `isVideo`
+- `isFile`
+- `isSticker`
+- `isContact`
+- `isURL`
+- `isLocation`
+- `isSubscribed`
+- `isUnsubscribed`
+- `isConversationStarted`
+- `isDelivered`
+- `isSeen`
+- `isFailed`
+
+#### Facebook
+
+- `isFeed`
+- `isStatus`
+- `isStatusAdd`
+- `isStatusEdited`
+- `isPost`
+- `isPostRemove`
+- `isComment`
+- `isCommentAdd`
+- `isCommentEdited`
+- `isCommentRemove`
+- `isLike`
+- `isLikeAdd`
+- `isLikeRemove`
+- `isReaction`
+- `isReactionAdd`
+- `isReactionEdit`
+- `isReactionRemove`
 
 ## License
 
