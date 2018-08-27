@@ -1,3 +1,6 @@
+const get = require('lodash/get');
+const isEqual = require('lodash/isEqual');
+
 exports.messenger = [
   'isMessage',
   'isText',
@@ -175,3 +178,12 @@ exports.fb = [
   'isReactionEdit',
   'isReactionRemove',
 ];
+
+exports.isTextMatch = text => context =>
+  !!(context.event.text && context.event.text.match(text));
+
+exports.isPayloadMatch = payload => context =>
+  !!(context.event.payload && context.event.payload.match(payload));
+
+exports.hasStateEqual = (path, state) => context =>
+  isEqual(get(context.state, path), state);
