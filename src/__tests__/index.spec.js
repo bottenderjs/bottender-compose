@@ -348,6 +348,14 @@ it('should export other predicates', () => {
   expect(B.hasStateEqual).toBeDefined();
 });
 
+it('should export logic predicates', () => {
+  expect(B.not).toBeDefined();
+  expect(B.and).toBeDefined();
+  expect(B.or).toBeDefined();
+  expect(B.alwaysTrue).toBeDefined();
+  expect(B.alwaysFalse).toBeDefined();
+});
+
 it('should export logger apis', () => {
   expect(B.log).toBeDefined();
   expect(B.info).toBeDefined();

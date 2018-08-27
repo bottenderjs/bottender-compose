@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "delay": "^3.1.0",
+    "invariant": "^2.2.4",
     "lodash": "^4.17.10",
     "noop2": "^2.0.0",
     "random-item": "^1.0.0",

@@ -1,5 +1,6 @@
 const methods = require('./methods');
 const predicates = require('./predicates');
+const { not, and, or, alwaysTrue, alwaysFalse } = require('./logic');
 const { log, info, warn, error, createLogger } = require('./logger');
 const { isValidTemplate, compileTemplate } = require('./utils');
 
@@ -61,6 +62,13 @@ exports.effect = require('./effect');
 exports.isTextMatch = predicates.isTextMatch;
 exports.isPayloadMatch = predicates.isPayloadMatch;
 exports.hasStateEqual = predicates.hasStateEqual;
+
+/* Logic */
+exports.not = not;
+exports.and = and;
+exports.or = or;
+exports.alwaysTrue = alwaysTrue;
+exports.alwaysFalse = alwaysFalse;
 
 /* Logger */
 exports.log = log;
