@@ -57,6 +57,11 @@ exports.delay = require('./delay');
 exports.setDisplayName = require('./setDisplayName');
 exports.effect = require('./effect');
 
+/* Predicate */
+exports.isTextMatch = predicates.isTextMatch;
+exports.isPayloadMatch = predicates.isPayloadMatch;
+exports.hasStateEqual = predicates.hasStateEqual;
+
 /* Logger */
 exports.log = log;
 exports.info = info;
