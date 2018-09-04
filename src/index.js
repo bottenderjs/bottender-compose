@@ -12,7 +12,7 @@ const allMethods = methods.common
   .concat(methods.viber)
   .concat(methods.fb);
 
-allMethods.forEach(method => {
+allMethods.forEach(({ method }) => {
   if (!exports[method]) {
     exports[method] = (...args) => (context, ...otherArgs) =>
       context[method](
