@@ -321,6 +321,23 @@ bot.onEvent(
 );
 ```
 
+### `attachOptions`
+
+Attaches additional options to the action.
+
+```js
+const { attachOptions, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  attachOptions({ tag: 'ISSUE_RESOLUTION' }, sendText('Issue Resolved'))
+);
+
+// curry function
+const attachIssueResolutionTag = attachOptions({ tag: 'ISSUE_RESOLUTION' });
+
+bot.onEvent(attachIssueResolutionTag(sendText('Issue Resolved')));
+```
+
 ### Logger Methods
 
 ```js
