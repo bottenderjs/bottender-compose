@@ -12,20 +12,38 @@ const allMethods = methods.common
   .concat(methods.viber)
   .concat(methods.fb);
 
-allMethods.forEach(({ method }) => {
+allMethods.forEach(({ method, length, allowOptions }) => {
   if (!exports[method]) {
-    exports[method] = (...args) => (context, ...otherArgs) =>
-      context[method](
-        ...args.map(arg => {
-          if (typeof arg === 'function') {
-            return arg(context, ...otherArgs);
-          }
-          if (typeof arg === 'string' && isValidTemplate(arg)) {
-            return compileTemplate(arg)(context);
-          }
-          return arg;
-        })
-      );
+    exports[method] = (...args) => {
+      const fn = (context, ...otherArgs) => {
+        const options = args[length - 1];
+
+        if (fn._options) {
+          // eslint-disable-next-line no-param-reassign
+          args[length - 1] = {
+            ...options,
+            ...fn._options, // provided by attachOption
+          };
+        }
+
+        return context[method](
+          ...args.map(arg => {
+            if (typeof arg === 'function') {
+              return arg(context, ...otherArgs);
+            }
+            if (typeof arg === 'string' && isValidTemplate(arg)) {
+              return compileTemplate(arg)(context);
+            }
+            return arg;
+          })
+        );
+      };
+
+      fn.argsLength = length;
+      fn.allowOptions = allowOptions;
+
+      return fn;
+    };
   }
 });
 
