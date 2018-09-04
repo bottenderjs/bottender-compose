@@ -55,9 +55,17 @@ describe('#isValidTemplate', () => {
       )
     ).toBe(true);
   });
+
+  it('should support other args', () => {
+    expect(
+      isValidTemplate('Hi, {{myFirstName}}', {
+        myFirstName: 'a',
+      })
+    ).toBe(true);
+  });
 });
 
-function expectTemplate(template) {
+function expectTemplate(template, otherArg) {
   const context = {
     session: {
       user: {
@@ -70,7 +78,7 @@ function expectTemplate(template) {
     },
   };
 
-  return expect(compileTemplate(template)(context));
+  return expect(compileTemplate(template)(context, otherArg));
 }
 
 describe('#compileTemplate', () => {
@@ -120,6 +128,12 @@ describe('#compileTemplate', () => {
     expectTemplate(
       'Hi, {{context.session.user.first_name}} & {{context.state.xxx}} & {{context.event.text}}'
     ).toBe('Hi, James & yyy & Cool');
+  });
+
+  it('should support other args', () => {
+    expectTemplate('Hi, {{myFirstName}}', {
+      myFirstName: 'a',
+    }).toBe('Hi, a');
   });
 
   describe('#warning', () => {

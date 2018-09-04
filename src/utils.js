@@ -18,32 +18,53 @@ const contextKeyPrefixResolveMap = {
   state: 'state.',
 };
 
-const VARIABLE = `(${TEMPLATE_WHITELIST_KEYS.join('|')})((\\.\\w+)+)`;
+function getOtherKeys(otherArg) {
+  return otherArg && typeof otherArg === 'object' ? Object.keys(otherArg) : [];
+}
 
-exports.isValidTemplate = str => {
-  const VALID_TEMPLATE = new RegExp(`{{\\s*${VARIABLE}\\s*}}`, 'g');
+function createTemplateRegExp(otherArg = {}) {
+  const otherKeys = getOtherKeys(otherArg);
+  const variables = `(${TEMPLATE_WHITELIST_KEYS.join('|')})((\\.\\w+)+)`;
 
-  return VALID_TEMPLATE.test(str);
+  return new RegExp(
+    `{{\\s*${
+      otherKeys.length > 0 ? `(${otherKeys.join('|')})|` : ''
+    }${variables}\\s*}}`,
+    'g'
+  );
+}
+
+exports.isValidTemplate = (str, otherArg) => {
+  const templateRegExp = createTemplateRegExp(otherArg);
+
+  return templateRegExp.test(str);
 };
 
-exports.compileTemplate = tpl => context => {
+exports.compileTemplate = tpl => (context, otherArg = {}) => {
   let compiledResult = tpl;
-  const VALID_TEMPLATE = new RegExp(`{{\\s*${VARIABLE}\\s*}}`, 'g');
+  const templateRegExp = createTemplateRegExp(otherArg);
 
-  const matchStrings = tpl.match(VALID_TEMPLATE);
+  const matchStrings = tpl.match(templateRegExp);
+
+  const otherKeys = getOtherKeys(otherArg);
 
   for (const matchString of matchStrings) {
     const [
       targetString,
       firstWhitelistKey,
       ...otherResults
-    ] = VALID_TEMPLATE.exec(matchString);
+    ] = templateRegExp.exec(matchString);
 
-    const properties = `${
-      contextKeyPrefixResolveMap[firstWhitelistKey]
-    }${otherResults[0].slice(1)}`;
+    let value;
+    if (otherKeys.includes(firstWhitelistKey)) {
+      value = otherArg[firstWhitelistKey];
+    } else {
+      const properties = `${
+        contextKeyPrefixResolveMap[firstWhitelistKey]
+      }${otherResults[0].slice(1)}`;
 
-    const value = get(context, properties, '');
+      value = get(context, properties, '');
+    }
 
     warning(
       typeof value === 'string',
@@ -52,7 +73,7 @@ exports.compileTemplate = tpl => context => {
 
     compiledResult = replace(compiledResult, targetString, value);
 
-    VALID_TEMPLATE.lastIndex = 0;
+    templateRegExp.lastIndex = 0;
   }
 
   return compiledResult;

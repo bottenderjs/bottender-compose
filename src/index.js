@@ -20,8 +20,8 @@ allMethods.forEach(method => {
           if (typeof arg === 'function') {
             return arg(context, ...otherArgs);
           }
-          if (typeof arg === 'string' && isValidTemplate(arg)) {
-            return compileTemplate(arg)(context);
+          if (typeof arg === 'string' && isValidTemplate(arg, otherArgs[0])) {
+            return compileTemplate(arg)(context, otherArgs[0]);
           }
           return arg;
         })
