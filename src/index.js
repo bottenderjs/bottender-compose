@@ -75,6 +75,7 @@ exports.repeat = require('./repeat');
 exports.delay = require('./delay');
 exports.setDisplayName = require('./setDisplayName');
 exports.effect = require('./effect');
+exports.attachOptions = require('./attachOptions');
 
 /* Predicate */
 exports.isTextMatch = predicates.isTextMatch;

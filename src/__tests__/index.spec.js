@@ -340,6 +340,7 @@ it('should export other apis', () => {
   expect(B.delay).toBeDefined();
   expect(B.setDisplayName).toBeDefined();
   expect(B.effect).toBeDefined();
+  expect(B.attachOptions).toBeDefined();
 });
 
 it('should export other predicates', () => {
