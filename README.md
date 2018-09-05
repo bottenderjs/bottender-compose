@@ -552,6 +552,12 @@ B.sendText('State: {{state.xxx}}');
 B.sendText('User: {{user.first_name}} {{user.last_name}}');
 ```
 
+Or use `param` to access object values that provided as sencond argument when calling action:
+
+```js
+B.sendText('User: {{param.name}}')(context, { name: 'Super User' });
+```
+
 <a name="predicates" />
 
 ### Predicates

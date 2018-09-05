@@ -8,6 +8,7 @@ const TEMPLATE_WHITELIST_KEYS = [
   'user',
   'event',
   'state',
+  'param',
 ];
 
 const contextKeyPrefixResolveMap = {
@@ -18,32 +19,38 @@ const contextKeyPrefixResolveMap = {
   state: 'state.',
 };
 
-const VARIABLE = `(${TEMPLATE_WHITELIST_KEYS.join('|')})((\\.\\w+)+)`;
+const JOINED_KEYS = `(${TEMPLATE_WHITELIST_KEYS.join('|')})((\\.\\w+)+)`;
 
 exports.isValidTemplate = str => {
-  const VALID_TEMPLATE = new RegExp(`{{\\s*${VARIABLE}\\s*}}`, 'g');
+  const templateRegExp = new RegExp(`{{\\s*${JOINED_KEYS}\\s*}}`, 'g');
 
-  return VALID_TEMPLATE.test(str);
+  return templateRegExp.test(str);
 };
 
-exports.compileTemplate = tpl => context => {
+exports.compileTemplate = tpl => (context, param) => {
   let compiledResult = tpl;
-  const VALID_TEMPLATE = new RegExp(`{{\\s*${VARIABLE}\\s*}}`, 'g');
+  const templateRegExp = new RegExp(`{{\\s*${JOINED_KEYS}\\s*}}`, 'g');
 
-  const matchStrings = tpl.match(VALID_TEMPLATE);
+  const matchStrings = tpl.match(templateRegExp);
 
   for (const matchString of matchStrings) {
     const [
       targetString,
       firstWhitelistKey,
       ...otherResults
-    ] = VALID_TEMPLATE.exec(matchString);
+    ] = templateRegExp.exec(matchString);
 
-    const properties = `${
-      contextKeyPrefixResolveMap[firstWhitelistKey]
-    }${otherResults[0].slice(1)}`;
+    let value;
 
-    const value = get(context, properties, '');
+    if (firstWhitelistKey === 'param') {
+      value = get(param, otherResults[0].slice(1), '');
+    } else {
+      const properties = `${
+        contextKeyPrefixResolveMap[firstWhitelistKey]
+      }${otherResults[0].slice(1)}`;
+
+      value = get(context, properties, '');
+    }
 
     warning(
       typeof value === 'string',
@@ -52,7 +59,7 @@ exports.compileTemplate = tpl => context => {
 
     compiledResult = replace(compiledResult, targetString, value);
 
-    VALID_TEMPLATE.lastIndex = 0;
+    templateRegExp.lastIndex = 0;
   }
 
   return compiledResult;
