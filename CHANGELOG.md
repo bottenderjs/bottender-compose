@@ -1,3 +1,7 @@
+# 0.12.1 / 2018-09-05
+
+- [fix] add missing export for `attachOptions`.
+
 # 0.12.0 / 2018-09-05
 
 - [new] add `attachOptions`:
