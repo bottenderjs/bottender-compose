@@ -1,3 +1,24 @@
+# 0.12.0 / 2018-09-05
+
+- [new] add `attachOptions`:
+
+### `attachOptions`
+
+Attaches additional options to the action.
+
+```js
+const { attachOptions, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  attachOptions({ tag: 'ISSUE_RESOLUTION' }, sendText('Issue Resolved'))
+);
+
+// curry function
+const attachIssueResolutionTag = attachOptions({ tag: 'ISSUE_RESOLUTION' });
+
+bot.onEvent(attachIssueResolutionTag(sendText('Issue Resolved')));
+```
+
 # 0.11.0 / 2018-08-27
 
 - [new] add predicates:
