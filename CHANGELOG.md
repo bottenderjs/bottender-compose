@@ -1,3 +1,13 @@
+# 0.12.2 / 2018-09-05
+
+- [new] add param support for template string:
+
+use `param` to access object values that provided as sencond argument when calling action:
+
+```js
+B.sendText('User: {{param.name}}')(context, { name: 'Super User' });
+```
+
 # 0.12.1 / 2018-09-05
 
 - [fix] add missing export for `attachOptions`.
