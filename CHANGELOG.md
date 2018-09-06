@@ -1,3 +1,19 @@
+# 0.12.3 / 2018-09-06
+
+- [improve] improve warning when compiling template #82
+
+##### Before:
+
+```
+Properties accessors in template is invalid -- expected return a string but got: object
+```
+
+##### After:
+
+```
+Properties accessors (context.session.user) in template is invalid -- expected return a non-empty string but got: object
+```
+
 # 0.12.2 / 2018-09-05
 
 - [new] add param support for template string:
