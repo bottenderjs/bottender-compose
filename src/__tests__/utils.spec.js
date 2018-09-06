@@ -135,7 +135,7 @@ describe('#compileTemplate', () => {
       expectTemplate('Hi, {{context.session.user.first_name}}');
       expect(warning).toBeCalledWith(
         true,
-        'Properties accessors in template is invalid -- expected return a string but got: string'
+        'Properties accessors (context.session.user.first_name) in template is invalid -- expected return a non-empty string but got: string'
       );
     });
 
@@ -145,7 +145,7 @@ describe('#compileTemplate', () => {
       );
       expect(warning).toBeCalledWith(
         false,
-        'Properties accessors in template is invalid -- expected return a string but got: object'
+        'Properties accessors (context.session.user) in template is invalid -- expected return a non-empty string but got: object'
       );
     });
   });

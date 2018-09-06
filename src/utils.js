@@ -41,23 +41,24 @@ exports.compileTemplate = tpl => (context, param) => {
     ] = templateRegExp.exec(matchString);
 
     let value;
+    let properties;
 
     if (firstWhitelistKey === 'param') {
-      value = get(param, otherResults[0].slice(1), '');
+      properties = otherResults[0].slice(1);
+      value = get(param, properties);
     } else {
-      const properties = `${
+      properties = `${
         contextKeyPrefixResolveMap[firstWhitelistKey]
       }${otherResults[0].slice(1)}`;
-
-      value = get(context, properties, '');
+      value = get(context, properties);
     }
 
     warning(
-      typeof value === 'string',
-      `Properties accessors in template is invalid -- expected return a string but got: ${typeof value}`
+      value && typeof value === 'string',
+      `Properties accessors (${firstWhitelistKey}.${properties}) in template is invalid -- expected return a non-empty string but got: ${typeof value}`
     );
 
-    compiledResult = replace(compiledResult, targetString, value);
+    compiledResult = replace(compiledResult, targetString, value || '');
 
     templateRegExp.lastIndex = 0;
   }
