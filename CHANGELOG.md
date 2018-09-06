@@ -1,3 +1,7 @@
+# 0.12.4 / 2018-09-06
+
+- [fix] pass required otherArgs to compileTemplate
+
 # 0.12.3 / 2018-09-06
 
 - [improve] improve warning when compiling template #82
