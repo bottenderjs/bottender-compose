@@ -32,7 +32,7 @@ allMethods.forEach(({ method, length, allowOptions }) => {
               return arg(context, ...otherArgs);
             }
             if (typeof arg === 'string' && isValidTemplate(arg)) {
-              return compileTemplate(arg)(context);
+              return compileTemplate(arg)(context, ...otherArgs);
             }
             return arg;
           })
