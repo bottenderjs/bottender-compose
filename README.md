@@ -6,7 +6,7 @@
 
 > An utility library for [Bottender](https://github.com/Yoctol/bottender) and higher-order handlers
 
-![](https://user-images.githubusercontent.com/3382565/45618167-6dd85900-baa7-11e8-99d1-412c6851b249.png)
+![](https://user-images.githubusercontent.com/3382565/45618583-d116bb00-baa8-11e8-9661-b36d8eb834c2.png)
 
 ## Installation
 
