@@ -150,4 +150,5 @@ exports.viber = [
 exports.fb = [
   { method: 'sendComment', length: 1, allowOptions: false },
   { method: 'sendPrivateReply', length: 1, allowOptions: false },
+  { method: 'sendLike', length: 1, allowOptions: false },
 ];
