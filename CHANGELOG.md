@@ -1,3 +1,7 @@
+# 0.12.5 / 2018-09-18
+
+- [new] support facebook `sendLike`
+
 # 0.12.4 / 2018-09-06
 
 - [fix] pass required otherArgs to compileTemplate
