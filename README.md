@@ -16,7 +16,40 @@ npm install bottender-compose
 
 ## API Reference
 
-### `series`
+### TOC
+
+- [Actions](#actions)
+  - [series()](#series)
+  - [parallel()](#parallel)
+  - [random()](#random)
+  - [branch()](#branch)
+  - [condition()](#condition)
+  - [match()](#match)
+  - [platform()](#platform)
+  - [tryCatch()](#trycatch)
+  - [weight()](#weight)
+  - [doNothing()](#donothing)
+  - [repeat()](#repeat)
+  - [delay()](#delay)
+  - [setDisplayName()](#setdisplayName)
+  - [effect()](#effect)
+  - [attachOptions()](#attachoptions)
+  - [Logger Methods](#logger-methods)
+  - [Context Methods](#context-methods)
+- [Predicates](#predicates)
+  - [isTextMatch()](#istextmatch)
+  - [isPayloadMatch()](#ispayloadmatch)
+  - [hasStateEqual()](#hasstateequal)
+  - [not()](#not)
+  - [and()](#and)
+  - [or()](#or)
+  - [alwaysTrue()](#alwaystrue)
+  - [alwaysFalse()](#alwaysfalse)
+  - [Event Predicates](#event-predicates)
+
+### Actions
+
+### `series()`
 
 Creates a function that executes methods in series.
 
@@ -32,7 +65,7 @@ bot.onEvent(
 );
 ```
 
-### `parallel`
+### `parallel()`
 
 Creates a function that executes methods in parallel.
 
@@ -48,7 +81,7 @@ bot.onEvent(
 );
 ```
 
-### `random`
+### `random()`
 
 Creates a function that executes one of method randomly.
 
@@ -64,7 +97,7 @@ bot.onEvent(
 );
 ```
 
-### `branch`
+### `branch()`
 
 Creates a function that will process either the `onTrue` or the `onFalse` function depending upon the result of the condition predicate.  
 Furthermore, `branch` can be sued as curry function.
@@ -96,7 +129,7 @@ branch(context => true, sendText('You are the lucky one.'));
 
 `branch` works well with [predicates](#predicates).
 
-### `condition`
+### `condition()`
 
 Creates a function that encapsulates `if/else`, `if/else`, ... logic.
 
@@ -114,7 +147,7 @@ bot.onEvent(
 
 `condition` works well with [predicates](#predicates).
 
-### `match`
+### `match()`
 
 Creates a function that encapsulates value matching logic.
 
@@ -168,7 +201,7 @@ bot.onEvent(
 );
 ```
 
-### `platform`
+### `platform()`
 
 Creates a function that will process function depending upon the platform context.
 
@@ -195,7 +228,7 @@ platform({
 });
 ```
 
-### `tryCatch`
+### `tryCatch()`
 
 Creates a function that calls error handler on error.  
 Furthermore, `tryCatch` can be used as curry function.
@@ -213,7 +246,7 @@ const mayFailTryCatch = tryCatch(doSomethingMayFail());
 bot.onEvent(mayFailTryCatch(sendText('Error Happened~~~~~~~~~~~!')));
 ```
 
-### `weight`
+### `weight()`
 
 Creates a function that randomly executes one of method by its weight.
 
@@ -229,7 +262,7 @@ bot.onEvent(
 );
 ```
 
-### `doNothing`
+### `doNothing()`
 
 Creates a no-op function.
 
@@ -245,7 +278,7 @@ bot.onEvent(
 );
 ```
 
-### `repeat`
+### `repeat()`
 
 Creates a function that executes the method repeatedly.  
 Furthermore, `repeat` can be sued as curry function.
@@ -261,7 +294,7 @@ const repeatFiveTimes = repeat(5);
 bot.onEvent(repeatFiveTimes(sendText('This will be sent 5 times.')));
 ```
 
-### `delay`
+### `delay()`
 
 Creates a function that executes methods after a number of milliseconds.
 
@@ -279,7 +312,7 @@ bot.onEvent(
 );
 ```
 
-### `setDisplayName`
+### `setDisplayName()`
 
 Assigns to the `displayName` property on the action.
 
@@ -292,7 +325,7 @@ setDisplayName('sayHello', sendText('hello'));
 setDisplayName('sayHello')(sendText('hello'));
 ```
 
-### `effect`
+### `effect()`
 
 Does side effects and mutate state or parameters.
 
@@ -323,7 +356,7 @@ bot.onEvent(
 );
 ```
 
-### `attachOptions`
+### `attachOptions()`
 
 Attaches additional options to the action.
 
@@ -379,149 +412,149 @@ B.series([log('sending hello'), B.sendText('hello')]);
 
 #### Common
 
-- `setState`
-- `resetState`
-- `typing`
+- `setState()`
+- `resetState()`
+- `typing()`
 
 #### Messenger
 
-- `sendMessage`
-- `sendText`
-- `sendAttachment`
-- `sendAudio`
-- `sendImage`
-- `sendVideo`
-- `sendFile`
-- `sendTemplate`
-- `sendButtonTemplate`
-- `sendGenericTemplate`
-- `sendListTemplate`
-- `sendOpenGraphTemplate`
-- `sendMediaTemplate`
-- `sendReceiptTemplate`
-- `sendAirlineBoardingPassTemplate`
-- `sendAirlineCheckinTemplate`
-- `sendAirlineItineraryTemplate`
-- `sendAirlineFlightUpdateTemplate`
-- `sendSenderAction`
-- `markSeen`
-- `typingOn`
-- `typingOff`
-- `passThreadControl`
-- `passThreadControlToPageInbox`
-- `takeThreadControl`
-- `requestThreadControl`
-- `associateLabel`
-- `dissociateLabel`
+- `sendMessage()`
+- `sendText()`
+- `sendAttachment()`
+- `sendAudio()`
+- `sendImage()`
+- `sendVideo()`
+- `sendFile()`
+- `sendTemplate()`
+- `sendButtonTemplate()`
+- `sendGenericTemplate()`
+- `sendListTemplate()`
+- `sendOpenGraphTemplate()`
+- `sendMediaTemplate()`
+- `sendReceiptTemplate()`
+- `sendAirlineBoardingPassTemplate()`
+- `sendAirlineCheckinTemplate()`
+- `sendAirlineItineraryTemplate()`
+- `sendAirlineFlightUpdateTemplate()`
+- `sendSenderAction()`
+- `markSeen()`
+- `typingOn()`
+- `typingOff()`
+- `passThreadControl()`
+- `passThreadControlToPageInbox()`
+- `takeThreadControl()`
+- `requestThreadControl()`
+- `associateLabel()`
+- `dissociateLabel()`
 
 #### LINE
 
-- `sendText`
-- `sendImage`
-- `sendVideo`
-- `sendAudio`
-- `sendLocation`
-- `sendSticker`
-- `sendImagemap`
-- `sendButtonTemplate`
-- `sendConfirmTemplate`
-- `sendCarouselTemplate`
-- `sendImageCarouselTemplate`
-- `reply`
-- `replyText`
-- `replyImage`
-- `replyVideo`
-- `replyAudio`
-- `replyLocation`
-- `replySticker`
-- `replyImagemap`
-- `replyButtonTemplate`
-- `replyConfirmTemplate`
-- `replyCarouselTemplate`
-- `replyImageCarouselTemplate`
-- `push`
-- `pushText`
-- `pushImage`
-- `pushVideo`
-- `pushAudio`
-- `pushLocation`
-- `pushSticker`
-- `pushImagemap`
-- `pushButtonTemplate`
-- `pushConfirmTemplate`
-- `pushCarouselTemplate`
-- `pushImageCarouselTemplate`
-- `linkRichMenu`
-- `unlinkRichMenu`
+- `sendText()`
+- `sendImage()`
+- `sendVideo()`
+- `sendAudio()`
+- `sendLocation()`
+- `sendSticker()`
+- `sendImagemap()`
+- `sendButtonTemplate()`
+- `sendConfirmTemplate()`
+- `sendCarouselTemplate()`
+- `sendImageCarouselTemplate()`
+- `reply()`
+- `replyText()`
+- `replyImage()`
+- `replyVideo()`
+- `replyAudio()`
+- `replyLocation()`
+- `replySticker()`
+- `replyImagemap()`
+- `replyButtonTemplate()`
+- `replyConfirmTemplate()`
+- `replyCarouselTemplate()`
+- `replyImageCarouselTemplate()`
+- `push()`
+- `pushText()`
+- `pushImage()`
+- `pushVideo()`
+- `pushAudio()`
+- `pushLocation()`
+- `pushSticker()`
+- `pushImagemap()`
+- `pushButtonTemplate()`
+- `pushConfirmTemplate()`
+- `pushCarouselTemplate()`
+- `pushImageCarouselTemplate()`
+- `linkRichMenu()`
+- `unlinkRichMenu()`
 
 #### Slack
 
-- `sendText`
-- `postMessage`
-- `postEphemeral`
+- `sendText()`
+- `postMessage()`
+- `postEphemeral()`
 
 #### Telegram
 
-- `sendText`
-- `sendMessage`
-- `sendPhoto`
-- `sendAudio`
-- `sendDocument`
-- `sendSticker`
-- `sendVideo`
-- `sendVoice`
-- `sendVideoNote`
-- `sendMediaGroup`
-- `sendLocation`
-- `sendVenue`
-- `sendContact`
-- `sendChatAction`
-- `editMessageText`
-- `editMessageCaption`
-- `editMessageReplyMarkup`
-- `deleteMessage`
-- `editMessageLiveLocation`
-- `stopMessageLiveLocation`
-- `forwardMessageFrom`
-- `forwardMessageTo`
-- `kickChatMember`
-- `unbanChatMember`
-- `restrictChatMember`
-- `promoteChatMember`
-- `exportChatInviteLink`
-- `setChatPhoto`
-- `deleteChatPhoto`
-- `setChatTitle`
-- `setChatDescription`
-- `setChatStickerSet`
-- `deleteChatStickerSet`
-- `pinChatMessage`
-- `unpinChatMessage`
-- `leaveChat`
-- `sendInvoice`
-- `answerShippingQuery`
-- `answerPreCheckoutQuery`
-- `answerInlineQuery`
-- `sendGame`
-- `setGameScore`
+- `sendText()`
+- `sendMessage()`
+- `sendPhoto()`
+- `sendAudio()`
+- `sendDocument()`
+- `sendSticker()`
+- `sendVideo()`
+- `sendVoice()`
+- `sendVideoNote()`
+- `sendMediaGroup()`
+- `sendLocation()`
+- `sendVenue()`
+- `sendContact()`
+- `sendChatAction()`
+- `editMessageText()`
+- `editMessageCaption()`
+- `editMessageReplyMarkup()`
+- `deleteMessage()`
+- `editMessageLiveLocation()`
+- `stopMessageLiveLocation()`
+- `forwardMessageFrom()`
+- `forwardMessageTo()`
+- `kickChatMember()`
+- `unbanChatMember()`
+- `restrictChatMember()`
+- `promoteChatMember()`
+- `exportChatInviteLink()`
+- `setChatPhoto()`
+- `deleteChatPhoto()`
+- `setChatTitle()`
+- `setChatDescription()`
+- `setChatStickerSet()`
+- `deleteChatStickerSet()`
+- `pinChatMessage()`
+- `unpinChatMessage()`
+- `leaveChat()`
+- `sendInvoice()`
+- `answerShippingQuery()`
+- `answerPreCheckoutQuery()`
+- `answerInlineQuery()`
+- `sendGame()`
+- `setGameScore()`
 
 #### Viber
 
-- `sendMessage`
-- `sendText`
-- `sendPicture`
-- `sendVideo`
-- `sendFile`
-- `sendContact`
-- `sendLocation`
-- `sendURL`
-- `sendSticker`
-- `sendCarouselContent`
+- `sendMessage()`
+- `sendText()`
+- `sendPicture()`
+- `sendVideo()`
+- `sendFile()`
+- `sendContact()`
+- `sendLocation()`
+- `sendURL()`
+- `sendSticker()`
+- `sendCarouselContent()`
 
 #### Facebook
 
-- `sendComment`
-- `sendPrivateReply`
+- `sendComment()`
+- `sendPrivateReply()`
 
 ### Passing Function as Argument to Context Method
 
@@ -560,11 +593,9 @@ Or use `param` to access object values that provided as sencond argument when ca
 B.sendText('User: {{param.name}}')(context, { name: 'Super User' });
 ```
 
-<a name="predicates" />
-
 ### Predicates
 
-### `isTextMatch`
+### `isTextMatch()`
 
 Creates a predicate function to return true when text matches.
 
@@ -575,7 +606,7 @@ isTextMatch('abc')(context); // boolean
 isTextMatch(/abc/)(context); // boolean
 ```
 
-### `isPayloadMatch`
+### `isPayloadMatch()`
 
 Creates a predicate function to return true when payload matches.
 
@@ -586,7 +617,7 @@ isPayloadMatch('abc')(context); // boolean
 isPayloadMatch(/abc/)(context); // boolean
 ```
 
-### `hasStateEqual`
+### `hasStateEqual()`
 
 Creates a predicate function to return true when state matches.
 
@@ -598,7 +629,7 @@ hasStateEqual('x.y.z', 1)(context); // boolean
 hasStateEqual('x', { y: { z: 1 } })(context); // boolean
 ```
 
-### `not`
+### `not()`
 
 Creates a predicate function with **not** condition.
 
@@ -610,7 +641,7 @@ const predicate = not(hasStateEqual('x', 1));
 predicate(context); // boolean
 ```
 
-### `and`
+### `and()`
 
 Creates a predicate function with **and** condition.
 
@@ -625,7 +656,7 @@ const predicate = and([
 predicate(context) // boolean
 ```
 
-### `or`
+### `or()`
 
 Creates a predicate function with **or** condition.
 
@@ -664,183 +695,185 @@ const predicate = alwaysFalse();
 predicate(context); // false
 ```
 
+### Event Predicates
+
 #### Messenger
 
-- `isMessage`
-- `isText`
-- `hasAttachment`
-- `isImage`
-- `isAudio`
-- `isVideo`
-- `isLocation`
-- `isFile`
-- `isFallback`
-- `isSticker`
-- `isLikeSticker`
-- `isQuickReply`
-- `isEcho`
-- `isPostback`
-- `isGamePlay`
-- `isOptin`
-- `isPayment`
-- `isCheckoutUpdate`
-- `isPreCheckout`
-- `isRead`
-- `isDelivery`
-- `isPayload`
-- `isPolicyEnforcement`
-- `isAppRoles`
-- `isStandby`
-- `isPassThreadControl`
-- `isTakeThreadControl`
-- `isRequestThreadControl`
-- `isRequestThreadControlFromPageInbox`
-- `isFromCustomerChatPlugin`
-- `isReferral`
-- `isBrandedCamera`
+- `isMessage()`
+- `isText()`
+- `hasAttachment()`
+- `isImage()`
+- `isAudio()`
+- `isVideo()`
+- `isLocation()`
+- `isFile()`
+- `isFallback()`
+- `isSticker()`
+- `isLikeSticker()`
+- `isQuickReply()`
+- `isEcho()`
+- `isPostback()`
+- `isGamePlay()`
+- `isOptin()`
+- `isPayment()`
+- `isCheckoutUpdate()`
+- `isPreCheckout()`
+- `isRead()`
+- `isDelivery()`
+- `isPayload()`
+- `isPolicyEnforcement()`
+- `isAppRoles()`
+- `isStandby()`
+- `isPassThreadControl()`
+- `isTakeThreadControl()`
+- `isRequestThreadControl()`
+- `isRequestThreadControlFromPageInbox()`
+- `isFromCustomerChatPlugin()`
+- `isReferral()`
+- `isBrandedCamera()`
 
 #### LINE
 
-- `isMessage`
-- `isText`
-- `isImage`
-- `isVideo`
-- `isAudio`
-- `isLocation`
-- `isSticker`
-- `isFollow`
-- `isUnfollow`
-- `isJoin`
-- `isLeave`
-- `isPostback`
-- `isPayload`
-- `isBeacon`
-- `isAccountLink`
+- `isMessage()`
+- `isText()`
+- `isImage()`
+- `isVideo()`
+- `isAudio()`
+- `isLocation()`
+- `isSticker()`
+- `isFollow()`
+- `isUnfollow()`
+- `isJoin()`
+- `isLeave()`
+- `isPostback()`
+- `isPayload()`
+- `isBeacon()`
+- `isAccountLink()`
 
 #### Slack
 
-- `isMessage`
-- `isChannelsMessage`
-- `isGroupsMessage`
-- `isImMessage`
-- `isMpimMessage`
-- `isText`
-- `isInteractiveMessage`
-- `isAppUninstalled`
-- `isChannelArchive`
-- `isChannelCreated`
-- `isChannelDeleted`
-- `isChannelHistoryChanged`
-- `isChannelRename`
-- `isChannelUnarchive`
-- `isDndUpdated`
-- `isDndUpdated_user`
-- `isEmailDomainChanged`
-- `isEmojiChanged`
-- `isFileChange`
-- `isFileCommentAdded`
-- `isFileCommentDeleted`
-- `isFileCommentEdited`
-- `isFileCreated`
-- `isFileDeleted`
-- `isFilePublic`
-- `isFileShared`
-- `isFileUnshared`
-- `isGridMigrationFinished`
-- `isGridMigrationStarted`
-- `isGroupArchive`
-- `isGroupClose`
-- `isGroupHistoryChanged`
-- `isGroupOpen`
-- `isGroupRename`
-- `isGroupUnarchive`
-- `isImClose`
-- `isImCreated`
-- `isImHistoryChanged`
-- `isImOpen`
-- `isLinkShared`
-- `isMemberJoinedChannel`
-- `isMemberLeftChannel`
-- `isPinAdded`
-- `isPinRemoved`
-- `isReactionAdded`
-- `isReactionRemoved`
-- `isStarAdded`
-- `isStarRemoved`
-- `isSubteamCreated`
-- `isSubteamMembersChanged`
-- `isSubteamSelfAdded`
-- `isSubteamSelfRemoved`
-- `isSubteamUpdated`
-- `isTeamDomainChange`
-- `isTeamJoin`
-- `isTeamRename`
-- `isTokensRevoked`
-- `isUrlVerification`
-- `isUserChange`
+- `isMessage()`
+- `isChannelsMessage()`
+- `isGroupsMessage()`
+- `isImMessage()`
+- `isMpimMessage()`
+- `isText()`
+- `isInteractiveMessage()`
+- `isAppUninstalled()`
+- `isChannelArchive()`
+- `isChannelCreated()`
+- `isChannelDeleted()`
+- `isChannelHistoryChanged()`
+- `isChannelRename()`
+- `isChannelUnarchive()`
+- `isDndUpdated()`
+- `isDndUpdated_user()`
+- `isEmailDomainChanged()`
+- `isEmojiChanged()`
+- `isFileChange()`
+- `isFileCommentAdded()`
+- `isFileCommentDeleted()`
+- `isFileCommentEdited()`
+- `isFileCreated()`
+- `isFileDeleted()`
+- `isFilePublic()`
+- `isFileShared()`
+- `isFileUnshared()`
+- `isGridMigrationFinished()`
+- `isGridMigrationStarted()`
+- `isGroupArchive()`
+- `isGroupClose()`
+- `isGroupHistoryChanged()`
+- `isGroupOpen()`
+- `isGroupRename()`
+- `isGroupUnarchive()`
+- `isImClose()`
+- `isImCreated()`
+- `isImHistoryChanged()`
+- `isImOpen()`
+- `isLinkShared()`
+- `isMemberJoinedChannel()`
+- `isMemberLeftChannel()`
+- `isPinAdded()`
+- `isPinRemoved()`
+- `isReactionAdded()`
+- `isReactionRemoved()`
+- `isStarAdded()`
+- `isStarRemoved()`
+- `isSubteamCreated()`
+- `isSubteamMembersChanged()`
+- `isSubteamSelfAdded()`
+- `isSubteamSelfRemoved()`
+- `isSubteamUpdated()`
+- `isTeamDomainChange()`
+- `isTeamJoin()`
+- `isTeamRename()`
+- `isTokensRevoked()`
+- `isUrlVerification()`
+- `isUserChange()`
 
 #### Telegram
 
-- `isMessage`
-- `isText`
-- `isAudio`
-- `isDocument`
-- `isGame`
-- `isPhoto`
-- `isSticker`
-- `isVideo`
-- `isVoice`
-- `isVideoNote`
-- `isContact`
-- `isLocation`
-- `isVenue`
-- `isEditedMessage`
-- `isChannelPost`
-- `isEditedChannelPost`
-- `isInlineQuery`
-- `isChosenInlineResult`
-- `isCallbackQuery`
-- `isPayload`
-- `isShippingQuery`
-- `isPreCheckoutQuery`
+- `isMessage()`
+- `isText()`
+- `isAudio()`
+- `isDocument()`
+- `isGame()`
+- `isPhoto()`
+- `isSticker()`
+- `isVideo()`
+- `isVoice()`
+- `isVideoNote()`
+- `isContact()`
+- `isLocation()`
+- `isVenue()`
+- `isEditedMessage()`
+- `isChannelPost()`
+- `isEditedChannelPost()`
+- `isInlineQuery()`
+- `isChosenInlineResult()`
+- `isCallbackQuery()`
+- `isPayload()`
+- `isShippingQuery()`
+- `isPreCheckoutQuery()`
 
 #### Viber
 
-- `isMessage`
-- `isText`
-- `isPicture`
-- `isVideo`
-- `isFile`
-- `isSticker`
-- `isContact`
-- `isURL`
-- `isLocation`
-- `isSubscribed`
-- `isUnsubscribed`
-- `isConversationStarted`
-- `isDelivered`
-- `isSeen`
-- `isFailed`
+- `isMessage()`
+- `isText()`
+- `isPicture()`
+- `isVideo()`
+- `isFile()`
+- `isSticker()`
+- `isContact()`
+- `isURL()`
+- `isLocation()`
+- `isSubscribed()`
+- `isUnsubscribed()`
+- `isConversationStarted()`
+- `isDelivered()`
+- `isSeen()`
+- `isFailed()`
 
 #### Facebook
 
-- `isFeed`
-- `isStatus`
-- `isStatusAdd`
-- `isStatusEdited`
-- `isPost`
-- `isPostRemove`
-- `isComment`
-- `isCommentAdd`
-- `isCommentEdited`
-- `isCommentRemove`
-- `isLike`
-- `isLikeAdd`
-- `isLikeRemove`
-- `isReaction`
-- `isReactionAdd`
-- `isReactionEdit`
-- `isReactionRemove`
+- `isFeed()`
+- `isStatus()`
+- `isStatusAdd()`
+- `isStatusEdited()`
+- `isPost()`
+- `isPostRemove()`
+- `isComment()`
+- `isCommentAdd()`
+- `isCommentEdited()`
+- `isCommentRemove()`
+- `isLike()`
+- `isLikeAdd()`
+- `isLikeRemove()`
+- `isReaction()`
+- `isReactionAdd()`
+- `isReactionEdit()`
+- `isReactionRemove()`
 
 ## License
 
