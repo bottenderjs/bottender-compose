@@ -555,6 +555,7 @@ B.series([log('sending hello'), B.sendText('hello')]);
 
 - `sendComment()`
 - `sendPrivateReply()`
+- `sendLike()`
 
 ### Passing Function as Argument to Context Method
 
