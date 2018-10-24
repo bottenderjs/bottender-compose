@@ -14,7 +14,6 @@
   "scripts": {
     "build": "npm run clean && babel src -d lib --ignore __tests__",
     "clean": "rimraf lib",
-    "precommit": "lint-staged",
     "lint": "eslint src",
     "lint:fix": "yarn run lint --fix",
     "lint:staged": "lint-staged",
@@ -26,32 +25,32 @@
     "preversion": "npm test"
   },
   "dependencies": {
-    "delay": "^3.1.0",
+    "delay": "^4.1.0",
     "invariant": "^2.2.4",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "noop2": "^2.0.0",
     "random-item": "^1.0.0",
     "warning": "^4.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-rc.3",
-    "@babel/core": "^7.0.0-rc.3",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-rc.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-rc.3",
-    "@babel/preset-env": "^7.0.0-rc.3",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
     "babel-core": "^7.0.0-0",
-    "babel-jest": "^23.4.2",
-    "eslint": "^5.4.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-config-yoctol-base": "^0.17.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-yoctol-base": "^0.18.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.3.0",
-    "husky": "^0.14.3",
-    "jest": "^23.5.0",
-    "lint-staged": "^7.2.2",
-    "prettier": "^1.14.2",
-    "prettier-package-json": "^2.0.0",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
+    "prettier-package-json": "^2.0.1",
     "rimraf": "^2.6.2"
   },
   "keywords": [
@@ -61,6 +60,11 @@
   ],
   "engines": {
     "node": ">=7.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "jest": {
     "coverageDirectory": "./coverage/",
