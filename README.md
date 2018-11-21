@@ -378,6 +378,7 @@ bot.onEvent(attachIssueResolutionTag(sendText('Issue Resolved')));
 ```js
 B.series([
   B.log('sending hello'),
+  B.debug('sending hello'),
   B.info('sending hello'),
   B.warn('sending hello'),
   B.error('sending hello'),
@@ -398,8 +399,9 @@ B.series([
 You can use your owner adapter for the logger:
 
 ```js
-const { log, info, warn, error } = B.createLogger({
+const { log, debug, info, warn, error } = B.createLogger({
   log: debug('log'),
+  debug: debug('debug'),
   info: debug('info'),
   warn: debug('warn'),
   error: debug('error'),

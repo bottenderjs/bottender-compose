@@ -18,15 +18,17 @@ function createLoggerAction(fn) {
 function createLogger(adapter) {
   return {
     log: createLoggerAction(adapter.log),
+    debug: createLoggerAction(adapter.debug),
     info: createLoggerAction(adapter.info),
     warn: createLoggerAction(adapter.warn),
     error: createLoggerAction(adapter.error),
   };
 }
 
-const { log, info, warn, error } = createLogger(console);
+const { log, debug, info, warn, error } = createLogger(console);
 
 exports.log = log;
+exports.debug = debug;
 exports.info = info;
 exports.warn = warn;
 exports.error = error;
