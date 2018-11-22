@@ -4,14 +4,15 @@ describe('#isTextMatch', () => {
   it('should work with RegExp', () => {
     const predicate = isTextMatch(/yes/);
 
-    expect(
-      predicate({
-        event: {
-          isText: true,
-          text: 'yes',
-        },
-      })
-    ).toBe(true);
+    const predicateResultYes = predicate({
+      event: {
+        isText: true,
+        text: 'yes',
+      },
+    });
+
+    expect(predicateResultYes[0]).toBe('yes');
+    expect(predicateResultYes.length).toBe(1);
 
     expect(
       predicate({
@@ -20,20 +21,45 @@ describe('#isTextMatch', () => {
           text: 'no',
         },
       })
-    ).toBe(false);
+    ).toBeNull();
+  });
+
+  it('should work with RegExp with extraction', () => {
+    const predicate = isTextMatch(/yes, (sir)/);
+
+    const predicateResultYes = predicate({
+      event: {
+        isText: true,
+        text: 'yes, sir',
+      },
+    });
+
+    expect(predicateResultYes[0]).toBe('yes, sir');
+    expect(predicateResultYes[1]).toBe('sir');
+    expect(predicateResultYes.length).toBe(2);
+
+    expect(
+      predicate({
+        event: {
+          isText: true,
+          text: 'no',
+        },
+      })
+    ).toBeNull();
   });
 
   it('should work with string', () => {
     const predicate = isTextMatch('yes');
 
-    expect(
-      predicate({
-        event: {
-          isText: true,
-          text: 'yes',
-        },
-      })
-    ).toBe(true);
+    const predicateResultYes = predicate({
+      event: {
+        isText: true,
+        text: 'yes',
+      },
+    });
+
+    expect(predicateResultYes[0]).toBe('yes');
+    expect(predicateResultYes.length).toBe(1);
 
     expect(
       predicate({
@@ -42,7 +68,7 @@ describe('#isTextMatch', () => {
           text: 'no',
         },
       })
-    ).toBe(false);
+    ).toBeNull();
   });
 });
 
@@ -50,14 +76,15 @@ describe('#isPayloadMatch', () => {
   it('should work with RegExp', () => {
     const predicate = isPayloadMatch(/yes/);
 
-    expect(
-      predicate({
-        event: {
-          isPayload: true,
-          payload: 'yes',
-        },
-      })
-    ).toBe(true);
+    const predicateResultYes = predicate({
+      event: {
+        isPayload: true,
+        payload: 'yes',
+      },
+    });
+
+    expect(predicateResultYes[0]).toBe('yes');
+    expect(predicateResultYes.length).toBe(1);
 
     expect(
       predicate({
@@ -66,20 +93,45 @@ describe('#isPayloadMatch', () => {
           payload: 'no',
         },
       })
-    ).toBe(false);
+    ).toBeNull();
+  });
+
+  it('should work with RegExp with extraction', () => {
+    const predicate = isPayloadMatch(/yes, (sir)/);
+
+    const predicateResultYes = predicate({
+      event: {
+        isPayload: true,
+        payload: 'yes, sir',
+      },
+    });
+
+    expect(predicateResultYes[0]).toBe('yes, sir');
+    expect(predicateResultYes[1]).toBe('sir');
+    expect(predicateResultYes.length).toBe(2);
+
+    expect(
+      predicate({
+        event: {
+          isPayload: true,
+          payload: 'no',
+        },
+      })
+    ).toBeNull();
   });
 
   it('should work with string', () => {
     const predicate = isPayloadMatch('yes');
 
-    expect(
-      predicate({
-        event: {
-          isPayload: true,
-          payload: 'yes',
-        },
-      })
-    ).toBe(true);
+    const predicateResultYes = predicate({
+      event: {
+        isPayload: true,
+        payload: 'yes',
+      },
+    });
+
+    expect(predicateResultYes[0]).toBe('yes');
+    expect(predicateResultYes.length).toBe(1);
 
     expect(
       predicate({
@@ -88,7 +140,7 @@ describe('#isPayloadMatch', () => {
           payload: 'no',
         },
       })
-    ).toBe(false);
+    ).toBeNull();
   });
 });
 

@@ -129,6 +129,20 @@ branch(context => true, sendText('You are the lucky one.'));
 
 `branch` works well with [predicates](#predicates).
 
+```js
+const { condition, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  branch(
+    isTextMatch(/(\d{4})-(\d{2})-(\d{2})/),
+    sendText(
+      (context, match) => `You said date "${match[1]}/${match[2]}/${match[3]}"`
+    ),
+    sendText('You need to say a date')
+  )
+);
+```
+
 ### `condition()`
 
 Creates a function that encapsulates `if/else`, `if/else`, ... logic.
@@ -146,6 +160,27 @@ bot.onEvent(
 ```
 
 `condition` works well with [predicates](#predicates).
+
+```js
+const { condition, sendText } = require('bottender-compose');
+
+bot.onEvent(
+  condition([
+    [isTextMatch('abc'), sendText('You said "abc"')],
+    [
+      isTextMatch(/(\d{4})-(\d{2})-(\d{2})/),
+      sendText(
+        (context, match) =>
+          `You said date "${match[1]}/${match[2]}/${match[3]}"`
+      ),
+    ],
+    [
+      isTextMatch(/.*/),
+      sendText((context, match) => `I repeat what you said: "${match[0]}"`),
+    ],
+  ])
+);
+```
 
 ### `match()`
 
@@ -598,24 +633,26 @@ B.sendText('User: {{param.name}}')(context, { name: 'Super User' });
 
 ### `isTextMatch()`
 
-Creates a predicate function to return true when text matches.
+Creates a predicate function to return text matche result.
 
 ```js
 const { isTextMatch } = require('bottender-compose');
 
-isTextMatch('abc')(context); // boolean
-isTextMatch(/abc/)(context); // boolean
+isTextMatch('abc')(context); // array or null
+isTextMatch(/abc/)(context); // array or null
+isTextMatch(/(\d+)/)(context); // array or null
 ```
 
 ### `isPayloadMatch()`
 
-Creates a predicate function to return true when payload matches.
+Creates a predicate function to return payload matche result.
 
 ```js
 const { isPayloadMatch } = require('bottender-compose');
 
-isPayloadMatch('abc')(context); // boolean
-isPayloadMatch(/abc/)(context); // boolean
+isPayloadMatch('abc')(context); // array or null
+isPayloadMatch(/abc/)(context); // array or null
+isPayloadMatch(/(\d+)/)(context); // array or null
 ```
 
 ### `hasStateEqual()`

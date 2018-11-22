@@ -3,7 +3,12 @@ module.exports = conds => async (context, ...otherArgs) => {
     const [predicate, action] = conds[i];
 
     /* eslint-disable no-await-in-loop */
-    if (await predicate(context, ...otherArgs)) {
+    const predicateResult = await predicate(context, ...otherArgs);
+
+    if (Array.isArray(predicateResult)) {
+      await action(context, ...otherArgs, ...predicateResult);
+      break;
+    } else if (predicateResult) {
       await action(context, ...otherArgs);
       break;
     }
