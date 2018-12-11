@@ -94,3 +94,22 @@ it('should support template', async () => {
 
   expect(console.log).toBeCalledWith('print First Last...');
 });
+
+it('should support template with Chinese words', async () => {
+  const action = log(
+    'print {{context.session.user.姓氏}}{{context.session.user.名字}}...'
+  );
+
+  const context = {
+    session: {
+      user: {
+        姓氏: '王',
+        名字: '小明',
+      },
+    },
+  };
+
+  await action(context);
+
+  expect(console.log).toBeCalledWith('print 王小明...');
+});
