@@ -1,3 +1,7 @@
+# 0.12.6 / 2018-12-11
+
+- [fix] support Chinese variable (#92)
+
 # 0.12.5 / 2018-09-18
 
 - [new] support facebook `sendLike`
