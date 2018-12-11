@@ -19,7 +19,9 @@ const contextKeyPrefixResolveMap = {
   state: 'state.',
 };
 
-const JOINED_KEYS = `(${TEMPLATE_WHITELIST_KEYS.join('|')})((\\.\\w+)+)`;
+const JOINED_KEYS = `(${TEMPLATE_WHITELIST_KEYS.join(
+  '|'
+)})((\\.[\u4e00-\u9fa5_a-zA-Z0-9]+)+)`;
 
 exports.isValidTemplate = str => {
   const templateRegExp = new RegExp(`{{\\s*${JOINED_KEYS}\\s*}}`, 'g');
