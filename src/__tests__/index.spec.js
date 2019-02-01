@@ -128,6 +128,8 @@ it('should export LINE predicates', () => {
   expect(B.isPayload).toBeDefined();
   expect(B.isBeacon).toBeDefined();
   expect(B.isAccountLink).toBeDefined();
+  expect(B.isMemberJoined).toBeDefined();
+  expect(B.isMemberLeft).toBeDefined();
 });
 
 it('should export Slack methods', () => {
