@@ -32,6 +32,9 @@
     "random-item": "^1.0.0",
     "warning": "^4.0.2"
   },
+  "peerDependencies": {
+    "bottender": ">= 0.15.17"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.0",

@@ -52,6 +52,8 @@ exports.line = [
   'isPayload',
   'isBeacon',
   'isAccountLink',
+  'isMemberJoined',
+  'isMemberLeft',
 ];
 
 exports.slack = [
