@@ -1,3 +1,12 @@
+# 0.12.7 / 2019-02-01
+
+- [new] support isMemberJoined, isMemberLeft predicates (#94)
+
+```js
+B.isMemberJoined();
+B.isMemberLeft();
+```
+
 # 0.12.6 / 2018-12-11
 
 - [fix] support Chinese variable (#92)
