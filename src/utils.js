@@ -9,6 +9,7 @@ const TEMPLATE_WHITELIST_KEYS = [
   'event',
   'state',
   'param',
+  'props',
 ];
 
 const contextKeyPrefixResolveMap = {
@@ -29,7 +30,7 @@ exports.isValidTemplate = str => {
   return templateRegExp.test(str);
 };
 
-exports.compileTemplate = tpl => (context, param) => {
+exports.compileTemplate = tpl => (context, props) => {
   let compiledResult = tpl;
   const templateRegExp = new RegExp(`{{\\s*${JOINED_KEYS}\\s*}}`, 'g');
 
@@ -45,9 +46,14 @@ exports.compileTemplate = tpl => (context, param) => {
     let value;
     let properties;
 
-    if (firstWhitelistKey === 'param') {
+    warning(
+      firstWhitelistKey !== 'params',
+      '`param` is deprecated. Use `props` instead.'
+    );
+
+    if (['param', 'props'].includes(firstWhitelistKey)) {
       properties = otherResults[0].slice(1);
-      value = get(param, properties);
+      value = get(props, properties);
     } else {
       properties = `${
         contextKeyPrefixResolveMap[firstWhitelistKey]
