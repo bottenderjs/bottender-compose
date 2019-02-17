@@ -115,6 +115,82 @@ it('should support derivedParam when have two otherArgs', async () => {
   expect(haha.mock.calls[0][2]).toBe(extraArg2);
 });
 
+it('should support derivedProps when have no otherArgs', async () => {
+  const haha = jest.fn();
+
+  const action = effect(
+    () => ({
+      derivedProps: { x: 1 },
+    }),
+    haha
+  );
+
+  const context = createContext();
+
+  await action(context);
+
+  expect(haha.mock.calls[0][1]).toHaveProperty('x', 1);
+});
+
+it('should support derivedProps when have one otherArg (object)', async () => {
+  const haha = jest.fn();
+
+  const action = effect(
+    () => ({
+      derivedProps: { x: 1 },
+    }),
+    haha
+  );
+
+  const context = createContext();
+
+  const extraArg = {};
+
+  await action(context, extraArg);
+
+  expect(haha.mock.calls[0][1]).toHaveProperty('x', 1);
+});
+
+it('should support derivedProps when have one otherArg (non-object)', async () => {
+  const haha = jest.fn();
+
+  const action = effect(
+    () => ({
+      derivedProps: { x: 1 },
+    }),
+    haha
+  );
+
+  const context = createContext();
+
+  const extraArg = 1;
+
+  await action(context, extraArg);
+
+  expect(haha.mock.calls[0][1]).not.toHaveProperty('x', 1);
+});
+
+it('should support derivedProps when have two otherArgs', async () => {
+  const haha = jest.fn();
+
+  const action = effect(
+    () => ({
+      derivedProps: { x: 1 },
+    }),
+    haha
+  );
+
+  const context = createContext();
+
+  const extraArg = {};
+  const extraArg2 = {};
+
+  await action(context, extraArg, extraArg2);
+
+  expect(haha.mock.calls[0][1]).toHaveProperty('x', 1);
+  expect(haha.mock.calls[0][2]).toBe(extraArg2);
+});
+
 it('should pass extra args to effect fn & action', async () => {
   const haha = jest.fn();
   const doEffect = jest.fn();

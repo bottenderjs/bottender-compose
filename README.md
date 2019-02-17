@@ -327,7 +327,7 @@ setDisplayName('sayHello')(sendText('hello'));
 
 ### `effect()`
 
-Does side effects and mutate state or parameters.
+Does side effects and mutate state or props.
 
 ```js
 const { effect } = require('bottender-compose');
@@ -341,16 +341,16 @@ bot.onEvent(
         derivedState: {
           x: 1,
         },
-        derivedParam: {
+        derivedProps: {
           y: 2,
         },
       };
     },
 
     // action
-    async (context, param) => {
+    async (context, props) => {
       console.log(context.state.x); // 1
-      console.log(param.y); // 2
+      console.log(props.y); // 2
     }
   )
 );
@@ -588,10 +588,10 @@ B.sendText('State: {{state.xxx}}');
 B.sendText('User: {{user.first_name}} {{user.last_name}}');
 ```
 
-Or use `param` to access object values that provided as sencond argument when calling action:
+Or use `props` to access object values that provided as props when calling action:
 
 ```js
-B.sendText('User: {{param.name}}')(context, { name: 'Super User' });
+B.sendText('User: {{props.name}}')(context, { name: 'Super User' });
 ```
 
 ### Predicates
