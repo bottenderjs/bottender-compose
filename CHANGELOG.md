@@ -1,3 +1,35 @@
+# 0.13.0 / 2019-02-19
+
+- [breaking] rename param to props in effects and template (#95)
+
+`params` is deprecated. Use `props` instead.
+
+In `effect`:
+
+```js
+effect(
+  // function has side effects
+  async context => {
+    await doSomeSideEffects();
+    return {
+      derivedState: {
+        x: 1,
+      },
+      derivedProps: {
+        y: 2,
+      },
+    };
+  },
+  // action
+  async (context, props) => {
+    console.log(context.state.x); // 1
+    console.log(props.y); // 2
+  }
+);
+```
+
+In template: `Hi, {{ props.name }}`
+
 # 0.12.7 / 2019-02-01
 
 - [new] support isMemberJoined, isMemberLeft predicates (#94)
