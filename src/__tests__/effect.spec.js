@@ -12,6 +12,12 @@ function createContext() {
   };
 }
 
+it('should have correct name', async () => {
+  const action = effect(() => {}, sendText('haha'));
+
+  expect(action.name).toEqual('Effect(SendText(haha))');
+});
+
 it('should create action that will call underlying action', async () => {
   const action = effect(() => {}, sendText('haha'));
 

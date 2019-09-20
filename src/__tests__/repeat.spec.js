@@ -1,6 +1,14 @@
 const repeat = require('../repeat');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const cool = sendText('cool');
+
+  const action = repeat(5, cool);
+
+  expect(action.name).toEqual('Repeat(5, SendText(cool))');
+});
+
 it('should create action that will run in repeat', async () => {
   const cool = sendText('cool');
 

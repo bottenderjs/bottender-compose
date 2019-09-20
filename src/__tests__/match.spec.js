@@ -2,6 +2,20 @@ const _ = require('../_');
 const match = require('../match');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const haha = sendText('haha');
+  const wow = sendText('wow');
+  const cool = sendText('cool');
+
+  const value = 2;
+
+  const action = match(value, [[1, haha], [2, wow], [3, cool]]);
+
+  expect(action.name).toEqual(
+    'Match(SendText(haha), SendText(wow), SendText(cool))'
+  );
+});
+
 it('should create action that will call underlying matching action', async () => {
   const haha = sendText('haha');
   const wow = sendText('wow');

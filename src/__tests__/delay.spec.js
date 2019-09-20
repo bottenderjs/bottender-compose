@@ -5,6 +5,12 @@ const delay = require('../delay');
 const series = require('../series');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const action = delay(1000);
+
+  expect(action.name).toEqual('Delay(1000)');
+});
+
 it('should create action that will run delay with series', async () => {
   expect.assertions(2);
 

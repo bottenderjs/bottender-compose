@@ -1,3 +1,5 @@
+const pascalCase = require('pascal-case');
+
 const methods = require('./methods');
 const predicates = require('./predicates');
 const { not, and, or, alwaysTrue, alwaysFalse } = require('./logic');
@@ -41,6 +43,17 @@ allMethods.forEach(({ method, length, allowOptions }) => {
 
       fn.argsLength = length;
       fn.allowOptions = allowOptions;
+
+      const firstArg = args[0];
+
+      const name =
+        firstArg && typeof firstArg === 'string'
+          ? `${pascalCase(method)}(${
+              firstArg.length > 15 ? `${firstArg.slice(0, 15)}...` : args
+            })`
+          : pascalCase(method);
+
+      Object.defineProperty(fn, 'name', { value: name });
 
       return fn;
     };

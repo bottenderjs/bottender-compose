@@ -1,6 +1,20 @@
 const platform = require('../platform');
 const { sendText } = require('../');
 
+it('should have correct name', () => {
+  const messenger = sendText('messenger');
+  const line = sendText('line');
+
+  const action = platform({
+    messenger,
+    line,
+  });
+
+  expect(action.name).toEqual(
+    `Platform(messenger: SendText(messenger), line: SendText(line))`
+  );
+});
+
 it('should create action that will call sendText with messenger when messenger', () => {
   const messenger = sendText('messenger');
   const line = sendText('line');

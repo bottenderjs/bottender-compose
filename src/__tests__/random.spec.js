@@ -5,6 +5,19 @@ const randomItem = require('random-item');
 const random = require('../random');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const haha = sendText('haha');
+  const wow = sendText('wow');
+  const cool = sendText('cool');
+  const actions = [haha, wow, cool];
+
+  const action = random(actions);
+
+  expect(action.name).toEqual(
+    'Random(SendText(haha), SendText(wow), SendText(cool))'
+  );
+});
+
 it('should create action that will call sendText', () => {
   const haha = sendText('haha');
   const wow = sendText('wow');
