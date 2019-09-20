@@ -27,6 +27,7 @@ it('#log should work', async () => {
   await action();
 
   expect(console.log).toBeCalledWith('print...');
+  expect(action.name).toEqual('Log(print...)');
 });
 
 it('#info should work', async () => {
@@ -35,6 +36,7 @@ it('#info should work', async () => {
   await action();
 
   expect(console.info).toBeCalledWith('print...');
+  expect(action.name).toEqual('Info(print...)');
 });
 
 it('#warn should work', async () => {
@@ -43,6 +45,7 @@ it('#warn should work', async () => {
   await action();
 
   expect(console.warn).toBeCalledWith('print...');
+  expect(action.name).toEqual('Warn(print...)');
 });
 
 it('#error should work', async () => {
@@ -51,6 +54,7 @@ it('#error should work', async () => {
   await action();
 
   expect(console.error).toBeCalledWith('print...');
+  expect(action.name).toEqual('Error(print...)');
 });
 
 it('#createLogger should work', async () => {

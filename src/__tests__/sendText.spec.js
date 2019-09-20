@@ -1,5 +1,11 @@
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const action = sendText('haha');
+
+  expect(action.name).toEqual('SendText(haha)');
+});
+
 it('should create action that will call sendText', async () => {
   const action = sendText('haha');
   const context = {

@@ -1,6 +1,19 @@
 const series = require('../series');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const haha = sendText('haha');
+  const wow = sendText('wow');
+  const cool = sendText('cool');
+  const actions = [haha, wow, cool];
+
+  const action = series(actions);
+
+  expect(action.name).toEqual(
+    'Series(SendText(haha), SendText(wow), SendText(cool))'
+  );
+});
+
 it('should create action that will run in series', async () => {
   let resolveHaha;
   const haha = async context => {

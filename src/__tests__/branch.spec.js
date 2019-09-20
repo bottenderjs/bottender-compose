@@ -1,6 +1,23 @@
 const branch = require('../branch');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const cond = jest.fn(() => Promise.resolve(true));
+
+  const trueAction = sendText(
+    "Sometimes it's easier livin' the lie. - Catch Me If You Can"
+  );
+  const falseAction = sendText(
+    'You are the butter to my bread, and the breath to my life - Julie & Julia'
+  );
+
+  const br = branch(cond, trueAction, falseAction);
+
+  expect(br.name).toEqual(
+    "Branch(SendText(Sometimes it's ...), SendText(You are the but...))"
+  );
+});
+
 it('should call second parameter function if first parameter return true, or call third parameter', async () => {
   const cond = jest.fn(() => Promise.resolve(true));
 

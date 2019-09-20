@@ -3,6 +3,19 @@ const delay = require('delay');
 const parallel = require('../parallel');
 const { sendText } = require('../');
 
+it('should have correct name', async () => {
+  const haha = sendText('haha');
+  const wow = sendText('wow');
+  const cool = sendText('cool');
+  const actions = [haha, wow, cool];
+
+  const action = parallel(actions);
+
+  expect(action.name).toEqual(
+    'Parallel(SendText(haha), SendText(wow), SendText(cool))'
+  );
+});
+
 it('should create action that will run in parallel', () => {
   const haha = async context => {
     await sendText('haha')(context);

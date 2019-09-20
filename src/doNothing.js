@@ -1,3 +1,3 @@
-const noop = require('noop2');
-
-module.exports = () => noop;
+module.exports = () => {
+  return function Noop() {};
+};

@@ -28,7 +28,7 @@
     "delay": "^4.3.0",
     "invariant": "^2.2.4",
     "lodash": "^4.17.15",
-    "noop2": "^2.0.0",
+    "pascal-case": "^2.0.1",
     "random-item": "^3.0.0",
     "warning": "^4.0.3"
   },

@@ -11,6 +11,19 @@ afterEach(() => {
   Math.random = mathRandom;
 });
 
+it('should have correct name', () => {
+  const haha = sendText('haha');
+  const wow = sendText('wow');
+  const cool = sendText('cool');
+  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+
+  const action = weight(conds);
+
+  expect(action.name).toEqual(
+    'Weight(SendText(haha)(0.5/1), SendText(wow)(0.2/1), SendText(cool)(0.3/1))'
+  );
+});
+
 it('should call first action when random is less than first weight', () => {
   const haha = sendText('haha');
   const wow = sendText('wow');

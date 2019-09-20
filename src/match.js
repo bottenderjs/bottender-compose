@@ -6,7 +6,7 @@ const match = (value, mapping) => {
   const defaultMapping = mapping.find(([pattern]) => pattern === _);
   const otherMapping = mapping.filter(([pattern]) => pattern !== _);
 
-  return async (context, ...otherArgs) => {
+  const fn = async (context, ...otherArgs) => {
     const val =
       typeof value === 'function' ? await value(context, ...otherArgs) : value;
 
@@ -22,6 +22,14 @@ const match = (value, mapping) => {
       return defaultAction(context, ...otherArgs);
     }
   };
+
+  const names = mapping.map(([, action]) => action.name || 'Anonymous');
+
+  const name = `Match(${names.join(', ')})`;
+
+  Object.defineProperty(fn, 'name', { value: name });
+
+  return fn;
 };
 
 module.exports = curry(match);

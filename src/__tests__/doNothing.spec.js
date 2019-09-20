@@ -1,15 +1,7 @@
-const noop = require('noop2');
-
 const doNothing = require('../doNothing');
 
-jest.mock('noop2');
-
-it('should return noop', async () => {
+it('should have correct name', async () => {
   const action = doNothing();
 
-  const context = {};
-
-  await action(context);
-
-  expect(noop).toBeCalled();
+  expect(action.name).toEqual('Noop');
 });
