@@ -1,3 +1,7 @@
+- 0.14.0 / 2019-09-20
+
+- [new] add better name to the return functions
+
 # 0.13.0 / 2019-02-19
 
 - [breaking] rename param to props in effects and template (#95)
