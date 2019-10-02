@@ -1,12 +1,12 @@
 module.exports = actions => {
-  const fn = (context, ...otherArgs) =>
+  const Fn = (context, ...otherArgs) =>
     Promise.all(actions.map(action => action(context, ...otherArgs)));
 
   const names = actions.map(action => action.name || 'Anonymous');
 
   const name = `Parallel(${names.join(', ')})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };

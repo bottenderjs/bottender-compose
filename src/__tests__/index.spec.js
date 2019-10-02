@@ -335,13 +335,11 @@ it('should export other apis', () => {
   expect(B.platform).toBeDefined();
   expect(B.random).toBeDefined();
   expect(B.series).toBeDefined();
-  expect(B.tryCatch).toBeDefined();
   expect(B.weight).toBeDefined();
-  expect(B.doNothing).toBeDefined();
+  expect(B.noop).toBeDefined();
   expect(B.repeat).toBeDefined();
   expect(B.delay).toBeDefined();
   expect(B.setDisplayName).toBeDefined();
-  expect(B.effect).toBeDefined();
   expect(B.attachOptions).toBeDefined();
 });
 

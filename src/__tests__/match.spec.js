@@ -3,117 +3,117 @@ const match = require('../match');
 const { sendText } = require('../');
 
 it('should have correct name', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   const value = 2;
 
-  const action = match(value, [[1, haha], [2, wow], [3, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
 
-  expect(action.name).toEqual(
-    'Match(SendText(haha), SendText(wow), SendText(cool))'
+  expect(Match.name).toEqual(
+    'Match(SendText(Haha), SendText(Wow), SendText(Cool))'
   );
 });
 
 it('should create action that will call underlying matching action', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   const value = 2;
 
-  const action = match(value, [[1, haha], [2, wow], [3, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  await action(context);
+  const Action = await Match(context);
 
-  expect(context.sendText).toBeCalledWith('wow');
+  expect(Action).toEqual(Wow);
 });
 
 it('should support context value function', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   const value = context => context.state.x;
 
-  const action = match(value, [[1, haha], [2, wow], [3, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
 
   const context = {
     state: { x: 2 },
     sendText: jest.fn(),
   };
 
-  await action(context);
+  const Action = await Match(context);
 
-  expect(context.sendText).toBeCalledWith('wow');
+  expect(Action).toEqual(Wow);
 });
 
 it('should support async value function', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   const value = jest.fn().mockResolvedValue(2);
 
-  const action = match(value, [[1, haha], [2, wow], [3, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  await action(context);
+  const Action = await Match(context);
 
-  expect(context.sendText).toBeCalledWith('wow');
+  expect(Action).toEqual(Wow);
 });
 
 it('should create action that will do nothing when no match', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
 
   const value = 3;
 
-  const action = match(value, [[1, haha], [2, wow]]);
+  const Match = match(value, [[1, Haha], [2, Wow]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  await action(context);
+  const Action = await Match(context);
 
-  expect(context.sendText).not.toBeCalled();
+  expect(Action).toBeUndefined();
 });
 
 it('should create action that will call default action when no match', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   const value = 3;
 
-  const action = match(value, [[1, haha], [2, wow], [_, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [_, Cool]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  await action(context);
+  const Action = await Match(context);
 
-  expect(context.sendText).toBeCalledWith('cool');
+  expect(Action).toEqual(Cool);
 });
 
-it('should pass extra args to underlying matched action', async () => {
-  const haha = jest.fn();
-  const wow = jest.fn();
-  const cool = jest.fn();
+xit('should pass extra args to underlying matched action', async () => {
+  const Haha = jest.fn();
+  const Wow = jest.fn();
+  const Cool = jest.fn();
 
   const value = 2;
 
-  const action = match(value, [[1, haha], [2, wow], [3, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
 
   const context = {
     sendText: jest.fn(),
@@ -121,19 +121,19 @@ it('should pass extra args to underlying matched action', async () => {
 
   const extraArg = {};
 
-  await action(context, extraArg);
+  await Match(context, extraArg);
 
-  expect(wow).toBeCalledWith(context, extraArg);
+  expect(Wow).toBeCalledWith(context, extraArg);
 });
 
-it('should pass extra args to underlying default action', async () => {
-  const haha = jest.fn();
-  const wow = jest.fn();
-  const cool = jest.fn();
+xit('should pass extra args to underlying default action', async () => {
+  const Haha = jest.fn();
+  const Wow = jest.fn();
+  const Cool = jest.fn();
 
   const value = 3;
 
-  const action = match(value, [[1, haha], [2, wow], [_, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [_, Cool]]);
 
   const context = {
     sendText: jest.fn(),
@@ -141,19 +141,19 @@ it('should pass extra args to underlying default action', async () => {
 
   const extraArg = {};
 
-  await action(context, extraArg);
+  await Match(context, extraArg);
 
-  expect(cool).toBeCalledWith(context, extraArg);
+  expect(Cool).toBeCalledWith(context, extraArg);
 });
 
 it('should pass extra args to value function', async () => {
-  const haha = jest.fn();
-  const wow = jest.fn();
-  const cool = jest.fn();
+  const Haha = jest.fn();
+  const Wow = jest.fn();
+  const Cool = jest.fn();
 
   const value = jest.fn(() => 3);
 
-  const action = match(value, [[1, haha], [2, wow], [_, cool]]);
+  const Match = match(value, [[1, Haha], [2, Wow], [_, Cool]]);
 
   const context = {
     sendText: jest.fn(),
@@ -161,26 +161,26 @@ it('should pass extra args to value function', async () => {
 
   const extraArg = {};
 
-  await action(context, extraArg);
+  await Match(context, extraArg);
 
   expect(value).toBeCalledWith(context, extraArg);
 });
 
 it('should create action that will run in curried match', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   const value = 3;
 
   const matchValue = match(value);
-  const action = matchValue([[1, haha], [2, wow], [_, cool]]);
+  const Match = matchValue([[1, Haha], [2, Wow], [_, Cool]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  await action(context);
+  const Action = await Match(context);
 
-  expect(context.sendText).toBeCalledWith('cool');
+  expect(Action).toEqual(Cool);
 });

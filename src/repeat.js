@@ -1,7 +1,7 @@
 const curry = require('lodash/curry');
 
 const repeat = (times, action) => {
-  const fn = async (context, ...otherArgs) => {
+  const Fn = async (context, ...otherArgs) => {
     for (let i = 0; i < times; i += 1) {
       await action(context, ...otherArgs); // eslint-disable-line no-await-in-loop
     }
@@ -9,9 +9,9 @@ const repeat = (times, action) => {
 
   const name = `Repeat(${times}, ${action.name || 'Anonymous'})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };
 
 module.exports = curry(repeat);

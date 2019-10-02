@@ -2,13 +2,13 @@ const mapValues = require('lodash/mapValues');
 
 // eslint-disable-next-line consistent-return
 module.exports = config => {
-  const fn = (context, ...otherArgs) => {
+  const Fn = context => {
     if (config[context.platform]) {
-      return config[context.platform](context, ...otherArgs);
+      return config[context.platform];
     }
 
     if (config.others) {
-      return config.others(context, ...otherArgs);
+      return config.others;
     }
   };
 
@@ -18,7 +18,7 @@ module.exports = config => {
 
   const name = `Platform(${str})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };

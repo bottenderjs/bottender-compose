@@ -12,81 +12,77 @@ afterEach(() => {
 });
 
 it('should have correct name', () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
-  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
-  const action = weight(conds);
+  const Weight = weight([[0.5, Haha], [0.2, Wow], [0.3, Cool]]);
 
-  expect(action.name).toEqual(
-    'Weight(SendText(haha)(0.5/1), SendText(wow)(0.2/1), SendText(cool)(0.3/1))'
+  expect(Weight.name).toEqual(
+    'Weight(SendText(Haha)(0.5/1), SendText(Wow)(0.2/1), SendText(Cool)(0.3/1))'
   );
 });
 
-it('should call first action when random is less than first weight', () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
-  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+it('should call first action when random is less than first weight', async () => {
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   Math.random.mockReturnValueOnce(0.4);
-  const action = weight(conds);
+  const Weight = weight([[0.5, Haha], [0.2, Wow], [0.3, Cool]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  action(context);
+  const Action = await Weight(context);
 
-  expect(context.sendText).toBeCalledWith('haha');
+  expect(Action).toEqual(Haha);
 });
 
-it('should call 2nd action when random result is between first and second weight', () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
-  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+it('should call 2nd action when random result is between first and second weight', async () => {
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
 
   Math.random.mockReturnValueOnce(0.6);
-  const action = weight(conds);
+  const Weight = weight([[0.5, Haha], [0.2, Wow], [0.3, Cool]]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  action(context);
+  const Action = await Weight(context);
 
-  expect(context.sendText).toBeCalledWith('wow');
+  expect(Action).toEqual(Wow);
 });
 
-it('should call last action', () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
-  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+it('should call last action', async () => {
+  const Haha = sendText('Haha');
+  const Wow = sendText('Wow');
+  const Cool = sendText('Cool');
+  const conds = [[0.5, Haha], [0.2, Wow], [0.3, Cool]];
 
   Math.random.mockReturnValueOnce(0.99);
-  const action = weight(conds);
+  const Weight = weight(conds);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  action(context);
+  const Action = await Weight(context);
 
-  expect(context.sendText).toBeCalledWith('cool');
+  expect(Action).toEqual(Cool);
 });
 
-it('should pass extra args to underlying action', async () => {
-  const haha = jest.fn();
-  const wow = jest.fn();
-  const cool = jest.fn();
-  const conds = [[0.5, haha], [0.2, wow], [0.3, cool]];
+xit('should pass extra args to underlying action', async () => {
+  const Haha = jest.fn();
+  const Wow = jest.fn();
+  const Cool = jest.fn();
 
   Math.random.mockReturnValueOnce(0.4);
 
-  const action = weight(conds);
+  const Weight = weight([[0.5, Haha], [0.2, Wow], [0.3, Cool]]);
 
   const context = {
     sendText: jest.fn(),
@@ -94,7 +90,7 @@ it('should pass extra args to underlying action', async () => {
 
   const extraArg = {};
 
-  await action(context, extraArg);
+  await Weight(context, extraArg);
 
-  expect(haha).toBeCalledWith(context, extraArg);
+  expect(Haha).toBeCalledWith(context, extraArg);
 });
