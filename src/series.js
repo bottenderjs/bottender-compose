@@ -1,5 +1,5 @@
 module.exports = actions => {
-  const fn = async (context, ...otherArgs) => {
+  const Fn = async (context, ...otherArgs) => {
     for (let i = 0; i < actions.length; i++) {
       await actions[i](context, ...otherArgs); // eslint-disable-line no-await-in-loop
     }
@@ -9,7 +9,7 @@ module.exports = actions => {
 
   const name = `Series(${names.join(', ')})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };

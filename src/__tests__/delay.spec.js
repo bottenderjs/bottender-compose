@@ -1,9 +1,10 @@
-jest.mock('delay');
 const _delay = require('delay');
 
 const delay = require('../delay');
 const series = require('../series');
 const { sendText } = require('../');
+
+jest.mock('delay');
 
 it('should have correct name', async () => {
   const action = delay(1000);
@@ -14,19 +15,16 @@ it('should have correct name', async () => {
 it('should create action that will run delay with series', async () => {
   expect.assertions(2);
 
-  const haha = sendText('haha');
-  const wow = sendText('wow');
+  const Haha = sendText('Haha');
 
-  const action = series([haha, delay(1000), wow]);
+  const Series = series([delay(1000), Haha]);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  const p = action(context).then(() => {
-    expect(_delay).toBeCalled();
-    expect(context.sendText.mock.calls).toEqual([['haha'], ['wow']]);
-  });
+  await Series(context);
 
-  return p;
+  expect(_delay).toBeCalledWith(1000);
+  expect(context.sendText).toBeCalledWith('Haha');
 });

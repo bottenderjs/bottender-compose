@@ -1,15 +1,15 @@
 const randomItem = require('random-item');
 
 module.exports = actions => {
-  const fn = async (context, ...otherArgs) => {
-    await randomItem(actions)(context, ...otherArgs);
+  const Fn = async () => {
+    return randomItem(actions);
   };
 
   const names = actions.map(action => action.name || 'Anonymous');
 
   const name = `Random(${names.join(', ')})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };

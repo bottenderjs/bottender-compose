@@ -2,21 +2,20 @@ const curry = require('lodash/curry');
 
 function Noop() {}
 
-const branch = (predicate, onTrue, onFalse = Noop) => {
-  const fn = async (context, ...otherArgs) => {
+const branch = (predicate, OnTrue, OnFalse = Noop) => {
+  const Fn = async (context, ...otherArgs) => {
     if (await predicate(context, ...otherArgs)) {
-      await onTrue(context, ...otherArgs);
-    } else {
-      await onFalse(context, ...otherArgs);
+      return OnTrue;
     }
+    return OnFalse;
   };
 
-  const name = `Branch(${onTrue.name || 'Anonymous'}, ${onFalse.name ||
+  const name = `Branch(${OnTrue.name || 'Anonymous'}, ${OnFalse.name ||
     'Anonymous'})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };
 
 module.exports = curry(branch);

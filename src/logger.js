@@ -2,7 +2,7 @@ const { isValidTemplate, compileTemplate } = require('./utils');
 
 function createLoggerAction(fn, name) {
   return (...args) => {
-    const action = (context, ...otherArgs) =>
+    const Action = (context, ...otherArgs) =>
       fn(
         ...args.map(arg => {
           if (typeof arg === 'function') {
@@ -24,9 +24,9 @@ function createLoggerAction(fn, name) {
           })`
         : name;
 
-    Object.defineProperty(action, 'name', { value: actionName });
+    Object.defineProperty(Action, 'name', { value: actionName });
 
-    return action;
+    return Action;
   };
 }
 

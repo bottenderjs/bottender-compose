@@ -81,13 +81,11 @@ exports.parallel = require('./parallel');
 exports.platform = require('./platform');
 exports.random = require('./random');
 exports.series = require('./series');
-exports.tryCatch = require('./tryCatch');
 exports.weight = require('./weight');
-exports.doNothing = require('./doNothing');
+exports.noop = require('./noop');
 exports.repeat = require('./repeat');
 exports.delay = require('./delay');
 exports.setDisplayName = require('./setDisplayName');
-exports.effect = require('./effect');
 exports.attachOptions = require('./attachOptions');
 
 /* Predicate */

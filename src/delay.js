@@ -2,11 +2,11 @@ const delay = require('delay');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = ms => {
-  const fn = () => delay(ms);
+  const Fn = () => delay(ms);
 
   const name = `Delay(${ms})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };

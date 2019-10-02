@@ -6,30 +6,30 @@ const match = (value, mapping) => {
   const defaultMapping = mapping.find(([pattern]) => pattern === _);
   const otherMapping = mapping.filter(([pattern]) => pattern !== _);
 
-  const fn = async (context, ...otherArgs) => {
+  const Fn = async (context, ...otherArgs) => {
     const val =
       typeof value === 'function' ? await value(context, ...otherArgs) : value;
 
     for (let i = 0; i < otherMapping.length; i++) {
-      const [pattern, action] = otherMapping[i];
+      const [pattern, Action] = otherMapping[i];
       if (pattern === val) {
-        return action(context, ...otherArgs);
+        return Action;
       }
     }
 
     if (defaultMapping) {
-      const [, defaultAction] = defaultMapping;
-      return defaultAction(context, ...otherArgs);
+      const [, DefaultAction] = defaultMapping;
+      return DefaultAction;
     }
   };
 
-  const names = mapping.map(([, action]) => action.name || 'Anonymous');
+  const names = mapping.map(([, Action]) => Action.name || 'Anonymous');
 
   const name = `Match(${names.join(', ')})`;
 
-  Object.defineProperty(fn, 'name', { value: name });
+  Object.defineProperty(Fn, 'name', { value: name });
 
-  return fn;
+  return Fn;
 };
 
 module.exports = curry(match);

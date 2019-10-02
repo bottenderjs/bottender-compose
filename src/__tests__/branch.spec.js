@@ -4,16 +4,16 @@ const { sendText } = require('../');
 it('should have correct name', async () => {
   const cond = jest.fn(() => Promise.resolve(true));
 
-  const trueAction = sendText(
+  const OnTrue = sendText(
     "Sometimes it's easier livin' the lie. - Catch Me If You Can"
   );
-  const falseAction = sendText(
+  const OnFalse = sendText(
     'You are the butter to my bread, and the breath to my life - Julie & Julia'
   );
 
-  const br = branch(cond, trueAction, falseAction);
+  const Branch = branch(cond, OnTrue, OnFalse);
 
-  expect(br.name).toEqual(
+  expect(Branch.name).toEqual(
     "Branch(SendText(Sometimes it's ...), SendText(You are the but...))"
   );
 });
@@ -21,121 +21,92 @@ it('should have correct name', async () => {
 it('should call second parameter function if first parameter return true, or call third parameter', async () => {
   const cond = jest.fn(() => Promise.resolve(true));
 
-  const trueAction = sendText(
+  const OnTrue = sendText(
     "Sometimes it's easier livin' the lie. - Catch Me If You Can"
   );
-  const falseAction = sendText(
+  const OnFalse = sendText(
     'You are the butter to my bread, and the breath to my life - Julie & Julia'
   );
 
-  const br = branch(cond, trueAction, falseAction);
+  const Branch = branch(cond, OnTrue, OnFalse);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  br(context);
+  const Action = await Branch(context);
 
-  await flushPromises();
-
-  expect(cond).toHaveBeenCalled();
-  expect(context.sendText).toBeCalledWith(
-    "Sometimes it's easier livin' the lie. - Catch Me If You Can"
-  );
-  expect(context.sendText).not.toBeCalledWith(
-    'You are the butter to my bread, and the breath to my life - Julie & Julia'
-  );
+  expect(Action).toEqual(OnTrue);
 });
 
 it('should call third parameter function if first parameter return false, or call second parameter', async () => {
   const cond = jest.fn(() => Promise.resolve(false));
 
-  const trueAction = sendText(
+  const OnTrue = sendText(
     "Sometimes it's easier livin' the lie. - Catch Me If You Can"
   );
-  const falseAction = sendText(
+  const OnFalse = sendText(
     'You are the butter to my bread, and the breath to my life - Julie & Julia'
   );
 
-  const br = branch(cond, trueAction, falseAction);
+  const Branch = branch(cond, OnTrue, OnFalse);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  br(context);
+  const Action = await Branch(context);
 
-  await flushPromises();
-
-  expect(cond).toHaveBeenCalled();
-  expect(context.sendText).not.toBeCalledWith(
-    "Sometimes it's easier livin' the lie. - Catch Me If You Can"
-  );
-  expect(context.sendText).toBeCalledWith(
-    'You are the butter to my bread, and the breath to my life - Julie & Julia'
-  );
+  expect(Action).toEqual(OnFalse);
 });
 
 it('should do nothing if third parameter is not provided', async () => {
   const cond = jest.fn(() => Promise.resolve(false));
 
-  const trueAction = sendText(
+  const OnTrue = sendText(
     "Sometimes it's easier livin' the lie. - Catch Me If You Can"
   );
 
-  const br = branch(cond, trueAction);
+  const Branch = branch(cond, OnTrue);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  br(context);
+  const Action = await Branch(context);
 
-  await flushPromises();
-
-  expect(cond).toHaveBeenCalled();
-  expect(context.sendText).not.toBeCalledWith(
-    "Sometimes it's easier livin' the lie. - Catch Me If You Can"
-  );
+  expect(Action.name).toEqual('Noop');
 });
 
 it('should call second parameter function if first parameter return true, or call third parameter in curried branch', async () => {
   const cond = jest.fn(() => Promise.resolve(true));
 
-  const trueAction = sendText(
+  const OnTrue = sendText(
     "Sometimes it's easier livin' the lie. - Catch Me If You Can"
   );
-  const falseAction = sendText(
+  const OnFalse = sendText(
     'You are the butter to my bread, and the breath to my life - Julie & Julia'
   );
 
   const trueCondBranch = branch(cond);
-  const br = trueCondBranch(trueAction, falseAction);
+  const Branch = trueCondBranch(OnTrue, OnFalse);
 
   const context = {
     sendText: jest.fn(),
   };
 
-  br(context);
+  const Action = await Branch(context);
 
-  await flushPromises();
-
-  expect(cond).toHaveBeenCalled();
-  expect(context.sendText).toBeCalledWith(
-    "Sometimes it's easier livin' the lie. - Catch Me If You Can"
-  );
-  expect(context.sendText).not.toBeCalledWith(
-    'You are the butter to my bread, and the breath to my life - Julie & Julia'
-  );
+  expect(Action).toEqual(OnTrue);
 });
 
 describe('should pass extra args to underlying action', () => {
-  it('on true', async () => {
+  xit('on true', async () => {
     const cond = jest.fn(() => true);
 
-    const trueAction = jest.fn();
+    const OnTrue = jest.fn();
 
-    const br = branch(cond, trueAction);
+    const Branch = branch(cond, OnTrue);
 
     const context = {
       sendText: jest.fn(),
@@ -143,21 +114,21 @@ describe('should pass extra args to underlying action', () => {
 
     const extraArg = {};
 
-    br(context, extraArg);
+    Branch(context, extraArg);
 
     await flushPromises();
 
     expect(cond).toHaveBeenCalled();
-    expect(trueAction).toBeCalledWith(context, extraArg);
+    expect(OnTrue).toBeCalledWith(context, extraArg);
   });
 
-  it('on false', async () => {
+  xit('on false', async () => {
     const cond = jest.fn(() => false);
 
-    const trueAction = jest.fn();
-    const falseAction = jest.fn();
+    const OnTrue = jest.fn();
+    const OnFalse = jest.fn();
 
-    const br = branch(cond, trueAction, falseAction);
+    const Branch = branch(cond, OnTrue, OnFalse);
 
     const context = {
       sendText: jest.fn(),
@@ -165,11 +136,11 @@ describe('should pass extra args to underlying action', () => {
 
     const extraArg = {};
 
-    br(context, extraArg);
+    Branch(context, extraArg);
 
     await flushPromises();
 
     expect(cond).toHaveBeenCalled();
-    expect(falseAction).toBeCalledWith(context, extraArg);
+    expect(OnFalse).toBeCalledWith(context, extraArg);
   });
 });

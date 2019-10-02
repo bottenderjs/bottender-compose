@@ -44,7 +44,7 @@ it('should merge original options', async () => {
 });
 
 it('should merge multiple attached options', async () => {
-  const action = attachOptions(
+  const Action = attachOptions(
     { tag: 'ISSUE_RESOLUTION' },
     attachOptions(
       {
@@ -63,7 +63,7 @@ it('should merge multiple attached options', async () => {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await action(context);
+  await Action(context);
 
   expect(context.sendText).toBeCalledWith('haha', {
     quick_replies: [
@@ -79,13 +79,13 @@ it('should merge multiple attached options', async () => {
 
 it('should create action that will run in curried attachOptions', async () => {
   const attachIssueResolutionTag = attachOptions({ tag: 'ISSUE_RESOLUTION' });
-  const action = attachIssueResolutionTag(sendText('haha'));
+  const Action = attachIssueResolutionTag(sendText('haha'));
 
   const context = {
     sendText: jest.fn(),
   };
 
-  await action(context);
+  await Action(context);
 
   expect(context.sendText).toBeCalledWith('haha', { tag: 'ISSUE_RESOLUTION' });
 });
