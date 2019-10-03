@@ -26,13 +26,11 @@ npm install bottender-compose
   - [`condition()`](#condition)
   - [`match()`](#match)
   - [`platform()`](#platform)
-  - [`tryCatch()`](#trycatch)
   - [`weight()`](#weight)
   - [`doNothing()`](#donothing)
   - [`repeat()`](#repeat)
   - [`delay()`](#delay)
   - [`setDisplayName()`](#setdisplayName)
-  - [`effect()`](#effect)
   - [`attachOptions()`](#attachoptions)
   - [Logger Methods](#logger-methods)
   - [Context Methods](#context-methods)
@@ -228,24 +226,6 @@ platform({
 });
 ```
 
-### `tryCatch()`
-
-Creates a function that calls error handler on error.  
-Furthermore, `tryCatch` can be used as curry function.
-
-```js
-const { tryCatch, sendText } = require('bottender-compose');
-
-bot.onEvent(
-  tryCatch(doSomethingMayFail(), sendText('Error Happened~~~~~~~~~~~!'))
-);
-
-// curry function
-const mayFailTryCatch = tryCatch(doSomethingMayFail());
-
-bot.onEvent(mayFailTryCatch(sendText('Error Happened~~~~~~~~~~~!')));
-```
-
 ### `weight()`
 
 Creates a function that randomly executes one of method by its weight.
@@ -323,37 +303,6 @@ setDisplayName('sayHello', sendText('hello'));
 
 // curry function
 setDisplayName('sayHello')(sendText('hello'));
-```
-
-### `effect()`
-
-Does side effects and mutate state or props.
-
-```js
-const { effect } = require('bottender-compose');
-
-bot.onEvent(
-  effect(
-    // function has side effects
-    async context => {
-      await doSomeSideEffects();
-      return {
-        derivedState: {
-          x: 1,
-        },
-        derivedProps: {
-          y: 2,
-        },
-      };
-    },
-
-    // action
-    async (context, props) => {
-      console.log(context.state.x); // 1
-      console.log(props.y); // 2
-    }
-  )
-);
 ```
 
 ### `attachOptions()`
