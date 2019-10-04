@@ -80,6 +80,7 @@ it('should export LINE methods', () => {
   expect(B.sendLocation).toBeDefined();
   expect(B.sendSticker).toBeDefined();
   expect(B.sendImagemap).toBeDefined();
+  expect(B.sendFlex).toBeDefined();
   expect(B.sendButtonTemplate).toBeDefined();
   expect(B.sendConfirmTemplate).toBeDefined();
   expect(B.sendCarouselTemplate).toBeDefined();
@@ -92,6 +93,7 @@ it('should export LINE methods', () => {
   expect(B.replyLocation).toBeDefined();
   expect(B.replySticker).toBeDefined();
   expect(B.replyImagemap).toBeDefined();
+  expect(B.replyFlex).toBeDefined();
   expect(B.replyButtonTemplate).toBeDefined();
   expect(B.replyConfirmTemplate).toBeDefined();
   expect(B.replyCarouselTemplate).toBeDefined();
@@ -104,6 +106,7 @@ it('should export LINE methods', () => {
   expect(B.pushLocation).toBeDefined();
   expect(B.pushSticker).toBeDefined();
   expect(B.pushImagemap).toBeDefined();
+  expect(B.pushFlex).toBeDefined();
   expect(B.pushButtonTemplate).toBeDefined();
   expect(B.pushConfirmTemplate).toBeDefined();
   expect(B.pushCarouselTemplate).toBeDefined();

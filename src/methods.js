@@ -44,6 +44,7 @@ exports.line = [
   { method: 'sendLocation', length: 2, allowOptions: true },
   { method: 'sendSticker', length: 2, allowOptions: true },
   { method: 'sendImagemap', length: 3, allowOptions: true },
+  { method: 'sendFlex', length: 3, allowOptions: true },
   { method: 'sendTemplate', length: 3, allowOptions: true },
   { method: 'sendButtonTemplate', length: 3, allowOptions: true },
   { method: 'sendButtonsTemplate', length: 3, allowOptions: true }, // sendButtonTemplate alias
@@ -58,6 +59,7 @@ exports.line = [
   { method: 'replyLocation', length: 2, allowOptions: true },
   { method: 'replySticker', length: 2, allowOptions: true },
   { method: 'replyImagemap', length: 3, allowOptions: true },
+  { method: 'replyFlex', length: 3, allowOptions: true },
   { method: 'replyTemplate', length: 3, allowOptions: true },
   { method: 'replyButtonTemplate', length: 3, allowOptions: true },
   { method: 'replyButtonsTemplate', length: 3, allowOptions: true }, // replyButtonTemplate alias
@@ -72,6 +74,7 @@ exports.line = [
   { method: 'pushLocation', length: 2, allowOptions: true },
   { method: 'pushSticker', length: 2, allowOptions: true },
   { method: 'pushImagemap', length: 3, allowOptions: true },
+  { method: 'pushFlex', length: 3, allowOptions: true },
   { method: 'pushTemplate', length: 3, allowOptions: true },
   { method: 'pushButtonTemplate', length: 3, allowOptions: true },
   { method: 'pushButtonsTemplate', length: 3, allowOptions: true }, // pushButtonTemplate alias
