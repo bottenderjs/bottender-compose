@@ -23,7 +23,6 @@ exports.messenger = [
   { method: 'sendAirlineCheckinTemplate', length: 2, allowOptions: true },
   { method: 'sendAirlineItineraryTemplate', length: 2, allowOptions: true },
   { method: 'sendAirlineUpdateTemplate', length: 2, allowOptions: true },
-  { method: 'sendAirlineFlightUpdateTemplate', length: 2, allowOptions: true }, // Todo: deprecated
   { method: 'sendSenderAction', length: 1, allowOptions: false },
   { method: 'markSeen', length: 0, allowOptions: false },
   { method: 'typingOn', length: 0, allowOptions: false },

@@ -384,7 +384,7 @@ B.series([log('sending hello'), B.sendText('hello')]);
 - `sendAirlineBoardingPassTemplate()`
 - `sendAirlineCheckinTemplate()`
 - `sendAirlineItineraryTemplate()`
-- `sendAirlineFlightUpdateTemplate()`
+- `sendAirlineUpdateTemplate()`
 - `sendSenderAction()`
 - `markSeen()`
 - `typingOn()`
@@ -517,9 +517,7 @@ B.sendText(() => `Now: ${new Date()}`);
 // Use user information on context
 B.sendText(
   context =>
-    `${context.session.user.first_name} ${
-      context.session.user.last_name
-    }, You are the lucky one.`
+    `${context.session.user.first_name} ${context.session.user.last_name}, You are the lucky one.`
 );
 
 // Use event information
