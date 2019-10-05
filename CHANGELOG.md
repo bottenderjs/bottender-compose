@@ -1,4 +1,4 @@
-- 0.14.0 / 2019-09-20
+# 0.14.0 / 2019-09-20
 
 - [new] add better name to the return functions
 
@@ -664,9 +664,7 @@ B.sendText(() => `Now: ${new Date()}`);
 // Use user information on context
 B.sendText(
   context =>
-    `${context.session.user.first_name} ${
-      context.session.user.last_name
-    }, You are the lucky one.`
+    `${context.session.user.first_name} ${context.session.user.last_name}, You are the lucky one.`
 );
 
 // Use event information
