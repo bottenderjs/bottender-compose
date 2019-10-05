@@ -24,7 +24,7 @@ it('should export Messenger methods', () => {
   expect(B.sendAirlineBoardingPassTemplate).toBeDefined();
   expect(B.sendAirlineCheckinTemplate).toBeDefined();
   expect(B.sendAirlineItineraryTemplate).toBeDefined();
-  expect(B.sendAirlineFlightUpdateTemplate).toBeDefined();
+  expect(B.sendAirlineUpdateTemplate).toBeDefined();
   expect(B.sendSenderAction).toBeDefined();
   expect(B.markSeen).toBeDefined();
   expect(B.typingOn).toBeDefined();
