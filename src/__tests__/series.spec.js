@@ -1,77 +1,84 @@
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
+
 const series = require('../series');
 const { sendText } = require('../');
 
 it('should have correct name', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
-  const actions = [haha, wow, cool];
+  const Haha = sendText('haha');
+  const Wow = sendText('wow');
+  const Cool = sendText('cool');
 
-  const action = series(actions);
+  const Series = series([Haha, Wow, Cool]);
 
-  expect(action.name).toEqual(
+  expect(Series.name).toEqual(
     'Series(SendText(haha), SendText(wow), SendText(cool))'
   );
 });
 
-it('should create action that will run in series', async () => {
-  let resolveHaha;
-  const haha = async context => {
-    await sendText('haha')(context);
-    await new Promise(resolve => {
-      resolveHaha = resolve;
-    });
+it('should create action that runs the provided actions in series', async () => {
+  let resolveHahaPromise;
+
+  const hahaPromise = new Promise(resolve => {
+    resolveHahaPromise = resolve;
+  });
+  const Haha = async context => {
+    await context.sendText('haha');
+    await hahaPromise;
   };
 
-  let resolveWow;
-  const wow = async context => {
-    await sendText('wow')(context);
-    await new Promise(resolve => {
-      resolveWow = resolve;
-    });
-  };
+  const Wow = sendText('wow');
 
-  const cool = sendText('cool');
-
-  const action = series([haha, wow, cool]);
+  const Series = series([Haha, Wow]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  action(context);
+  const promise = run(Series)(context, {});
 
-  await flushPromises();
+  expect(context.sendText).toBeCalledWith('haha');
+  expect(context.sendText).not.toBeCalledWith('wow');
 
-  expect(context.sendText.mock.calls).toContainEqual(['haha']);
+  resolveHahaPromise();
 
-  resolveHaha();
+  await promise;
 
-  await flushPromises();
-
-  expect(context.sendText.mock.calls).toContainEqual(['wow']);
-
-  resolveWow();
-
-  await flushPromises();
-
-  expect(context.sendText.mock.calls).toContainEqual(['cool']);
+  expect(context.sendText).toBeCalledWith('wow');
 });
 
-xit('should pass extra args to underlying action', async () => {
-  const haha = jest.fn();
-  const wow = jest.fn();
+it('should pass props to the underlying action', async () => {
+  const Haha = jest.fn(async (context, { name }) => {
+    await context.sendText(`haha ${name}`);
+  });
+  const Wow = jest.fn(async (context, { name }) => {
+    await context.sendText(`wow ${name}`);
+  });
 
-  const action = series([haha, wow]);
+  const Series = series([Haha, Wow]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const extraArg = {};
+  await run(Series)(context, { name: 'John' });
 
-  await action(context, extraArg);
+  expect(context.sendText).toBeCalledWith('haha John');
+  expect(context.sendText).toBeCalledWith('wow John');
+});
 
-  expect(haha).toBeCalledWith(context, extraArg);
-  expect(wow).toBeCalledWith(context, extraArg);
+it('should support nested actions', async () => {
+  const Haha = () => sendText('haha');
+  const Wow = () => sendText('wow');
+
+  const Series = series([Haha, Wow]);
+
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Series)(context, {});
+
+  expect(context.sendText).toBeCalledWith('haha');
+  expect(context.sendText).toBeCalledWith('wow');
 });

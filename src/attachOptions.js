@@ -1,26 +1,26 @@
 const curry = require('lodash/curry');
 const warning = require('warning');
 
-const attachOptions = (options, action) => {
+const attachOptions = (options, Action) => {
   if (
     !(
-      typeof action.argsLength === 'number' &&
-      action.argsLength > 0 &&
-      action.allowOptions === true
+      typeof Action.argsLength === 'number' &&
+      Action.argsLength > 0 &&
+      Action.allowOptions === true
     )
   ) {
     warning(false, 'attachOptions: cannot attach options to this action');
 
-    return action;
+    return Action;
   }
 
   // eslint-disable-next-line no-param-reassign
-  action._options = {
-    ...action._options,
+  Action._options = {
+    ...Action._options,
     ...options,
   };
 
-  return action;
+  return Action;
 };
 
 module.exports = curry(attachOptions);

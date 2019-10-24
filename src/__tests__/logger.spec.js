@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
+
 const parallel = require('../parallel');
 
 let log;
@@ -22,39 +26,55 @@ beforeEach(() => {
 });
 
 it('#log should work', async () => {
-  const action = log('print...');
+  const Log = log('print...');
 
-  await action();
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Log)(context, {});
 
   expect(console.log).toBeCalledWith('print...');
-  expect(action.name).toEqual('Log(print...)');
+  expect(Log.name).toEqual('Log(print...)');
 });
 
 it('#info should work', async () => {
-  const action = info('print...');
+  const Info = info('print...');
 
-  await action();
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Info)(context, {});
 
   expect(console.info).toBeCalledWith('print...');
-  expect(action.name).toEqual('Info(print...)');
+  expect(Info.name).toEqual('Info(print...)');
 });
 
 it('#warn should work', async () => {
-  const action = warn('print...');
+  const Warn = warn('print...');
 
-  await action();
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Warn)(context, {});
 
   expect(console.warn).toBeCalledWith('print...');
-  expect(action.name).toEqual('Warn(print...)');
+  expect(Warn.name).toEqual('Warn(print...)');
 });
 
 it('#error should work', async () => {
-  const action = error('print...');
+  const Err = error('print...');
 
-  await action();
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Err)(context, {});
 
   expect(console.error).toBeCalledWith('print...');
-  expect(action.name).toEqual('Error(print...)');
+  expect(Err.name).toEqual('Error(print...)');
 });
 
 it('#createLogger should work', async () => {
@@ -65,14 +85,18 @@ it('#createLogger should work', async () => {
     error: jest.fn(),
   };
   const logger = createLogger(adapter);
-  const action = parallel([
+  const Action = parallel([
     logger.log('log...'),
     logger.info('info...'),
     logger.warn('warn...'),
     logger.error('error...'),
   ]);
 
-  await action();
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Action)(context, {});
 
   expect(adapter.log).toBeCalledWith('log...');
   expect(adapter.info).toBeCalledWith('info...');
@@ -81,26 +105,26 @@ it('#createLogger should work', async () => {
 });
 
 it('should support template', async () => {
-  const action = log(
-    'print {{context.session.user.first_name}} {{context.session.user.last_name}}...'
+  const Log = log(
+    'print {{context.session.user.firstName}} {{context.session.user.lastName}}...'
   );
 
   const context = {
     session: {
       user: {
-        first_name: 'First',
-        last_name: 'Last',
+        firstName: 'First',
+        lastName: 'Last',
       },
     },
   };
 
-  await action(context);
+  await run(Log)(context, {});
 
   expect(console.log).toBeCalledWith('print First Last...');
 });
 
 it('should support template with Chinese words', async () => {
-  const action = log(
+  const Log = log(
     'print {{context.session.user.姓氏}}{{context.session.user.名字}}...'
   );
 
@@ -113,7 +137,7 @@ it('should support template with Chinese words', async () => {
     },
   };
 
-  await action(context);
+  await run(Log)(context, {});
 
   expect(console.log).toBeCalledWith('print 王小明...');
 });

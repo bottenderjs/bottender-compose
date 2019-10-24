@@ -1,14 +1,15 @@
 const mapValues = require('lodash/mapValues');
+const { withProps } = require('bottender');
 
 // eslint-disable-next-line consistent-return
 module.exports = config => {
-  const Fn = context => {
+  const Fn = (context, props) => {
     if (config[context.platform]) {
-      return config[context.platform];
+      return withProps(config[context.platform], props);
     }
 
     if (config.others) {
-      return config.others;
+      return withProps(config.others, props);
     }
   };
 

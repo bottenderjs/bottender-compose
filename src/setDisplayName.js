@@ -1,12 +1,12 @@
 const curry = require('lodash/curry');
 
-const setDisplayName = (displayName, action) => {
+const setDisplayName = (displayName, Action) => {
   /* eslint-disable no-param-reassign */
-  action.displayName = displayName;
-  Object.defineProperty(action, 'name', { value: displayName });
+  Action.displayName = displayName;
+  Object.defineProperty(Action, 'name', { value: displayName });
   /* eslint-enable no-param-reassign */
 
-  return action;
+  return Action;
 };
 
 module.exports = curry(setDisplayName);

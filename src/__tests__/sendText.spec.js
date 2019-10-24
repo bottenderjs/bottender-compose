@@ -1,69 +1,71 @@
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
+
 const { sendText } = require('../');
 
 it('should have correct name', async () => {
-  const action = sendText('haha');
+  const Haha = sendText('haha');
 
-  expect(action.name).toEqual('SendText(haha)');
+  expect(Haha.name).toEqual('SendText(haha)');
 });
 
 it('should create action that will call sendText', async () => {
-  const action = sendText('haha');
+  const Haha = sendText('haha');
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await action(context);
+  await run(Haha)(context, {});
 
   expect(context.sendText).toBeCalledWith('haha');
 });
 
-it('should call parameter as function', async () => {
+it('should call function to get the text', async () => {
   const mockFn = jest.fn(() => 'haha');
 
-  const action = sendText(mockFn);
+  const Haha = sendText(mockFn);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await action(context);
+  await run(Haha)(context, {});
 
   expect(context.sendText).toBeCalledWith('haha');
-  expect(mockFn).toBeCalledWith(context);
+  expect(mockFn).toBeCalledWith(context, {});
 });
 
-it('should pass extra args to function', async () => {
-  const mockFn = jest.fn(() => 'haha');
+it('should pass props to the function', async () => {
+  const mockFn = jest.fn((_, { name }) => `haha ${name}`);
 
-  const action = sendText(mockFn);
+  const Haha = sendText(mockFn);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const extraArg = {};
+  await run(Haha)(context, { name: 'John' });
 
-  await action(context, extraArg);
-
-  expect(mockFn).toBeCalledWith(context, extraArg);
+  expect(mockFn).toBeCalledWith(context, { name: 'John' });
+  expect(context.sendText).toBeCalledWith('haha John');
 });
 
 it('should parse template', async () => {
-  const action = sendText(
-    '{{context.session.user.first_name}} {{context.session.user.last_name}}'
+  const Action = sendText(
+    '{{context.session.user.firstName}} {{context.session.user.lastName}}'
   );
 
   const context = {
     session: {
       user: {
-        first_name: 'First',
-        last_name: 'Last',
+        firstName: 'First',
+        lastName: 'Last',
       },
     },
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await action(context);
+  await run(Action)(context, {});
 
   expect(context.sendText).toBeCalledWith('First Last');
 });
