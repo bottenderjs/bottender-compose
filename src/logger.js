@@ -2,11 +2,11 @@ const { isValidTemplate, compileTemplate } = require('./utils');
 
 function createLoggerAction(fn, name) {
   return (...args) => {
-    const Action = (context, ...otherArgs) =>
+    const Action = (context, props) =>
       fn(
         ...args.map(arg => {
           if (typeof arg === 'function') {
-            return arg(context, ...otherArgs);
+            return arg(context, props);
           }
           if (typeof arg === 'string' && isValidTemplate(arg)) {
             return compileTemplate(arg)(context);

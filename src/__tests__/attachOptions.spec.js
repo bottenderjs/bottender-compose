@@ -1,40 +1,45 @@
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
+
 const attachOptions = require('../attachOptions');
 const { sendText } = require('../');
 
-it('should create action that will call sendText and tag', async () => {
-  const action = attachOptions({ tag: 'ISSUE_RESOLUTION' }, sendText('haha'));
+it('should create an action that calls sendText with the tag', async () => {
+  const Action = attachOptions({ tag: 'ISSUE_RESOLUTION' }, sendText('haha'));
+
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await action(context);
+  await run(Action)(context, {});
 
   expect(context.sendText).toBeCalledWith('haha', { tag: 'ISSUE_RESOLUTION' });
 });
 
 it('should merge original options', async () => {
-  const action = attachOptions(
+  const Action = attachOptions(
     { tag: 'ISSUE_RESOLUTION' },
     sendText('haha', {
-      quick_replies: [
+      quickReplies: [
         {
-          content_type: 'text',
+          contentType: 'text',
           title: 'Red',
           payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED',
         },
       ],
     })
   );
+
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await action(context);
+  await run(Action)(context, {});
 
   expect(context.sendText).toBeCalledWith('haha', {
-    quick_replies: [
+    quickReplies: [
       {
-        content_type: 'text',
+        contentType: 'text',
         title: 'Red',
         payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED',
       },
@@ -48,9 +53,9 @@ it('should merge multiple attached options', async () => {
     { tag: 'ISSUE_RESOLUTION' },
     attachOptions(
       {
-        quick_replies: [
+        quickReplies: [
           {
-            content_type: 'text',
+            contentType: 'text',
             title: 'Red',
             payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED',
           },
@@ -59,16 +64,17 @@ it('should merge multiple attached options', async () => {
       sendText('haha')
     )
   );
+
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await Action(context);
+  await run(Action)(context, {});
 
   expect(context.sendText).toBeCalledWith('haha', {
-    quick_replies: [
+    quickReplies: [
       {
-        content_type: 'text',
+        contentType: 'text',
         title: 'Red',
         payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED',
       },
@@ -82,10 +88,10 @@ it('should create action that will run in curried attachOptions', async () => {
   const Action = attachIssueResolutionTag(sendText('haha'));
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  await Action(context);
+  await run(Action)(context, {});
 
   expect(context.sendText).toBeCalledWith('haha', { tag: 'ISSUE_RESOLUTION' });
 });

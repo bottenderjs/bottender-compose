@@ -1,59 +1,61 @@
-jest.mock('random-item');
-
 const randomItem = require('random-item');
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
 
 const random = require('../random');
 const { sendText } = require('../');
 
+jest.mock('random-item');
+
 it('should have correct name', async () => {
-  const Haha = sendText('Haha');
-  const Wow = sendText('Wow');
-  const Cool = sendText('Cool');
+  const Haha = sendText('haha');
+  const Wow = sendText('wow');
+  const Cool = sendText('cool');
   const actions = [Haha, Wow, Cool];
 
   const Random = random(actions);
 
   expect(Random.name).toEqual(
-    'Random(SendText(Haha), SendText(Wow), SendText(Cool))'
+    'Random(SendText(haha), SendText(wow), SendText(cool))'
   );
 });
 
 it('should create action that will call sendText', async () => {
-  const Haha = sendText('Haha');
-  const Wow = sendText('Wow');
-  const Cool = sendText('Cool');
+  const Haha = sendText('haha');
+  const Wow = sendText('wow');
+  const Cool = sendText('cool');
   const actions = [Haha, Wow, Cool];
 
   randomItem.mockReturnValueOnce(Cool);
   const Random = random([Haha, Wow, Cool]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const Action = await Random(context);
+  await run(Random)(context, {});
 
   expect(randomItem).toBeCalledWith(actions);
-  expect(Action).toEqual(Cool);
+  expect(context.sendText).toBeCalledWith('cool');
 });
 
-xit('should pass extra args to underlying action', () => {
-  const Haha = jest.fn();
+it('should pass props to underlying action', async () => {
+  const Haha = async (context, { name }) => {
+    await context.sendText(`haha ${name}`);
+  };
   const Wow = jest.fn();
 
   const actions = [Haha, Wow];
 
   randomItem.mockReturnValueOnce(Haha);
-  const action = random(actions);
+  const Random = random(actions);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const extraArg = {};
-
-  action(context, extraArg);
+  await run(Random)(context, { name: 'John' });
 
   expect(randomItem).toBeCalledWith(actions);
-  expect(Haha).toBeCalledWith(context, extraArg);
+  expect(context.sendText).toBeCalledWith('haha John');
 });

@@ -28,7 +28,7 @@ npm install bottender-compose
   - [`match()`](#match)
   - [`platform()`](#platform)
   - [`weight()`](#weight)
-  - [`doNothing()`](#donothing)
+  - [`noop()`](#noop)
   - [`repeat()`](#repeat)
   - [`delay()`](#delay)
   - [`setDisplayName()`](#setdisplayName)
@@ -55,13 +55,13 @@ Creates a function that executes methods in series.
 ```js
 const { series, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  series([
+module.exports = function App() {
+  return series([
     sendText('1. First Item'),
     sendText('2. Second Item'),
     sendText('3. Third Item'),
-  ])
-);
+  ]);
+};
 ```
 
 ### `parallel()`
@@ -71,13 +71,13 @@ Creates a function that executes methods in parallel.
 ```js
 const { parallel, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  parallel([
+module.exports = function App() {
+  return parallel([
     sendText('- You got one of Items'),
     sendText('- You got one of Items'),
     sendText('- You got one of Items'),
-  ])
-);
+  ]);
+};
 ```
 
 ### `random()`
@@ -87,13 +87,13 @@ Creates a function that executes one of method randomly.
 ```js
 const { random, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  random([
+module.exports = function App() {
+  return random([
     sendText('You got a random item: A'),
     sendText('You got a random item: B'),
     sendText('You got a random item: C'),
-  ])
-);
+  ]);
+};
 ```
 
 ### `branch()`
@@ -104,20 +104,23 @@ Furthermore, `branch` can be sued as curry function.
 ```js
 const { branch, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  branch(
+module.exports = function App() {
+  return branch(
     context => true,
     sendText('You are the lucky one.'),
     sendText('Too bad.')
-  )
-);
+  );
+};
 
 // curry function
 const trueConditionBranch = branch(context => true);
 
-bot.onEvent(
-  trueConditionBranch(sendText('You are the lucky one.'), sendText('Too bad.'))
-);
+module.exports = function App() {
+  return trueConditionBranch(
+    sendText('You are the lucky one.'), 
+    sendText('Too bad.')
+  );
+};
 ```
 
 Or you can executes function on `true` and do nothing when received `false`.
@@ -135,13 +138,13 @@ Creates a function that encapsulates `if/else`, `if/else`, ... logic.
 ```js
 const { condition, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  condition([
+module.exports = function App() {
+  return condition([
     [context => false, sendText('a')],
     [context => false, sendText('b')],
     [context => true, sendText('c')],
-  ])
-);
+  ]);
+};
 ```
 
 `condition` works well with [predicates](#predicates).
@@ -153,36 +156,36 @@ Creates a function that encapsulates value matching logic.
 ```js
 const { match, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  match('a', [
+module.exports = function App() {
+  return match('a', [
     ['a', sendText('You got a A')],
     ['b', sendText('You got a B')],
     ['c', sendText('You got a C')],
-  ])
-);
+  ]);
+};
 ```
 
 It accepts function with `context` argument:
 
 ```js
-bot.onEvent(
-  match(context => context.state.answer, [
+module.exports = function App() {
+  return match(context => context.state.answer, [
     ['a', sendText('You got a A')],
     ['b', sendText('You got a B')],
     ['c', sendText('You got a C')],
-  ])
-);
+  ]);
+};
 
 // curry function
 const matchAnswer = match(context => context.state.answer);
 
-bot.onEvent(
-  matchAnswer([
+module.exports = function App() {
+  return matchAnswer([
     ['a', sendText('You got a A')],
     ['b', sendText('You got a B')],
     ['c', sendText('You got a C')],
-  ])
-);
+  ]);
+};
 ```
 
 To assign default action, use `_` as pattern:
@@ -190,14 +193,14 @@ To assign default action, use `_` as pattern:
 ```js
 const { _, match, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  match('a', [
+module.exports = function App() {
+  return match('a', [
     ['a', sendText('You got a A')],
     ['b', sendText('You got a B')],
     ['c', sendText('You got a C')],
     [_, sendText('You got something')],
   ])
-);
+};
 ```
 
 ### `platform()`
@@ -211,10 +214,12 @@ const {
   sendImagemap,
 } = require('bottender-compose');
 
-bot.onEvent(platform({
-  messenger: sendGenericTemplate(...),
-  line: sendImagemap(...),
-}));
+module.exports = function App() {
+  return platform({
+    messenger: sendGenericTemplate(...),
+    line: sendImagemap(...),
+  });
+};
 ```
 
 Or you can use `others` key to match other platforms:
@@ -234,29 +239,29 @@ Creates a function that randomly executes one of method by its weight.
 ```js
 const { weight, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  weight([
+module.exports = function App() {
+  return weight([
     [0.2, sendText('20%')],
     [0.4, sendText('40%')],
     [0.4, sendText('40%')],
-  ])
-);
+  ]);
+};
 ```
 
-### `doNothing()`
+### `noop()`
 
 Creates a no-op function.
 
 ```js
-const { branch, sendText, doNothing } = require('bottender-compose');
+const { branch, sendText, noop } = require('bottender-compose');
 
-bot.onEvent(
-  branch(
+module.exports = function App() {
+  return branch(
     context => false,
     sendText('You are the lucky one.'),
-    doNothing() // do exactly nothing...
-  )
-);
+    noop() // do exactly nothing...
+  );
+};
 ```
 
 ### `repeat()`
@@ -267,12 +272,16 @@ Furthermore, `repeat` can be sued as curry function.
 ```js
 const { repeat, sendText } = require('bottender-compose');
 
-bot.onEvent(repeat(3, sendText('This will be sent 3 times.')));
+module.exports = function App() {
+  return repeat(3, sendText('This will be sent 3 times.'));
+};
 
 // curry function
 const repeatFiveTimes = repeat(5);
 
-bot.onEvent(repeatFiveTimes(sendText('This will be sent 5 times.')));
+module.exports = function App() {
+  return repeatFiveTimes(sendText('This will be sent 5 times.'))
+};
 ```
 
 ### `delay()`
@@ -282,15 +291,15 @@ Creates a function that executes methods after a number of milliseconds.
 ```js
 const { series, delay, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  series([
+module.exports = function App() {
+  return series([
     sendText('1. First Item'),
     delay(1000),
     sendText('2. Second Item'),
     delay(1000),
     sendText('3. Third Item'),
-  ])
-);
+  ]);
+};
 ```
 
 ### `setDisplayName()`
@@ -313,14 +322,21 @@ Attaches additional options to the action.
 ```js
 const { attachOptions, sendText } = require('bottender-compose');
 
-bot.onEvent(
-  attachOptions({ tag: 'ISSUE_RESOLUTION' }, sendText('Issue Resolved'))
-);
+module.exports = function App() {
+  return attachOptions(
+    { tag: 'ISSUE_RESOLUTION' }, 
+    sendText('Issue Resolved')
+  );
+};
 
 // curry function
-const attachIssueResolutionTag = attachOptions({ tag: 'ISSUE_RESOLUTION' });
+const attachIssueResolutionTag = attachOptions({ 
+  tag: 'ISSUE_RESOLUTION',
+});
 
-bot.onEvent(attachIssueResolutionTag(sendText('Issue Resolved')));
+module.exports = function App() {
+  reutnr attachIssueResolutionTag(sendText('Issue Resolved'));
+};
 ```
 
 ### Logger Methods
@@ -515,25 +531,17 @@ You can pass function as argument to handle time-specified or context-specified 
 // Lazy execution
 B.sendText(() => `Now: ${new Date()}`);
 
-// Use user information on context
-B.sendText(
-  context =>
-    `${context.session.user.first_name} ${context.session.user.last_name}, You are the lucky one.`
-);
-
 // Use event information
 B.sendText(context => `Received: ${context.event.text}`);
 ```
 
 ### Use Template in String
 
-You can use `context`, `session`, `event`, `state`, `user` to access values in your template string:
+You can use `context`, `session`, `event`, `state` to access values in your template string:
 
 ```js
-B.sendText('Hi, {{session.user.first_name}} {{session.user.last_name}}');
 B.sendText('Received: {{event.text}}');
 B.sendText('State: {{state.xxx}}');
-B.sendText('User: {{user.first_name}} {{user.last_name}}');
 ```
 
 Or use `props` to access object values that provided as props when calling action:

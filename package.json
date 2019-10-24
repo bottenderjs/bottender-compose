@@ -33,7 +33,7 @@
     "warning": "^4.0.3"
   },
   "peerDependencies": {
-    "bottender": ">= 0.15.17"
+    "bottender": ">= 1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
@@ -43,6 +43,7 @@
     "@babel/preset-env": "^7.6.0",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^24.9.0",
+    "bottender": "^1.4.6",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",
     "eslint-config-yoctol-base": "^0.21.2",

@@ -1,3 +1,6 @@
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
+
 const platform = require('../platform');
 const { sendText } = require('../');
 
@@ -26,18 +29,18 @@ it('should create action that will call sendText with messenger when messenger',
 
   const context = {
     platform: 'messenger',
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const Action = await Platform(context);
+  await run(Platform)(context, {});
 
-  expect(Action).toEqual(Messenger);
+  expect(context.sendText).toBeCalledWith('messenger');
 });
 
-it('should create action that will call sendText with others when telegram', async () => {
+it('should create an action that calls sendText with others when receiving telegram contexts', async () => {
   const Messenger = sendText('messenger');
   const Line = sendText('line');
-  const Others = sendText('other');
+  const Others = sendText('others');
 
   const Platform = platform({
     messenger: Messenger,
@@ -47,56 +50,56 @@ it('should create action that will call sendText with others when telegram', asy
 
   const context = {
     platform: 'telegram',
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const Action = await Platform(context);
+  await run(Platform)(context, {});
 
-  expect(Action).toEqual(Others);
+  expect(context.sendText).toBeCalledWith('others');
 });
 
-describe('should pass extra args to underlying action', () => {
-  xit('on platform', () => {
-    const messenger = jest.fn();
-    const line = jest.fn();
+describe('should pass props to the underlying action', () => {
+  it('on platform', async () => {
+    const Messenger = jest.fn(async (context, { name }) => {
+      await context.sendText(`haha ${name}`);
+    });
+    const Line = jest.fn();
 
-    const action = platform({
-      messenger,
-      line,
+    const Platform = platform({
+      messenger: Messenger,
+      line: Line,
     });
 
     const context = {
       platform: 'messenger',
-      sendText: jest.fn(),
+      sendText: jest.fn(() => Promise.resolve()),
     };
 
-    const extraArg = {};
+    await run(Platform)(context, { name: 'John' });
 
-    action(context, extraArg);
-
-    expect(messenger).toBeCalledWith(context, extraArg);
+    expect(context.sendText).toBeCalledWith('haha John');
   });
 
-  xit('on others', () => {
-    const messenger = jest.fn();
-    const line = jest.fn();
-    const others = jest.fn();
+  it('on others', async () => {
+    const Messenger = sendText('messenger');
+    const Line = sendText('line');
+    const Others = jest.fn(async (context, { name }) => {
+      await context.sendText(`haha ${name}`);
+    });
 
-    const action = platform({
-      messenger,
-      line,
-      others,
+    const Platform = platform({
+      messenger: Messenger,
+      line: Line,
+      others: Others,
     });
 
     const context = {
       platform: 'telegram',
-      sendText: jest.fn(),
+      sendText: jest.fn(() => Promise.resolve()),
     };
 
-    const extraArg = {};
+    await run(Platform)(context, { name: 'John' });
 
-    action(context, extraArg);
-
-    expect(others).toBeCalledWith(context, extraArg);
+    expect(context.sendText).toBeCalledWith('haha John');
   });
 });

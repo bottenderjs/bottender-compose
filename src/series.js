@@ -1,7 +1,10 @@
+// FIXME: export public API or somehow improve this
+const { run } = require('bottender/dist/bot/Bot');
+
 module.exports = actions => {
-  const Fn = async (context, ...otherArgs) => {
+  const Fn = async (context, props) => {
     for (let i = 0; i < actions.length; i++) {
-      await actions[i](context, ...otherArgs); // eslint-disable-line no-await-in-loop
+      await run(actions[i])(context, props); // eslint-disable-line no-await-in-loop
     }
   };
 

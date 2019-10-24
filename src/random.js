@@ -1,8 +1,9 @@
 const randomItem = require('random-item');
+const { withProps } = require('bottender');
 
 module.exports = actions => {
-  const Fn = async () => {
-    return randomItem(actions);
+  const Fn = async (context, props) => {
+    return withProps(randomItem(actions), props);
   };
 
   const names = actions.map(action => action.name || 'Anonymous');

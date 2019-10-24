@@ -1,11 +1,13 @@
+const { withProps } = require('bottender');
+
 module.exports = conds => {
-  const Fn = async (context, ...otherArgs) => {
+  const Fn = async (context, props) => {
     for (let i = 0; i < conds.length; i += 1) {
       const [predicate, Action] = conds[i];
 
       /* eslint-disable no-await-in-loop */
-      if (await predicate(context, ...otherArgs)) {
-        return Action;
+      if (await predicate(context, props)) {
+        return withProps(Action, props);
       }
       /* eslint-enable no-await-in-loop */
     }

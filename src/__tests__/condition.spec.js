@@ -1,9 +1,12 @@
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
+
 const condition = require('../condition');
 const { sendText } = require('../');
 
 it('should have correct name', async () => {
-  const condA = jest.fn(() => Promise.resolve(false));
-  const condB = jest.fn(() => Promise.resolve(true));
+  const condA = () => Promise.resolve(false);
+  const condB = () => Promise.resolve(true);
 
   const ActionA = sendText(
     "You've seen them once, you've seen them all. - Singin' in the Rain"
@@ -17,7 +20,7 @@ it('should have correct name', async () => {
   );
 });
 
-it('should run second function in the element which first function return true', async () => {
+it('should run the second function in the element when the first function resolve true', async () => {
   const condA = jest.fn(() => Promise.resolve(false));
   const condB = jest.fn(() => Promise.resolve(true));
 
@@ -26,36 +29,41 @@ it('should run second function in the element which first function return true',
   );
   const ActionB = sendText('You Shall Not Pass - The Lord of the Rings');
 
-  const conds = condition([[condA, ActionA], [condB, ActionB]]);
+  const Condition = condition([[condA, ActionA], [condB, ActionB]]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const Action = await conds(context);
+  await run(Condition)(context, {});
 
-  expect(Action).toEqual(ActionB);
+  expect(condA).toBeCalledWith(context, {});
+  expect(condB).toBeCalledWith(context, {});
+  expect(context.sendText).not.toBeCalledWith(
+    "You've seen them once, you've seen them all. - Singin' in the Rain"
+  );
+  expect(context.sendText).toBeCalledWith(
+    'You Shall Not Pass - The Lord of the Rings'
+  );
 });
 
-xit('should pass extra args to underlying action', async () => {
+it('should pass props to the underlying action', async () => {
   const condA = jest.fn(() => true);
   const condB = jest.fn(() => false);
 
-  const actionA = jest.fn();
-  const actionB = sendText('You Shall Not Pass - The Lord of the Rings');
+  const ActionA = jest.fn(async (context, { name }) => {
+    await context.sendText(`haha ${name}`);
+  });
+  const ActionB = sendText('You Shall Not Pass - The Lord of the Rings');
 
-  const conds = condition([[condA, actionA], [condB, actionB]]);
+  const Condition = condition([[condA, ActionA], [condB, ActionB]]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const extraArg = {};
+  await run(Condition)(context, { name: 'John' });
 
-  conds(context, extraArg);
-
-  await flushPromises();
-
-  expect(condA).toHaveBeenCalled();
-  expect(actionA).toBeCalledWith(context, extraArg);
+  expect(condA).toBeCalledWith(context, { name: 'John' });
+  expect(context.sendText).toBeCalledWith('haha John');
 });

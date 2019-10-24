@@ -1,7 +1,9 @@
+const { withProps } = require('bottender');
+
 module.exports = conds => {
   const totalWeight = conds.reduce((sum, cond) => cond[0] + sum, 0);
 
-  const Fn = async () => {
+  const Fn = async (context, props) => {
     const d = Math.random();
 
     let acc = 0;
@@ -10,7 +12,7 @@ module.exports = conds => {
       const [weight, Action] = conds[i];
       acc += weight / totalWeight;
       if (d < acc) {
-        return Action;
+        return withProps(Action, props);
       }
     }
   };

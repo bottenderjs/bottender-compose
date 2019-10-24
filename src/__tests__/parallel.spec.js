@@ -1,62 +1,89 @@
-const delay = require('delay');
+// FIXME: export public API for testing
+const { run } = require('bottender/dist/bot/Bot');
 
 const parallel = require('../parallel');
 const { sendText } = require('../');
 
 it('should have correct name', async () => {
-  const haha = sendText('haha');
-  const wow = sendText('wow');
-  const cool = sendText('cool');
-  const actions = [haha, wow, cool];
+  const Haha = sendText('haha');
+  const Wow = sendText('wow');
+  const Cool = sendText('cool');
 
-  const action = parallel(actions);
+  const Parallel = parallel([Haha, Wow, Cool]);
 
-  expect(action.name).toEqual(
+  expect(Parallel.name).toEqual(
     'Parallel(SendText(haha), SendText(wow), SendText(cool))'
   );
 });
 
-it('should create action that will run in parallel', () => {
-  const haha = async context => {
-    await sendText('haha')(context);
-    await delay(1000);
-  };
-  const wow = async context => {
-    await sendText('wow')(context);
-    await delay(3000);
-  };
-  const cool = async context => {
-    await sendText('cool')(context);
-    await delay(5000);
+it('should create an action that runs the actions in parallel', async () => {
+  let resolveHahaPromise;
+  const hahaPromise = new Promise(resolve => {
+    resolveHahaPromise = resolve;
+  });
+  const Haha = async context => {
+    await context.sendText('haha');
+    await hahaPromise;
   };
 
-  const action = parallel([haha, wow, cool]);
+  let resolveWowPromise;
+  const wowPromise = new Promise(resolve => {
+    resolveWowPromise = resolve;
+  });
+  const Wow = async context => {
+    await context.sendText('wow');
+    await wowPromise;
+  };
+
+  const Parallel = parallel([Haha, Wow]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  action(context);
+  const promise = run(Parallel)(context, {});
 
-  expect(context.sendText.mock.calls).toContainEqual(['cool']);
-  expect(context.sendText.mock.calls).toContainEqual(['wow']);
-  expect(context.sendText.mock.calls).toContainEqual(['haha']);
+  expect(context.sendText).toBeCalledWith('haha');
+  expect(context.sendText).toBeCalledWith('wow');
+
+  resolveHahaPromise();
+  resolveWowPromise();
+
+  await promise;
 });
 
-xit('should pass extra args to underlying action', async () => {
-  const haha = jest.fn();
-  const wow = jest.fn();
+it('should pass extra args to underlying action', async () => {
+  const Haha = jest.fn(async (context, { name }) => {
+    await context.sendText(`haha ${name}`);
+  });
+  const Wow = jest.fn(async (context, { name }) => {
+    await context.sendText(`wow ${name}`);
+  });
 
-  const action = parallel([haha, wow]);
+  const Parallel = parallel([Haha, Wow]);
 
   const context = {
-    sendText: jest.fn(),
+    sendText: jest.fn(() => Promise.resolve()),
   };
 
-  const extraArg = {};
+  await run(Parallel)(context, { name: 'John' });
 
-  await action(context, extraArg);
+  expect(context.sendText).toBeCalledWith('haha John');
+  expect(context.sendText).toBeCalledWith('wow John');
+});
 
-  expect(haha).toBeCalledWith(context, extraArg);
-  expect(wow).toBeCalledWith(context, extraArg);
+it('should support nested actions', async () => {
+  const Haha = () => sendText('haha');
+  const Wow = () => sendText('wow');
+
+  const Parallel = parallel([Haha, Wow]);
+
+  const context = {
+    sendText: jest.fn(() => Promise.resolve()),
+  };
+
+  await run(Parallel)(context, {});
+
+  expect(context.sendText).toBeCalledWith('haha');
+  expect(context.sendText).toBeCalledWith('wow');
 });
