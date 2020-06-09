@@ -20,7 +20,7 @@
     "prepublish": "npm run build",
     "test": "yarn run lint && yarn run testonly",
     "testonly": "jest",
-    "testonly:cov": "jest --coverage --runInBand --forceExit",
+    "testonly:cov": "jest --coverage",
     "testonly:watch": "jest --watch",
     "preversion": "npm test"
   },
