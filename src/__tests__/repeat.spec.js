@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const repeat = require('../repeat');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const Cool = sendText('cool');

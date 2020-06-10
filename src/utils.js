@@ -24,13 +24,13 @@ const JOINED_KEYS = `(${TEMPLATE_WHITELIST_KEYS.join(
   '|'
 )})((\\.[\u4e00-\u9fa5_a-zA-Z0-9]+)+)`; // support Chinese words
 
-exports.isValidTemplate = str => {
+exports.isValidTemplate = (str) => {
   const templateRegExp = new RegExp(`{{\\s*${JOINED_KEYS}\\s*}}`, 'g');
 
   return templateRegExp.test(str);
 };
 
-exports.compileTemplate = tpl => (context, props) => {
+exports.compileTemplate = (tpl) => (context, props) => {
   let compiledResult = tpl;
   const templateRegExp = new RegExp(`{{\\s*${JOINED_KEYS}\\s*}}`, 'g');
 

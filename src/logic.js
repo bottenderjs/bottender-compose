@@ -1,7 +1,7 @@
 const invariant = require('invariant');
 
 function not(predicate) {
-  return context => !predicate(context);
+  return (context) => !predicate(context);
 }
 
 function and(predicates) {
@@ -9,7 +9,7 @@ function and(predicates) {
     Array.isArray(predicates),
     `and: predicates must be an array. Recevied ${predicates}`
   );
-  return context => predicates.every(predicate => predicate(context));
+  return (context) => predicates.every((predicate) => predicate(context));
 }
 
 function or(predicates) {
@@ -17,7 +17,7 @@ function or(predicates) {
     Array.isArray(predicates),
     `or: predicates must be an array. Recevied ${predicates}`
   );
-  return context => predicates.some(predicate => predicate(context));
+  return (context) => predicates.some((predicate) => predicate(context));
 }
 
 function alwaysTrue() {

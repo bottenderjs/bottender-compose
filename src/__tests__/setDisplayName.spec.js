@@ -1,5 +1,5 @@
 const setDisplayName = require('../setDisplayName');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should create a named action', async () => {
   const Cool = sendText('cool');

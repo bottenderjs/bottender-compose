@@ -2,7 +2,7 @@ const mapValues = require('lodash/mapValues');
 const { withProps } = require('bottender');
 
 // eslint-disable-next-line consistent-return
-module.exports = config => {
+module.exports = (config) => {
   const Fn = (context, props) => {
     if (config[context.platform]) {
       return withProps(config[context.platform], props);
@@ -13,7 +13,7 @@ module.exports = config => {
     }
   };
 
-  const str = Object.entries(mapValues(config, action => action.name))
+  const str = Object.entries(mapValues(config, (action) => action.name))
     .map(([key, name]) => `${key}: ${name}`)
     .join(', ');
 

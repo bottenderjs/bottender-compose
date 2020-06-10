@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const series = require('../series');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const Haha = sendText('haha');
@@ -19,10 +19,10 @@ it('should have correct name', async () => {
 it('should create action that runs the provided actions in series', async () => {
   let resolveHahaPromise;
 
-  const hahaPromise = new Promise(resolve => {
+  const hahaPromise = new Promise((resolve) => {
     resolveHahaPromise = resolve;
   });
-  const Haha = async context => {
+  const Haha = async (context) => {
     await context.sendText('haha');
     await hahaPromise;
   };

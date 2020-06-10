@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const branch = require('../branch');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const cond = () => Promise.resolve(true);

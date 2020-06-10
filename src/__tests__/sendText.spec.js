@@ -1,7 +1,7 @@
 // FIXME: export public API for testing
 const { run } = require('bottender/dist/bot/Bot');
 
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const Haha = sendText('haha');

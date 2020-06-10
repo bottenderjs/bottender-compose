@@ -8,7 +8,7 @@ it('#not should work', () => {
     },
   };
 
-  const isText = () => _context => _context.event.isText;
+  const isText = () => (_context) => _context.event.isText;
 
   const predicate = not(isText());
 
@@ -23,8 +23,8 @@ it('#and should work', () => {
     },
   };
 
-  const isText = () => _context => _context.event.isText;
-  const isOk = () => _context => _context.event.text === 'ok';
+  const isText = () => (_context) => _context.event.isText;
+  const isOk = () => (_context) => _context.event.text === 'ok';
 
   const predicate = and([isText, isOk]);
 
@@ -39,8 +39,8 @@ it('#or should work', () => {
     },
   };
 
-  const isText = () => _context => _context.event.isText;
-  const isOk = () => _context => _context.event.text === 'ok';
+  const isText = () => (_context) => _context.event.isText;
+  const isOk = () => (_context) => _context.event.text === 'ok';
 
   const predicate = or([isText, isOk]);
 

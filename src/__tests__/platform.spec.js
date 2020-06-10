@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const platform = require('../platform');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', () => {
   const Messenger = sendText('messenger');

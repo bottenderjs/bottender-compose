@@ -1,4 +1,4 @@
-const pascalCase = require('pascal-case');
+const { pascalCase } = require('pascal-case');
 
 const methods = require('./methods');
 const predicates = require('./predicates');
@@ -29,7 +29,7 @@ allMethods.forEach(({ method, length, allowOptions }) => {
         }
 
         return context[method](
-          ...args.map(arg => {
+          ...args.map((arg) => {
             if (typeof arg === 'function') {
               return arg(context, ...otherArgs);
             }
@@ -67,9 +67,9 @@ const allPredicates = predicates.messenger
   .concat(predicates.viber)
   .concat(predicates.fb);
 
-allPredicates.forEach(predicate => {
+allPredicates.forEach((predicate) => {
   if (!exports[predicate]) {
-    exports[predicate] = () => context => context.event[predicate];
+    exports[predicate] = () => (context) => context.event[predicate];
   }
 });
 

@@ -3,7 +3,7 @@ const { run } = require('bottender/dist/bot/Bot');
 
 const _ = require('../_');
 const match = require('../match');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const Haha = sendText('haha');
@@ -12,7 +12,11 @@ it('should have correct name', async () => {
 
   const value = 2;
 
-  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [3, Cool],
+  ]);
 
   expect(Match.name).toEqual(
     'Match(SendText(haha), SendText(wow), SendText(cool))'
@@ -26,7 +30,11 @@ it('should create an action that calls the underlying matching action', async ()
 
   const value = 2;
 
-  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [3, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -42,9 +50,13 @@ it('should support context value function', async () => {
   const Wow = sendText('wow');
   const Cool = sendText('cool');
 
-  const value = context => context.state.x;
+  const value = (context) => context.state.x;
 
-  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [3, Cool],
+  ]);
 
   const context = {
     state: { x: 2 },
@@ -63,7 +75,11 @@ it('should support async value function', async () => {
 
   const value = jest.fn().mockResolvedValue(2);
 
-  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [3, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -80,7 +96,10 @@ it('should create an action that does nothing when no match result', async () =>
 
   const value = 3;
 
-  const Match = match(value, [[1, Haha], [2, Wow]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -98,7 +117,11 @@ it('should create an action that calls the default action when no match result',
 
   const value = 3;
 
-  const Match = match(value, [[1, Haha], [2, Wow], [_, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [_, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -118,7 +141,11 @@ it('should pass props to the underlying matching action', async () => {
 
   const value = 2;
 
-  const Match = match(value, [[1, Haha], [2, Wow], [3, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [3, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -138,7 +165,11 @@ it('should pass props to the underlying default action', async () => {
 
   const value = 3;
 
-  const Match = match(value, [[1, Haha], [2, Wow], [_, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [_, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -156,7 +187,11 @@ it('should pass props to the value function', async () => {
 
   const value = jest.fn(() => 3);
 
-  const Match = match(value, [[1, Haha], [2, Wow], [_, Cool]]);
+  const Match = match(value, [
+    [1, Haha],
+    [2, Wow],
+    [_, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -175,7 +210,11 @@ it('should create an action that runs in curried match', async () => {
   const value = 3;
 
   const matchValue = match(value);
-  const Match = matchValue([[1, Haha], [2, Wow], [_, Cool]]);
+  const Match = matchValue([
+    [1, Haha],
+    [2, Wow],
+    [_, Cool],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),

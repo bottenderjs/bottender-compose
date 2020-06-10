@@ -4,7 +4,7 @@ const _delay = require('delay');
 
 const delay = require('../delay');
 const series = require('../series');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 jest.mock('delay');
 

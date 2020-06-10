@@ -4,7 +4,7 @@ function createLoggerAction(fn, name) {
   return (...args) => {
     const Action = (context, props) =>
       fn(
-        ...args.map(arg => {
+        ...args.map((arg) => {
           if (typeof arg === 'function') {
             return arg(context, props);
           }

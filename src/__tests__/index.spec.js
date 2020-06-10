@@ -1,4 +1,4 @@
-const B = require('../');
+const B = require('..');
 
 it('should export common methods', () => {
   expect(B.setState).toBeDefined();

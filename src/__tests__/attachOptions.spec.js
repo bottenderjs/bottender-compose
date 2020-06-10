@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const attachOptions = require('../attachOptions');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should create an action that calls sendText with the tag', async () => {
   const Action = attachOptions({ tag: 'ISSUE_RESOLUTION' }, sendText('haha'));

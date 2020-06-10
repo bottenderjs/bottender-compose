@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const parallel = require('../parallel');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const Haha = sendText('haha');
@@ -18,19 +18,19 @@ it('should have correct name', async () => {
 
 it('should create an action that runs the actions in parallel', async () => {
   let resolveHahaPromise;
-  const hahaPromise = new Promise(resolve => {
+  const hahaPromise = new Promise((resolve) => {
     resolveHahaPromise = resolve;
   });
-  const Haha = async context => {
+  const Haha = async (context) => {
     await context.sendText('haha');
     await hahaPromise;
   };
 
   let resolveWowPromise;
-  const wowPromise = new Promise(resolve => {
+  const wowPromise = new Promise((resolve) => {
     resolveWowPromise = resolve;
   });
-  const Wow = async context => {
+  const Wow = async (context) => {
     await context.sendText('wow');
     await wowPromise;
   };

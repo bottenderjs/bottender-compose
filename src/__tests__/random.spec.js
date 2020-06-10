@@ -3,7 +3,7 @@ const randomItem = require('random-item');
 const { run } = require('bottender/dist/bot/Bot');
 
 const random = require('../random');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 jest.mock('random-item');
 

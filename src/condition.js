@@ -1,6 +1,6 @@
 const { withProps } = require('bottender');
 
-module.exports = conds => {
+module.exports = (conds) => {
   const Fn = async (context, props) => {
     for (let i = 0; i < conds.length; i += 1) {
       const [predicate, Action] = conds[i];

@@ -181,11 +181,11 @@ exports.fb = [
   'isReactionRemove',
 ];
 
-exports.isTextMatch = text => context =>
+exports.isTextMatch = (text) => (context) =>
   !!(context.event.text && context.event.text.match(text));
 
-exports.isPayloadMatch = payload => context =>
+exports.isPayloadMatch = (payload) => (context) =>
   !!(context.event.payload && context.event.payload.match(payload));
 
-exports.hasStateEqual = (path, state) => context =>
+exports.hasStateEqual = (path, state) => (context) =>
   isEqual(get(context.state, path), state);

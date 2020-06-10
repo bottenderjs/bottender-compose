@@ -11,8 +11,9 @@ const branch = (predicate, OnTrue, OnFalse = Noop) => {
     return withProps(OnFalse, props);
   };
 
-  const name = `Branch(${OnTrue.name || 'Anonymous'}, ${OnFalse.name ||
-    'Anonymous'})`;
+  const name = `Branch(${OnTrue.name || 'Anonymous'}, ${
+    OnFalse.name || 'Anonymous'
+  })`;
 
   Object.defineProperty(Fn, 'name', { value: name });
 

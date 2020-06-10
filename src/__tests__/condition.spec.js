@@ -2,7 +2,7 @@
 const { run } = require('bottender/dist/bot/Bot');
 
 const condition = require('../condition');
-const { sendText } = require('../');
+const { sendText } = require('..');
 
 it('should have correct name', async () => {
   const condA = () => Promise.resolve(false);
@@ -13,7 +13,10 @@ it('should have correct name', async () => {
   );
   const ActionB = sendText('You Shall Not Pass - The Lord of the Rings');
 
-  const Condition = condition([[condA, ActionA], [condB, ActionB]]);
+  const Condition = condition([
+    [condA, ActionA],
+    [condB, ActionB],
+  ]);
 
   expect(Condition.name).toEqual(
     "Condition(SendText(You've seen the...), SendText(You Shall Not P...))"
@@ -29,7 +32,10 @@ it('should run the second function in the element when the first function resolv
   );
   const ActionB = sendText('You Shall Not Pass - The Lord of the Rings');
 
-  const Condition = condition([[condA, ActionA], [condB, ActionB]]);
+  const Condition = condition([
+    [condA, ActionA],
+    [condB, ActionB],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),
@@ -56,7 +62,10 @@ it('should pass props to the underlying action', async () => {
   });
   const ActionB = sendText('You Shall Not Pass - The Lord of the Rings');
 
-  const Condition = condition([[condA, ActionA], [condB, ActionB]]);
+  const Condition = condition([
+    [condA, ActionA],
+    [condB, ActionB],
+  ]);
 
   const context = {
     sendText: jest.fn(() => Promise.resolve()),

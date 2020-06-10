@@ -1,6 +1,6 @@
 const { withProps } = require('bottender');
 
-module.exports = conds => {
+module.exports = (conds) => {
   const totalWeight = conds.reduce((sum, cond) => cond[0] + sum, 0);
 
   const Fn = async (context, props) => {
